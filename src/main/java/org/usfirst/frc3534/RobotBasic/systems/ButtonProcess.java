@@ -165,4 +165,11 @@ public class ButtonProcess {
 		return stateOut;
 
 	}
+
+	public void setFinishes(boolean[] finishes){
+
+		this.finishes = finishes;
+
+	}
+
 }

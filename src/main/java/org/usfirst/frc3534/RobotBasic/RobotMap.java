@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
@@ -18,8 +19,10 @@ public class RobotMap {
 
 	public static WPI_TalonSRX frontRightMotor;
 	private static WPI_TalonSRX backRightMotor;
+	private static WPI_TalonSRX centerRightMotor;
 	public static WPI_TalonSRX frontLeftMotor;
 	private static WPI_TalonSRX backLeftMotor;
+	private static WPI_TalonSRX centerLeftMotor;
 
 	public static WPI_TalonSRX shooter;
 
@@ -30,37 +33,47 @@ public class RobotMap {
 
 	public static AHRS navx;
 
+	public static DigitalInput cylinderSensor;
+
 	public static final double wheelBase_width = 36;
 	public static final double robotMaxVeloctiy = 168; // inches per second
 	public static final double minMoveSpeed = .375;
 
 	// Wheel Encoder Calculations
 	public static final int countsPerRevEncoders = 1440; // 1440 if plugged into talon. 360 if directly into the roborio; just go with, it its weird
-	public static final double wheelDiameter = 6; // measured in inches
+	public static final double wheelDiameter = 6.25; // measured in inches
 	public static final double inchesPerCountMultiplier = wheelDiameter * Math.PI / countsPerRevEncoders;
 
 	public static void init() {
 
 		frontRightMotor = new WPI_TalonSRX(5);
-		frontRightMotor.set(ControlMode.PercentOutput, 1);
+		frontRightMotor.set(ControlMode.PercentOutput, 0);
 		frontRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		backRightMotor = new WPI_TalonSRX(6);
-		backRightMotor.set(ControlMode.PercentOutput, 1);
+		backRightMotor.set(ControlMode.PercentOutput, 0);
+
+		centerRightMotor = new WPI_TalonSRX(4);
+		centerRightMotor.set(ControlMode.PercentOutput, 0);
 
 		frontLeftMotor = new WPI_TalonSRX(1);
-		frontLeftMotor.set(ControlMode.PercentOutput, 1);
+		frontLeftMotor.set(ControlMode.PercentOutput, 0);
 		frontLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		backLeftMotor = new WPI_TalonSRX(2);
-		backLeftMotor.set(ControlMode.PercentOutput, 1);
+		backLeftMotor.set(ControlMode.PercentOutput, 0);
 
-		rightSideMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
-		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
+		centerLeftMotor = new WPI_TalonSRX(3);
+		centerLeftMotor.set(ControlMode.PercentOutput, 0);
+
+		rightSideMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor, centerRightMotor);
+		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor, centerLeftMotor);
 		
 		pidArm.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		navx = new AHRS(SerialPort.Port.kMXP);
+
+		cylinderSensor = new DigitalInput(0);
 
 	}
 }
