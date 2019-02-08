@@ -1,2 +1,6 @@
-package org.usfirst.frc3534.RobotBasic.system;
+package org.usfirst.frc3534.RobotBasic.systems;
 
+public class Climber extends SystemBase implements SystemInterface{
+
+    
+}
