@@ -7,6 +7,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 /**
@@ -32,6 +33,9 @@ public class RobotMap {
 	public static SpeedControllerGroup leftSideMotors;
 
 	public static AHRS navx;
+
+	public static Solenoid elevatorCylinderOne;
+	public static Solenoid elevatorCylinderTwo;
 
 	public static DigitalInput cylinderSensor;
 
@@ -72,6 +76,9 @@ public class RobotMap {
 		pidArm.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		navx = new AHRS(SerialPort.Port.kMXP);
+
+		elevatorCylinderOne = new Solenoid(1);
+		elevatorCylinderTwo = new Solenoid(2);
 
 		cylinderSensor = new DigitalInput(0);
 
