@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -34,7 +35,7 @@ public class RobotMap {
 
 	public static AHRS navx;
 
-	public static Solenoid elevatorCylinderOne;
+	public static DoubleSolenoid elevatorCylinderOne;
 	public static Solenoid elevatorCylinderTwo;
 
 	public static DigitalInput limitSwitch;
@@ -80,13 +81,13 @@ public class RobotMap {
 
 		navx = new AHRS(SerialPort.Port.kMXP);
 
-		elevatorCylinderOne = new Solenoid(0, 0);
-		elevatorCylinderTwo = new Solenoid(0, 1);
+		elevatorCylinderOne = new DoubleSolenoid(0, 0, 1);
+		elevatorCylinderTwo = new Solenoid(0, 2);
 
 		limitSwitch = new DigitalInput(0);
 
-		climbingCylinderOne = new Solenoid(0, 2);
-		climbingCylinderTwo = new Solenoid(0, 3);
+		climbingCylinderOne = new Solenoid(0, 3);
+		climbingCylinderTwo = new Solenoid(0, 4);
 
 	}
 }
