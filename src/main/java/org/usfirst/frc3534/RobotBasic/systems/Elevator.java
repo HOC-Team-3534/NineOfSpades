@@ -168,6 +168,18 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     }
 
+    private void setElevatorState(ElevatorState state){
+
+        elevatorState = state;
+
+    }
+
+    private ElevatorState getElevatorState(){
+
+        return elevatorState;
+
+    }
+
     //solenoid_.set(true) pushes air through the bottom
     //solenoid_.set(false) pushes air through the top
 
