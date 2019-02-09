@@ -1,7 +1,5 @@
 package org.usfirst.frc3534.RobotBasic.systems;
 
-import java.awt.Robot;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.usfirst.frc3534.RobotBasic.RobotMap;
