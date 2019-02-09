@@ -23,11 +23,15 @@ public class Climber extends SystemBase implements SystemInterface{
             
             setCylinder1Extended();
             setCylinder2Extended();
+            cylinder1 = STATE.EXTENDED;
+            cylinder2 = STATE.EXTENDED;
 
         }else{ //Once the Y button is released by the driver, the cylinders will depress due to the air being put to them in the opposite direction of the initial force of the air.
 
             setCylinder1Collapsed();
             setCylinder2Collapsed();
+            cylinder1 = STATE.COLLAPSED;
+            cylinder2 = STATE.COLLAPSED;
 
         }
 
