@@ -16,6 +16,7 @@ public class Drive extends SystemBase implements SystemInterface {
 	private double rightPower, leftPower;
 
 	private double deadband = 0.10;
+	private double turningDeadband = 0.20;
 	private boolean negative = false;
 
 	private double yInput, xInput;
@@ -58,10 +59,10 @@ public class Drive extends SystemBase implements SystemInterface {
 			if(xInput < 0) negative = true;
 			
 			xOut = Math.abs(xInput);
-			if(xOut > deadband){
+			if(xOut > turningDeadband){
 
-				xOut -= deadband;
-				xOut *= Math.pow((1 / (1 - deadband)), 2);
+				xOut -= turningDeadband;
+				xOut *= Math.pow((1 / (1 - turningDeadband)), 2);
 				if(negative) xOut = -xOut;
 
 			}else{}
