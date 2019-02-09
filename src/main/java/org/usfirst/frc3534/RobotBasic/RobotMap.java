@@ -2,6 +2,7 @@ package org.usfirst.frc3534.RobotBasic;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -64,24 +65,30 @@ public class RobotMap {
 
 	public static void init() {
 
-		frontRightMotor = new WPI_TalonSRX(5);
+		frontRightMotor = new WPI_TalonSRX(10);
 		frontRightMotor.set(ControlMode.PercentOutput, 0);
+		frontRightMotor.setNeutralMode(NeutralMode.Brake);
 		frontRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-		backRightMotor = new WPI_TalonSRX(6);
+		backRightMotor = new WPI_TalonSRX((9));
+		backRightMotor.setNeutralMode(NeutralMode.Brake);
 		backRightMotor.set(ControlMode.PercentOutput, 0);
 
-		centerRightMotor = new WPI_TalonSRX(4);
+		centerRightMotor = new WPI_TalonSRX(8);
+		centerRightMotor.setNeutralMode(NeutralMode.Brake);
 		centerRightMotor.set(ControlMode.PercentOutput, 0);
 
 		frontLeftMotor = new WPI_TalonSRX(1);
+		frontLeftMotor.setNeutralMode(NeutralMode.Brake);
 		frontLeftMotor.set(ControlMode.PercentOutput, 0);
 		frontLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		backLeftMotor = new WPI_TalonSRX(2);
+		backLeftMotor.setNeutralMode(NeutralMode.Brake);
 		backLeftMotor.set(ControlMode.PercentOutput, 0);
 
 		centerLeftMotor = new WPI_TalonSRX(3);
+		centerLeftMotor.setNeutralMode(NeutralMode.Brake);
 		centerLeftMotor.set(ControlMode.PercentOutput, 0);
 
 		rightSideMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor, centerRightMotor);
@@ -89,6 +96,7 @@ public class RobotMap {
 
 		navx = new AHRS(SerialPort.Port.kMXP);
 
+		/*
 		elevatorCylinderOne = new DoubleSolenoid(0, 0, 1);
 		elevatorCylinderTwo = new Solenoid(0, 2);
 
@@ -108,6 +116,8 @@ public class RobotMap {
 		cargoShooter = new SpeedControllerGroup(cargoShooterMaster, cargoShooterSlave);
 
 		cargoRoller = new WPI_TalonSRX(4);
+		*/
+
 
 	}
 }
