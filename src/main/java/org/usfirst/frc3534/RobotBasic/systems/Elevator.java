@@ -1,7 +1,11 @@
 package org.usfirst.frc3534.RobotBasic.systems;
 
 import org.usfirst.frc3534.RobotBasic.RobotMap;
+import org.usfirst.frc3534.RobotBasic.XboxPlusPOV;
+import org.usfirst.frc3534.RobotBasic.XboxPlusPOV.POV;
+import org.usfirst.frc3534.RobotBasic.Robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 
 public class Elevator extends SystemBase implements SystemInterface {
@@ -11,6 +15,8 @@ public class Elevator extends SystemBase implements SystemInterface {
     private Solenoid solenoid1 = RobotMap.elevatorCylinderOne;
     private Solenoid solenoid2 = RobotMap.elevatorCylinderTwo;
 
+    private DigitalInput limitSwitch = RobotMap.limitSwitch;
+
     STATE cylinder1 = STATE.COLLAPSED;
     STATE cylinder2 = STATE.COLLAPSED;
 
@@ -19,11 +25,11 @@ public class Elevator extends SystemBase implements SystemInterface {
     @Override
     public void process() {
 
-        if() {//DPAD DOWN, STAGE 1
+        if(Robot.oi.getController2().getPOV() == Robot.oi.getController2().getPOVValue(POV.South)) {//DPAD DOWN, STAGE 1
 
             if (cylinder1 == STATE.EXTENDED) {
 
-                if (limitSwitch.getValue()) {
+                if (limitSwitch.get()) {
 
                     limitSwitchMet = true;
 
