@@ -21,11 +21,15 @@ public class Climber extends SystemBase implements SystemInterface{
             
             setCylinder1Extended();
             setCylinder2Extended();
+            cylinder1 = STATE.EXTENDED;
+            cylinder2 = STATE.EXTENDED;
 
         }else{
 
             setCylinder1Collapsed();
             setCylinder2Collapsed();
+            cylinder1 = STATE.COLLAPSED;
+            cylinder2 = STATE.COLLAPSED;
 
         }
 
