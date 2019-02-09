@@ -15,36 +15,53 @@ public class Climber extends SystemBase implements SystemInterface{
     private Solenoid solenoid1 = RobotMap.climbingCylinderOne; //These two lines are used to create variables of type Solenoid
     private Solenoid solenoid2 = RobotMap.climbingCylinderTwo;
 
-    STATE cylinder1 = STATE.COLLAPSED; //These two lines are used to create variables of type STATE
-    STATE cylinder2 = STATE.COLLAPSED;
+    CylinderState cylinder1 = CylinderState.COLLAPSED; //These two lines are used to create variables of type STATE
+    CylinderState cylinder2 = CylinderState.COLLAPSED;
+
+    ClimberState climberState = ClimberState.Retract;
 
     public Climber(){} //The default constructor of the Climber class
 
     public void process(){
 
-        if(Robot.oi.getController1().getYButton()){ //Should the driver hold the Y button, the cylinders will extend due to air being put to them.
+        switch(climberState){
+        case Climb: //Should the driver hold the Y button, the cylinders will extend due to air being put to them.
             
             setCylinder1Extended();
             setCylinder2Extended();
-            cylinder1 = STATE.EXTENDED;
-            cylinder2 = STATE.EXTENDED;
+            cylinder1 = CylinderState.EXTENDED;
+            cylinder2 = CylinderState.EXTENDED;
+            break;
 
-        }else{ //Once the Y button is released by the driver, the cylinders will depress due to the air being put to them in the opposite direction of the initial force of the air.
+        case Retract: //Once the Y button is released by the driver, the cylinders will depress due to the air being put to them in the opposite direction of the initial force of the air.
 
             setCylinder1Collapsed();
             setCylinder2Collapsed();
-            cylinder1 = STATE.COLLAPSED;
-            cylinder2 = STATE.COLLAPSED;
-
+            cylinder1 = CylinderState.COLLAPSED;
+            cylinder2 = CylinderState.COLLAPSED;
+            break;
         }
 
     }
 
-    private enum STATE{ //This method is used to describe all possible states of the cylinders
+    private enum CylinderState{ //This method is used to describe all possible states of the cylinders
 
         EXTENDED,
         COLLAPSED;
 
+    }
+
+    private enum ClimberState{
+        Climb(1),
+        Retract(2);
+
+        int value;
+
+        private ClimberState(int value){
+
+            this.value = value;
+
+        }
     }
 
     private void setCylinder1Extended() {
