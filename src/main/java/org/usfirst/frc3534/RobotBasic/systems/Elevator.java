@@ -106,15 +106,15 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             setCylinder1Extended();
             setCylinder2Extended();
-            if(cylinder1 == STATE.COLLAPSED){
+            if(cylinder1 == STATE.COLLAPSED){//if the first cylinder is collapsed 
 
-                if(limitSwitch.get()){
+                if(limitSwitch.get()){//if the cylinder is at the limit switch
 
                     cylinder1 = STATE.EXTENDED;
 
                 }
 
-            }else{
+            }else{//if the first cylinder is not collapsed
 
                 cylinder1 = STATE.EXTENDED;
 
@@ -125,15 +125,15 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             setCylinder1Collapsed();
             setCylinder2Collapsed();
-            if(cylinder1 == STATE.EXTENDED){
+            if(cylinder1 == STATE.EXTENDED){//if the first cylinder is extended
 
-                if(limitSwitch.get()){
+                if(limitSwitch.get()){//if the cylinder is at the limit switch
 
                     cylinder1 = STATE.COLLAPSED;
 
                 }
 
-            }else{
+            }else{//if the first cylinder is not xtended
 
                 cylinder1 = STATE.COLLAPSED;
 
