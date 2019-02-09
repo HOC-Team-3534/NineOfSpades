@@ -15,6 +15,9 @@ public class Climber extends SystemBase implements SystemInterface{
     private Solenoid solenoid1 = RobotMap.climbingCylinderOne; //These two lines are used to create variables of type Solenoid
     private Solenoid solenoid2 = RobotMap.climbingCylinderTwo;
 
+    STATE cylinder1 = STATE.COLLAPSED; //These two lines are used to create variables of type STATE
+    STATE cylinder2 = STATE.COLLAPSED;
+
     public Climber(){} //The default constructor of the Climber class
 
     public void process(){
@@ -34,6 +37,13 @@ public class Climber extends SystemBase implements SystemInterface{
             cylinder2 = STATE.COLLAPSED;
 
         }
+
+    }
+
+    private enum STATE{ //This method is used to describe all possible states of the cylinders
+
+        EXTENDED,
+        COLLAPSED;
 
     }
 
