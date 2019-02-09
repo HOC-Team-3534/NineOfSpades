@@ -6,7 +6,6 @@ import org.usfirst.frc3534.RobotBasic.RobotMap;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive extends SystemBase implements SystemInterface {
 
@@ -101,6 +100,12 @@ public class Drive extends SystemBase implements SystemInterface {
 	public void setLeftPower(double power) {
 
 		leftPower = power;
+
+	}
+
+	public double getNavXAngle(){
+
+		return RobotMap.navx.getRoll();
 
 	}
 }
