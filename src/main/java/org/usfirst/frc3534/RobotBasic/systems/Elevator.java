@@ -26,6 +26,7 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     public Elevator() {
 
+        //setting the DPAD buttons up so we dont have to type Robot.oi.getController2().getPOVValue(POV.Direction)
         DPAD_DOWN = Robot.oi.getController2().getPOVValue(POV.South);
         DPAD_UP = Robot.oi.getController2().getPOVValue(POV.North);
         DPAD_RIGHT = Robot.oi.getController2().getPOVValue(POV.East);
@@ -35,89 +36,116 @@ public class Elevator extends SystemBase implements SystemInterface {
     @Override
     public void process() {
 
-        if(Robot.oi.getController2().getPOV() == DPAD_DOWN) {//DPAD DOWN, STAGE 1
+        if(Robot.oi.getController2().getPOV() == DPAD_DOWN) {//STAGE 1
 
-            if (cylinder1 == STATE.EXTENDED) {
+            if (cylinder1 == STATE.EXTENDED) {//if the first cylinder is extended
 
-                if (limitSwitch.get()) {
+                if (limitSwitch.get()) {//if the first cylinder is at the limit switch
 
                     limitSwitchMet = true;
 
                 }
-                if (!limitSwitchMet) {
+                if (!limitSwitchMet) {//if the limit switch is not met
 
                     setCylinder1Collapsed();
 
-                } else {
+                } else {//if the first cylinder is already at stage 1
 
                     //STAY THERE??????????
 
                 }
 
-            } else if (cylinder1 == STATE.COLLAPSED) {
+            } else if (cylinder1 == STATE.COLLAPSED) {//if the first cylinder is collapsed
 
-                if (limitSwitch.get()) {
+                if (limitSwitch.get()) {//if the first cylinder is at the limit switch
 
                     limitSwitchMet = true;
 
                 }
-                if (!limitSwitchMet) {
+                if (!limitSwitchMet) {//if the limit switch is not met
 
                    setCylinder1Extended();
 
-                } else {
+                } else {//if the first cylinder is already at stage 1
 
                     //STAY THERE??????????
 
                 }
 
-            } else {
+            } else {//if the first cylinder is already at stage 1
 
                 //nothing
 
             }
-
-        } else if (Robot.oi.getController2().getPOV() == DPAD_RIGHT) {//DPAD RIGHT, STAGE 2
-
-            if (cylinder1 != STATE.EXTENDED) {
-
-                setCylinder1Extended();
-
-            } else {
-
-                //nothing
-
-            }
-
-        } else if(Robot.oi.getController2().getPOV() == DPAD_UP) {//DPAD UP, STAGE 3
-
-            if(cylinder2 != STATE.EXTENDED) {
-
-                setCylinder2Extended();
-
-            } else {
-
-                //nothing
-
-            }
-
-        } else {
-
-            if(cylinder1 != STATE.COLLAPSED) {
-
-                setCylinder1Collapsed();
-
-            } else {
-
-                //nothing
-
-            }
-
-            if(cylinder2 != STATE.COLLAPSED) {
+            if (cylinder2 == STATE.EXTENDED) {//if the second cylinder is extended
 
                 setCylinder2Collapsed();
 
-            } else {
+            } else {//if the second cylinder is collapsed
+
+                //nothing
+
+            }
+
+        } else if (Robot.oi.getController2().getPOV() == DPAD_RIGHT) {//STAGE 2
+
+            if (cylinder1 != STATE.EXTENDED) {//if the first cylinder is not extended
+
+                setCylinder1Extended();
+
+            } else {//if the first cylinder is at stage 2
+
+                //nothing
+
+            }
+            if (cylinder2 == STATE.EXTENDED) {//if the second cylinder is extended
+
+                setCylinder2Collapsed();
+
+            } else {//if the second cylinder is collapsed
+
+                //nothing
+
+            } 
+
+        } else if(Robot.oi.getController2().getPOV() == DPAD_UP) {//STAGE 3
+
+            if(cylinder2 != STATE.EXTENDED) {//if the second cylinder is collapsed
+
+                setCylinder2Extended();
+
+            } else {//if the second cylinder is extended
+
+                //nothing
+
+            }
+            if(cylinder1 != STATE.EXTENDED) {//if the first cylinder is not extended
+
+                setCylinder1Extended();
+
+            } else {//if the first cylinder is extended
+
+                //nothing
+
+            }
+
+        } else {//bottom stage, DPAD not pressed
+
+            if(cylinder1 != STATE.COLLAPSED) {//if the first cylinder is not extended
+
+                setCylinder1Collapsed();
+
+            } else {//if the first cylinder is extended
+
+                //nothing
+
+            }
+
+            if(cylinder2 != STATE.COLLAPSED) {//if the second cylinder is extended
+
+                setCylinder2Collapsed();
+
+            } else {//if the second cylinder is collapsed
 
                 //nothing
 
@@ -134,6 +162,9 @@ public class Elevator extends SystemBase implements SystemInterface {
         HALFWAY //ONLY FOR CYLINDER 1
 
     }
+
+    //solenoid_.set(true) pushes air through the bottom
+    //solenoid_.set(false) pushes air through the top
 
     private void setCylinder1Extended() {
 
