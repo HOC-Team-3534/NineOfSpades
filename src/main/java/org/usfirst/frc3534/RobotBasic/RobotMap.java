@@ -83,7 +83,7 @@ public class RobotMap {
 		elevatorCylinderOne = new Solenoid(0, 1);
 		elevatorCylinderTwo = new Solenoid(0, 2);
 
-		cylinderSensor = new DigitalInput(0);
+		limitSwitch = new DigitalInput(0);
 
 	}
 }
