@@ -133,7 +133,7 @@ public class Elevator extends SystemBase implements SystemInterface {
 
                 }
 
-            }else{//if the first cylinder is not xtended
+            }else{//if the first cylinder is not extended
 
                 cylinder1 = STATE.COLLAPSED;
 

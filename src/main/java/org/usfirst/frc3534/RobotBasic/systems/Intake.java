@@ -61,4 +61,11 @@ public class Intake extends SystemBase implements SystemInterface{
 
     }
 
+    @Override
+    public void process() {
+
+        
+
+    }
+
 }
