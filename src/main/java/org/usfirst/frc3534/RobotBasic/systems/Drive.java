@@ -4,8 +4,11 @@ import org.usfirst.frc3534.RobotBasic.Robot;
 import org.usfirst.frc3534.RobotBasic.RobotMap;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive extends SystemBase implements SystemInterface {
 
@@ -22,6 +25,16 @@ public class Drive extends SystemBase implements SystemInterface {
 	private double yInput, xInput;
 	private double yOut, xOut;
 
+	private double left_command = 0.0, right_command = 0.0;
+
+	private double last_error, distance_last_error;
+
+	private double KpAim = 0.065;
+	private double KdAim = 0.004;
+	private double KpDistance = 0.03;
+	private double KdDistance = .015;
+	private double min_aim_command = 0.005;
+
 	public Drive() {
 
 		drive = new DifferentialDrive(leftSide, rightSide);
@@ -35,49 +48,94 @@ public class Drive extends SystemBase implements SystemInterface {
 
 		if (Robot.teleop && Robot.enabled) {
 
-			negative = false;
-			yInput = -Robot.oi.getController1().getY(Hand.kLeft);
-			if(yInput < 0) negative = true;
+			//Network 
+			//Attempt at calling the Network Tables for Limelight and setting it 
+			NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+			double tx = table.getEntry("tx").getDouble(0.0);
+			SmartDashboard.putNumber("tx", tx);
+			double ty = table.getEntry("ty").getDouble(0.0);
 
-			yOut = Math.abs(yInput);
+			if(Robot.oi.getController1().getAButton()){
 
-			if(yOut > deadband){
+				double heading_error = tx;
+				double distance_error = ty;
+				double steering_adjust = 0.0;
 
-				yOut -= deadband;
-				yOut *= (1 / (1 - deadband));
-				yOut = Math.pow(yOut, 2) * (1 - RobotMap.minMoveSpeed) + RobotMap.minMoveSpeed;
-				if(negative) yOut = -yOut;
+				if ( tx > 1.0 ) {
 
-			}else{
+					steering_adjust = KpAim * heading_error + min_aim_command  + (heading_error - last_error) * KdAim ;
+		
+				}
+				else if ( tx < -1.0 ) {
 
-				yOut = 0;
-
-			}
-
-			negative = false;
-			xInput = Robot.oi.getController1().getX(Hand.kLeft);
-			if(xInput < 0) negative = true;
-			
-			xOut = Math.abs(xInput);
-			if(xOut > turningDeadband){
-
-				xOut -= turningDeadband;
-				xOut *= Math.pow((1 / (1 - turningDeadband)), 2);
-				if(negative) xOut = -xOut;
-
-			}else{
-
-				xOut = 0;
-
-			}
-
-			if(Robot.oi.getController1().getTriggerAxis(Hand.kRight) >= 0.5){
+					steering_adjust = KpAim * heading_error - min_aim_command + (heading_error - last_error) * KdAim;
 				
-				drive.arcadeDrive(yOut * 0.6, xOut);
+				}else{
+
+					steering_adjust = 0.0;
+					left_command = 0.0;
+					right_command = 0.0;
+
+				}
+
+				last_error = heading_error;
+
+				double distance_adjust = KpDistance * distance_error + KdDistance * (distance_error - distance_last_error);
+				
+				distance_last_error = distance_error;
+
+				left_command = steering_adjust + distance_adjust ;
+				right_command = -steering_adjust + distance_adjust ;
+
+				drive.tankDrive(left_command, right_command);
 
 			}else{
 
-				drive.arcadeDrive(yOut, xOut);
+				negative = false;
+				yInput = -Robot.oi.getController1().getY(Hand.kLeft);
+				if(yInput < 0) negative = true;
+
+				yOut = Math.abs(yInput);
+
+				if(yOut > deadband){
+
+					yOut -= deadband;
+					yOut *= (1 / (1 - deadband));
+					yOut = Math.pow(yOut, 2) * (1 - RobotMap.minMoveSpeed) + RobotMap.minMoveSpeed;
+					if(negative) yOut = -yOut;
+
+				}else{
+
+					yOut = 0;
+
+				}
+
+				negative = false;
+				xInput = Robot.oi.getController1().getX(Hand.kLeft);
+				if(xInput < 0) negative = true;
+				
+				xOut = Math.abs(xInput);
+				if(xOut > turningDeadband){
+
+					xOut -= turningDeadband;
+					xOut *= Math.pow((1 / (1 - turningDeadband)), 2);
+					if(negative) xOut = -xOut;
+
+				}else{
+
+					xOut = 0;
+
+				}
+
+				if(Robot.oi.getController1().getTriggerAxis(Hand.kRight) >= 0.5){
+					
+					drive.arcadeDrive(yOut * 0.6, xOut);
+
+				}else{
+
+					drive.arcadeDrive(yOut, xOut);
+
+				}
 
 			}
 
