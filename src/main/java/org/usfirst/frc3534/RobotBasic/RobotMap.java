@@ -37,6 +37,9 @@ public class RobotMap {
 	public static Solenoid elevatorCylinderOne;
 	public static Solenoid elevatorCylinderTwo;
 
+	public static Solenoid climbingCylinderOne;
+	public static Solenoid climbingCylinderTwo;
+
 	public static DigitalInput cylinderSensor;
 
 	public static final double wheelBase_width = 36;
