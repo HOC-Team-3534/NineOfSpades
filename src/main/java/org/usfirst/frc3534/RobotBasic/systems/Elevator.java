@@ -93,6 +93,16 @@ public class Elevator extends SystemBase implements SystemInterface {
 
         } else {
 
+            if(cylinder1 != STATE.COLLAPSED) {
+
+                setCylinder1Collapsed();
+
+            } else {
+
+                //nothing
+
+            }
+
             if(cylinder2 != STATE.COLLAPSED) {
 
                 setCylinder2Collapsed();
@@ -118,24 +128,28 @@ public class Elevator extends SystemBase implements SystemInterface {
     private void setCylinder1Extended() {
 
         //give power to solenoid1 bottom
+        solenoid1.set(true);
 
     }
 
     private void setCylinder1Collapsed() {
 
         //give power to solenoid1 top
+        solenoid1.set(false);
 
     }
 
     private void setCylinder2Extended() {
 
         //give power to solenoid2 bottom
+        solenoid2.set(true);
 
     }
 
     private void setCylinder2Collapsed() {
 
         //give power to solenoid2 top
+        solenoid2.set(false);
 
     }
 

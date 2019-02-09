@@ -39,6 +39,9 @@ public class RobotMap {
 
 	public static DigitalInput limitSwitch;
 
+	public static Solenoid climbingCylinderOne;
+	public static Solenoid climbingCylinderTwo;
+
 	public static final double wheelBase_width = 36;
 	public static final double robotMaxVeloctiy = 168; // inches per second
 	public static final double minMoveSpeed = .375;
@@ -77,8 +80,8 @@ public class RobotMap {
 
 		navx = new AHRS(SerialPort.Port.kMXP);
 
-		elevatorCylinderOne = new Solenoid(1);
-		elevatorCylinderTwo = new Solenoid(2);
+		elevatorCylinderOne = new Solenoid(0, 1);
+		elevatorCylinderTwo = new Solenoid(0, 2);
 
 		cylinderSensor = new DigitalInput(0);
 
