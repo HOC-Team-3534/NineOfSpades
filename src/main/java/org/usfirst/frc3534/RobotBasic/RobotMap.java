@@ -28,8 +28,6 @@ public class RobotMap {
 
 	public static WPI_TalonSRX shooter;
 
-	public static WPI_TalonSRX pidArm;
-
 	public static SpeedControllerGroup rightSideMotors;
 	public static SpeedControllerGroup leftSideMotors;
 
@@ -76,8 +74,6 @@ public class RobotMap {
 
 		rightSideMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor, centerRightMotor);
 		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor, centerLeftMotor);
-		
-		pidArm.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		navx = new AHRS(SerialPort.Port.kMXP);
 

@@ -137,8 +137,8 @@ public class Robot extends TimedRobot {
 				loopCnt++;
 
 				// run processes
-				drive.process();
 				autonStateMachine.process();
+				drive.process();
 
 			}
 
