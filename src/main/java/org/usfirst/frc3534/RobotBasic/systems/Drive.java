@@ -34,6 +34,7 @@ public class Drive extends SystemBase implements SystemInterface {
 
 		if (Robot.teleop && Robot.enabled) {
 
+			negative = false;
 			yInput = -Robot.oi.getController1().getY(Hand.kLeft);
 			if(yInput < 0) negative = true;
 
@@ -52,15 +53,32 @@ public class Drive extends SystemBase implements SystemInterface {
 
 			}
 
+			negative = false;
 			xInput = Robot.oi.getController1().getX(Hand.kLeft);
-			xOut = xInput;
-			if(Math.abs(xOut) < deadband){
+			if(xInput < 0) negative = true;
+			
+			xOut = Math.abs(xInput);
+			if(xOut > deadband){
+
+				xOut -= deadband;
+				xOut *= Math.pow((1 / (1 - deadband)), 2);
+				if(negative) xOut = -xOut;
+
+			}else{}
 
 				xOut = 0;
 
 			}
 
-			drive.arcadeDrive(yOut, xOut);
+			if(Robot.oi.getController1().getTriggerAxis(Hand.kRight) >= 0.5){
+				
+				drive.arcadeDrive(yOut * 0.6, xOut);
+
+			}else{
+
+				drive.arcadeDrive(yOut, xOut);
+
+			}
 
 
 		} else if (Robot.autonomous) {
