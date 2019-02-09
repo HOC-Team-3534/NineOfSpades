@@ -60,12 +60,4 @@ public class Intake extends SystemBase implements SystemInterface{
         rightLong.set(false);
 
     }
-
-    @Override
-    public void process() {
-
-        
-
-    }
-
 }
