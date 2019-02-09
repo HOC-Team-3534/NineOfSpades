@@ -1,19 +1,20 @@
 package org.usfirst.frc3534.RobotBasic.systems;
 
 import org.usfirst.frc3534.RobotBasic.RobotMap;
-import org.usfirst.frc3534.RobotBasic.XboxPlusPOV;
 import org.usfirst.frc3534.RobotBasic.XboxPlusPOV.POV;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Elevator extends SystemBase implements SystemInterface {
 
     private boolean limitSwitchMet = false;
 
-    private Solenoid solenoid1 = RobotMap.elevatorCylinderOne;
+    private DoubleSolenoid solenoid1 = RobotMap.elevatorCylinderOne;
     private Solenoid solenoid2 = RobotMap.elevatorCylinderTwo;
 
     private DigitalInput limitSwitch = RobotMap.limitSwitch;
@@ -27,10 +28,10 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     public Elevator() {
 
-        //setting the DPAD buttons up so we dont have to type XboxPlusPOV.POV.Direction.getValue()
-        DPAD_DOWN = XboxPlusPOV.POV.South.getValue();
-        DPAD_UP = XboxPlusPOV.POV.North.getValue();
-        DPAD_RIGHT = XboxPlusPOV.POV.East.getValue();
+        //setting the DPAD buttons up so we dont have to type POV.Direction.getValue()
+        DPAD_DOWN = POV.South.getValue();
+        DPAD_UP = POV.North.getValue();
+        DPAD_RIGHT = POV.East.getValue();
 
     }
 
@@ -54,7 +55,8 @@ public class Elevator extends SystemBase implements SystemInterface {
 
                 } else {//if the first cylinder is already at stage 1
 
-                    //STAY THERE??????????
+                    //STAY THERE
+                    setCylinder1Halfway();
 
                 }
 
@@ -74,7 +76,8 @@ public class Elevator extends SystemBase implements SystemInterface {
 
                 } else {//if the first cylinder is already at stage 1
 
-                    //STAY THERE??????????
+                    //STAY THERE
+                    setCylinder1Halfway();
 
                 }
 
@@ -142,23 +145,9 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     private enum STATE{
 
-        EXTENDED(1),
-        COLLAPSED(2),
-        HALFWAY(3); //ONLY FOR CYLINDER 1
-
-        int value;
-
-        private STATE(int value){
-
-            this.value = value;
-
-        }
-
-        private int getValue(){
-
-            return value;
-
-        }
+        EXTENDED,
+        COLLAPSED,
+        HALFWAY; //ONLY FOR CYLINDER 1
 
     }
 
@@ -168,14 +157,21 @@ public class Elevator extends SystemBase implements SystemInterface {
     private void setCylinder1Extended() {
 
         //give power to solenoid1 bottom
-        solenoid1.set(true);
+        solenoid1.set(Value.kForward);
 
     }
 
     private void setCylinder1Collapsed() {
 
-        //give power to solenoid1 top
-        solenoid1.set(false);
+        //give power to solenoid1 top (in theory). Use gravity and plug the value
+        solenoid1.set(Value.kReverse);
+
+    }
+
+    private void setCylinder1Halfway(){
+
+        //block all pathways to the atmosphere
+        solenoid1.set(Value.kOff);
 
     }
 
