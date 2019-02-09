@@ -77,8 +77,8 @@ public class RobotMap {
 
 		navx = new AHRS(SerialPort.Port.kMXP);
 
-		elevatorCylinderOne = new Solenoid(1);
-		elevatorCylinderTwo = new Solenoid(2);
+		elevatorCylinderOne = new Solenoid(0, 1);
+		elevatorCylinderTwo = new Solenoid(0, 2);
 
 		cylinderSensor = new DigitalInput(0);
 
