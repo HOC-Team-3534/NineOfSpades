@@ -65,7 +65,7 @@ public class Drive extends SystemBase implements SystemInterface {
 				xOut *= Math.pow((1 / (1 - turningDeadband)), 2);
 				if(negative) xOut = -xOut;
 
-			}else{}
+			}else{
 
 				xOut = 0;
 
