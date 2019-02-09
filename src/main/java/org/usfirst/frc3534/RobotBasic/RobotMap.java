@@ -41,6 +41,18 @@ public class RobotMap {
 	public static Solenoid climbingCylinderOne;
 	public static Solenoid climbingCylinderTwo;
 
+	public static Solenoid leftShortArmCylinder;
+	public static Solenoid leftLongArmCylinder;
+	public static Solenoid rightShortArmCylinder;
+	public static Solenoid rightLongArmCylinder;
+
+	public static WPI_TalonSRX cargoShooterMaster;
+	public static WPI_TalonSRX cargoShooterSlave;
+
+	public static WPI_TalonSRX cargoRoller;
+
+	public static SpeedControllerGroup cargoShooter;
+
 	public static final double wheelBase_width = 36;
 	public static final double robotMaxVeloctiy = 168; // inches per second
 	public static final double minMoveSpeed = .375;
@@ -84,6 +96,18 @@ public class RobotMap {
 
 		climbingCylinderOne = new Solenoid(0, 3);
 		climbingCylinderTwo = new Solenoid(0, 4);
+
+		leftShortArmCylinder = new Solenoid(1, 0);
+		leftLongArmCylinder = new Solenoid(1, 1);
+		rightShortArmCylinder = new Solenoid(1, 2);
+		rightLongArmCylinder = new Solenoid(1, 3);
+
+		cargoShooterMaster = new WPI_TalonSRX(6);
+		cargoShooterSlave = new WPI_TalonSRX(7);
+
+		cargoShooter = new SpeedControllerGroup(cargoShooterMaster, cargoShooterSlave);
+
+		cargoRoller = new WPI_TalonSRX(4);
 
 	}
 }
