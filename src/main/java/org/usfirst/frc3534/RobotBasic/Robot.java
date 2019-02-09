@@ -48,7 +48,6 @@ public class Robot extends TimedRobot {
 		RobotMap.init();
 
 		drive = new Drive();
-		shooter = new Shooter();
 
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
@@ -181,7 +180,6 @@ public class Robot extends TimedRobot {
 
 				// run processes
 				drive.process();
-				shooter.process();
 
 			}
 
