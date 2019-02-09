@@ -59,5 +59,11 @@ public class XboxPlusPOV extends XboxController {
 			this.value = value;
 
 		}
+
+		public int getValue(){
+
+			return value;
+
+		}
 	}
 }
