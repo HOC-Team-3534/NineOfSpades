@@ -23,7 +23,10 @@ public class Robot extends TimedRobot {
 	public static int AUTON_PERIODIC = 1;
 	public static OI oi;
 	public static Drive drive;
-	public static Shooter shooter;
+	public static Elevator elevator;
+	public static Intake intake;
+	public static Climber climber;
+	public static HatchPanelApparatus hatchPanelApparatus;
 
 	private int loopPeriod = 0;
 	private int loopCnt = 0;
@@ -138,6 +141,10 @@ public class Robot extends TimedRobot {
 				// run processes
 				autonStateMachine.process();
 				drive.process();
+				elevator.process();
+				intake.process();
+				climber.process();
+				hatchPanelApparatus.process();
 
 			}
 
@@ -180,6 +187,10 @@ public class Robot extends TimedRobot {
 
 				// run processes
 				drive.process();
+				elevator.process();
+				intake.process();
+				climber.process();
+				hatchPanelApparatus.process();
 
 			}
 

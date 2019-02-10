@@ -6,4 +6,6 @@ public interface FunctionInterface{
 
     public boolean isFinished();
 
+    public void reset();
+
 }

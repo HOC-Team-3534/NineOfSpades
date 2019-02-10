@@ -18,4 +18,11 @@ public class FunctionBase implements FunctionInterface{
 
     }
 
+    @Override
+    public void reset(){
+
+        state = 1;
+
+    }
+
 }
