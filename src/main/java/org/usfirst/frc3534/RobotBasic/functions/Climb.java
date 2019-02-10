@@ -10,6 +10,8 @@ public class Climb extends FunctionBase implements FunctionInterface{
 
     @Override
     public void process(){
+
+        running = true;
         
     }
 

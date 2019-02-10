@@ -1,8 +1,8 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
-public class Retract extends FunctionBase implements FunctionInterface{
+public class ShootCargo extends FunctionBase implements FunctionInterface{
 
-    public Retract(){
+    public ShootCargo(){
 
         reset();
 
@@ -10,7 +10,9 @@ public class Retract extends FunctionBase implements FunctionInterface{
 
     @Override
     public void process(){
-        
+
+        running = true;
+
     }
 
 }

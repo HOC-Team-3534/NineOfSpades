@@ -22,6 +22,16 @@ public class FunctionBase implements FunctionInterface{
     public void reset(){
 
         state = 1;
+        running = false;
+        finished = false;
+
+    }
+
+    @Override
+    public void completed(){
+
+        running = false;
+        finished = true;
 
     }
 

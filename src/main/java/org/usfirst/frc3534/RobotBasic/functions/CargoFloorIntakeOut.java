@@ -1,8 +1,8 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
-public class ArmsUp extends FunctionBase implements FunctionInterface{
+public class CargoFloorIntakeOut extends FunctionBase implements FunctionInterface{
 
-    public ArmsUp(){
+    public CargoFloorIntakeOut(){
 
         reset();
 
@@ -12,7 +12,7 @@ public class ArmsUp extends FunctionBase implements FunctionInterface{
     public void process(){
 
         running = true;
-
+        
     }
 
 }

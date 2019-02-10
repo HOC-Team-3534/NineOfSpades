@@ -42,7 +42,7 @@ public class XboxPlusPOV extends XboxController {
 
 	}
 
-	public int getPOVValue(POV direction){
+	public static int getPOVValue(POV direction){
 
 		return direction.value;
 

@@ -1,8 +1,8 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
-public class CargoFloorIntake extends FunctionBase implements FunctionInterface{
+public class RetractClimber extends FunctionBase implements FunctionInterface{
 
-    public CargoFloorIntake(){
+    public RetractClimber(){
 
         reset();
 
@@ -10,6 +10,8 @@ public class CargoFloorIntake extends FunctionBase implements FunctionInterface{
 
     @Override
     public void process(){
+
+        running = true;
         
     }
 

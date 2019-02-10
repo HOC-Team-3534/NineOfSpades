@@ -11,7 +11,7 @@ public class PlacePanel extends FunctionBase implements FunctionInterface{
     @Override
     public void process(){
 
-        
+        running = true;
 
     }
 

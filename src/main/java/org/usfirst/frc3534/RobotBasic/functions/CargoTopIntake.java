@@ -1,8 +1,8 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
-public class ArmsUp extends FunctionBase implements FunctionInterface{
+public class CargoTopIntake extends FunctionBase implements FunctionInterface{
 
-    public ArmsUp(){
+    public CargoTopIntake(){
 
         reset();
 
