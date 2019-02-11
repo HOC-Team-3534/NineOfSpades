@@ -35,7 +35,7 @@ public class Drive extends SystemBase implements SystemInterface {
 	private double KdDistance = .015;
 	private double kpTranslation = 0.007;
 	private double min_aim_command = 0.005;
-	private double max_side_to_side_correction = 0.15;
+	private double max_side_to_side_correction = 0.1;
 
 	private double[] defaultArray = {0.0, 0.0, 0.0, 0.0, 0.0 , 0.0};
 
