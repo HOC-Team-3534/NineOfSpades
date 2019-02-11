@@ -8,6 +8,8 @@ public class Arduino extends SystemBase implements SystemInterface{
 
     private I2C arduino = RobotMap.arduino;
 
+    private LEDState ledState = LEDState.OFF;
+
     public Arduino(){
 
         String WriteString = "test"; //"test" will be the message we will send to the arduino
@@ -22,6 +24,59 @@ public class Arduino extends SystemBase implements SystemInterface{
 
     @Override
     public void process(){
+
+        switch(ledState){
+
+        case OFF:
+
+            break;
+
+        case BLUE:
+
+            break;
+
+        case RED:
+
+            break;
+
+        case GREEN:
+
+            break;
+        
+        case RAINBOW:
+
+            break;
+        }
+
+    }
+
+    public enum LEDState{
+
+        OFF,
+        BLUE,
+        RED,
+        GREEN,
+        RAINBOW
+
+    }
+
+    public void setLEDToOff(){
+        
+    }
+
+    public void setLEDToBlue(){
+
+    }
+
+    public void setLEDToRed(){
+
+    }
+
+    public void setLEDToGreen(){
+
+    }
+
+    public void setLEDToRainbow(){
 
     }
 
