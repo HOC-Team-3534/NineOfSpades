@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -60,6 +61,8 @@ public class RobotMap {
 	public static Solenoid panelCylinder1;
 	public static Solenoid panelCylinder2;
 	public static Solenoid panelCylinder3;
+
+	public static I2C arduino;
 
 	public static final double wheelBase_width = 36;
 	public static final double robotMaxVeloctiy = 168; // inches per second
@@ -131,6 +134,8 @@ public class RobotMap {
 		panelCylinder2 = new Solenoid(0, 6);
 		panelCylinder3 = new Solenoid(0, 7);
 		*/
+
+		arduino = new I2C(I2C.Port.kOnboard, 111);
 
 
 	}
