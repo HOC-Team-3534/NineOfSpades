@@ -2,6 +2,8 @@ package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+
 public class FunctionProcessor{
 
     static ArmsUp armsUp;
@@ -30,7 +32,7 @@ public class FunctionProcessor{
 
     public void process(){
 
-        if(Robot.oi.getController2().getYButton() || armsUp.running){
+        if(Robot.oi.getController2().getXButton() || armsUp.running){
 
             armsUp.process();
 
@@ -40,12 +42,12 @@ public class FunctionProcessor{
 
         }
 
-        if((armsUp.isFinished() && Robot.oi.getController1().getYButton()) || climb.running){
+        if((armsUp.isFinished() && Robot.oi.getController1().getXButton()) || climb.running){
 
             climb.process();
             retractClimber.reset();
 
-        }else if(climb.isFinished() || (armsUp.running && !Robot.oi.getController2().getYButton())){
+        }else if(climb.isFinished() || (armsUp.running && !Robot.oi.getController2().getXButton())){
 
             if(!retractClimber.isFinished()){
 
@@ -60,7 +62,7 @@ public class FunctionProcessor{
 
         }
 
-        if(Robot.oi.getController2().getAButton() || cargoFloorIntakeIn.running){
+        if(Robot.oi.getController1().getAButton() || cargoFloorIntakeIn.running){
 
             cargoFloorIntakeIn.process();
             cargoFloorIntakeOut.reset();
@@ -79,7 +81,7 @@ public class FunctionProcessor{
 
         }
 
-        if(Robot.oi.getController2().getBButton() || cargoTopIntake.running){
+        if(Robot.oi.getController1().getBButton() || cargoTopIntake.running){
 
             cargoTopIntake.process();
 
@@ -89,7 +91,7 @@ public class FunctionProcessor{
 
         }
 
-        if(Robot.oi.getController1().getBButton() || shootCargo.running){
+        if((Robot.oi.getController2().getBumper(Hand.kRight) || shootCargo.running) && !cargoTopIntake.running){
 
             shootCargo.process();
 
@@ -99,7 +101,7 @@ public class FunctionProcessor{
 
         }
 
-        if(Robot.oi.getController1().getAButton() || placePanel.running){
+        if(Robot.oi.getController2().getTriggerAxis(Hand.kRight) >= 0.5 || placePanel.running){
 
             placePanel.process();
 
@@ -109,7 +111,7 @@ public class FunctionProcessor{
 
         }
 
-        if(((!climb.running && !retractClimber.running) && (!cargoFloorIntakeIn.running && !cargoFloorIntakeOut.running)) && !cargoTopIntake.running){
+        if(((!climb.running && !retractClimber.running) && (!cargoFloorIntakeIn.running && !cargoFloorIntakeOut.running)) && (!cargoTopIntake.running && !armsUp.running)){
 
             elevate.process();
 

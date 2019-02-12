@@ -22,6 +22,7 @@ public class Climber extends SystemBase implements SystemInterface{
 
     public Climber(){} //The default constructor of the Climber class
 
+    @Override
     public void process(){
 
         switch(climberState){
