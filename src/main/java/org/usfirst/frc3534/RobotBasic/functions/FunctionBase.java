@@ -14,14 +14,14 @@ public class FunctionBase implements FunctionInterface{
     @Override
     public boolean isFinished(){
 
-        return isFinished();
+        return finished;
 
     }
 
     @Override
     public void reset(){
 
-        state = 1;
+        state = 0;
         running = false;
         finished = false;
 
