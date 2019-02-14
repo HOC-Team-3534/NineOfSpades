@@ -35,4 +35,11 @@ public class FunctionBase implements FunctionInterface{
 
     }
 
+    @Override
+    public void started(){
+
+        running = true;
+
+    }
+
 }

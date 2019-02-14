@@ -10,4 +10,6 @@ public interface FunctionInterface{
 
     public void completed();
 
+    public void started();
+
 }
