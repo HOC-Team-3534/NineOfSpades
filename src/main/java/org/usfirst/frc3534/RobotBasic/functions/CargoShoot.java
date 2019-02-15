@@ -48,6 +48,13 @@ public class CargoShoot extends FunctionBase implements FunctionInterface{
 
             case 20:
 
+                Robot.shooter.setShooterState(ShooterState.STOP);
+                this.state = 30;
+
+                break;
+
+            case 30:
+
                 completed();
 
                 break;
