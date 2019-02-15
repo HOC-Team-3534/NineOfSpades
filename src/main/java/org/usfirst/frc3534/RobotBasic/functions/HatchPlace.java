@@ -2,9 +2,11 @@ package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
 
-public class Elevate extends FunctionBase implements FunctionInterface{
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 
-    public Elevate(){
+public class HatchPlace extends FunctionBase implements FunctionInterface{
+
+    public HatchPlace(){
 
         reset();
 
@@ -15,7 +17,7 @@ public class Elevate extends FunctionBase implements FunctionInterface{
 
         switch(this.state) {
             case 0:
-                if(Robot.oi.getController2().getXButton()) {
+                if(Robot.oi.getController2().getTriggerAxis(Hand.kRight) >= 0.5) {
                     this.started();
                     this.state = 10;
                 }

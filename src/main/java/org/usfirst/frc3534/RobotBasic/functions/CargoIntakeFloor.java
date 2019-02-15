@@ -2,9 +2,9 @@ package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
 
-public class Elevate extends FunctionBase implements FunctionInterface{
+public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
-    public Elevate(){
+    public CargoIntakeFloor(){
 
         reset();
 
@@ -15,7 +15,7 @@ public class Elevate extends FunctionBase implements FunctionInterface{
 
         switch(this.state) {
             case 0:
-                if(Robot.oi.getController2().getXButton()) {
+                if(Robot.oi.getController1().getAButton()) {
                     this.started();
                     this.state = 10;
                 }
@@ -26,7 +26,7 @@ public class Elevate extends FunctionBase implements FunctionInterface{
                 break;
     
             }
-
+        
     }
 
 }
