@@ -13,6 +13,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
     public CargoIntakeFloor(){
 
         reset();
+        completed();
 
     }
 
