@@ -195,4 +195,10 @@ public class Intake extends SystemBase implements SystemInterface{
         rightExtend.set(false);
 
     }
+
+    public boolean isArmAft(){
+
+        return RobotMap.forwardAftSensor.get();
+
+    }
 }

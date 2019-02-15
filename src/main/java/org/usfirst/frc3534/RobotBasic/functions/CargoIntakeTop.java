@@ -2,13 +2,12 @@ package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
-import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
-import org.usfirst.frc3534.RobotBasic.systems.Intake.RollerState;
 import org.usfirst.frc3534.RobotBasic.systems.Shooter.ShooterState;
 
 public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
 
     long originalTime = 0;
+    boolean firstPartDone = false;
 
     public CargoIntakeTop(){
 
@@ -20,9 +19,10 @@ public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
     @Override
     public void process(){
 
-        if(!Robot.oi.getController2().getBButton()){
+        if(!Robot.oi.getController2().getBButton() && firstPartDone){
 
-            this.state = 40;
+            this.state = 30;
+            firstPartDone = false;
 
         }
 
@@ -37,40 +37,35 @@ public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
                 if(Robot.oi.getController1().getBButton()) {
                     this.started();
                     this.state = 10;
-                    originalTime = System.currentTimeMillis();
                 }
                 break;
     
             case 10:
 
-                Robot.elevator.setElevatorState(ElevatorState.Stage1A);
+                Robot.elevator.setElevatorState(ElevatorState.Floor);
+                Robot.shooter.setShooterState(ShooterState.INTAKE);
                 
-                if(System.currentTimeMillis() - originalTime > .75 * 1000){
-                    this.state = 20;
-                    originalTime = System.currentTimeMillis();
-                }
+                this.state = 20;
+
                 break;
 
             case 20:
 
-                Robot.intake.setArmExtendState(ArmExtendState.EXTENDED);
-                Robot.intake.setRollerState(RollerState.INTAKE);
-
-                this.state = 30;
+                firstPartDone = true;
 
                 break;
 
             case 30:
 
-                break;
+                Robot.shooter.setShooterState(ShooterState.STOP);
+                Robot.elevator.setElevatorState(ElevatorState.Floor);
 
-            case 40:
-
-                
+                completed();
 
                 break;
     
             }
+        
 
     }
 
