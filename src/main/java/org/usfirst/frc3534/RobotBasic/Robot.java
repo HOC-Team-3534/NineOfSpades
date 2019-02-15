@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
 	public static Climber climber;
 	public static HatchPanelApparatus hatchPanelApparatus;
 	public static Arduino arduino;
+	public static Shooter shooter;
 
 	private int loopPeriod = 0;
 	private int loopCnt = 0;
@@ -57,6 +58,7 @@ public class Robot extends TimedRobot {
 		climber = new Climber();
 		hatchPanelApparatus = new HatchPanelApparatus();
 		arduino = new Arduino();
+		shooter = new Shooter();
 
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be

@@ -151,7 +151,7 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     }
 
-    private enum ElevatorState{
+    public enum ElevatorState{
 
         Floor(1),
         Stage1A(2),
@@ -168,7 +168,7 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     }
 
-    private void setElevatorState(ElevatorState state){
+    public void setElevatorState(ElevatorState state){
 
         elevatorState = state;
 
