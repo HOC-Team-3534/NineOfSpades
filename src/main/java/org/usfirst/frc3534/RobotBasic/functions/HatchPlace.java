@@ -36,7 +36,7 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
     
             case 10:
 
-                Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.EXTENDED);\
+                Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.EXTENDED);
                 if(System.currentTimeMillis() - originalTime > .75 * 1000){
 
                     this.state = 20;
