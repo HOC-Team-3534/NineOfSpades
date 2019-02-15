@@ -4,7 +4,6 @@ import org.usfirst.frc3534.RobotBasic.Robot;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.RollerState;
-import org.usfirst.frc3534.RobotBasic.systems.Shooter.ShooterState;
 
 public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
