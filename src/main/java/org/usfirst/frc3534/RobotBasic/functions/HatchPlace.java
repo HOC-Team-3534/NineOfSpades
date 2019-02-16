@@ -27,7 +27,7 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
 
         switch(this.state) {
             case 0:
-                if(Robot.oi.getController2().getTriggerAxis(Hand.kRight) >= 0.5) {
+                if((Robot.oi.getController2().getTriggerAxis(Hand.kRight) >= 0.5 && (!Robot.functionProcessor.cargoIntakeTop.running && !Robot.functionProcessor.cargoIntakeFloor.running)) && ((!Robot.functionProcessor.cargoShoot.running && !Robot.functionProcessor.habLevel3ClimbPart1.running) && (!Robot.functionProcessor.habLevel3ClimbPart2.running && !Robot.functionProcessor.xButtonReset.running))) {
                     this.started();
                     this.state = 10;
                     originalTime = System.currentTimeMillis();

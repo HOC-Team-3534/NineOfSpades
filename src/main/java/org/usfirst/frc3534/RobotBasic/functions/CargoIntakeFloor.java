@@ -35,7 +35,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
         switch(this.state) {
             case 0:
-                if(Robot.oi.getController1().getAButton()) {
+                if((Robot.oi.getController1().getAButton() && (!Robot.functionProcessor.cargoIntakeTop.running && !Robot.functionProcessor.hatchPlace.running)) && ((!Robot.functionProcessor.cargoShoot.running && !Robot.functionProcessor.habLevel3ClimbPart1.running) && (!Robot.functionProcessor.habLevel3ClimbPart2.running && !Robot.functionProcessor.xButtonReset.running))) {
                     this.started();
                     this.state = 10;
                     originalTime = System.currentTimeMillis();

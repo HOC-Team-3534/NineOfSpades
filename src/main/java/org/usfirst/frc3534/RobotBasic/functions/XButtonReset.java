@@ -19,7 +19,7 @@ public class XButtonReset extends FunctionBase implements FunctionInterface {
     @Override
     public void process() {
 
-        if(!running && Robot.oi.getController2().getBackButton()){
+        if((!running && Robot.oi.getController2().getBackButton() && (!Robot.functionProcessor.cargoIntakeTop.running && !Robot.functionProcessor.hatchPlace.running)) && ((!Robot.functionProcessor.cargoShoot.running && !Robot.functionProcessor.habLevel3ClimbPart1.running) && (!Robot.functionProcessor.habLevel3ClimbPart2.running && !Robot.functionProcessor.xButtonReset.running))){
 
             this.reset();
 

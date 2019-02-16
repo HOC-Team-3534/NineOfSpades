@@ -13,6 +13,7 @@ public class FunctionProcessor{
     static Elevate elevate;
     static HatchPlace hatchPlace;
     static CargoShoot cargoShoot;
+    static XButtonReset xButtonReset;
 
     public FunctionProcessor(){
 
@@ -23,12 +24,20 @@ public class FunctionProcessor{
         elevate = new Elevate();
         hatchPlace = new HatchPlace();
         cargoShoot = new CargoShoot();
+        xButtonReset = new XButtonReset();
 
     }
 
     public void process(){
 
-        
+        cargoIntakeFloor.process();
+        cargoIntakeTop.process();
+        habLevel3ClimbPart1.process();
+        habLevel3ClimbPart2.process();
+        xButtonReset.process();
+        hatchPlace.process();
+        cargoShoot.process();
+        elevate.process();
 
     }
 
