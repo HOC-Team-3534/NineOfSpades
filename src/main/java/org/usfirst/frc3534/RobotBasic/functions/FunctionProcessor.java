@@ -1,6 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
+import org.usfirst.frc3534.RobotBasic.systems.Arduino.LEDState;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
@@ -30,6 +31,7 @@ public class FunctionProcessor{
 
     public void process(){
 
+        Robot.arduino.setLEDState(LEDState.BLUE);
         cargoIntakeFloor.process();
         cargoIntakeTop.process();
         habLevel3ClimbPart1.process();
