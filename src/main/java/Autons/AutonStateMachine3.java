@@ -9,6 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 import PathfinderWorkArounds.EncoderFollower;
 import PathfinderWorkArounds.Reader;
 import PathfinderWorkArounds.Segment;
+import PathfinderWorkArounds.EncoderFollower.Side;
 
 public class AutonStateMachine3 extends AutonStateMachineBase implements AutonStateMachineInterface {
 
@@ -79,11 +80,11 @@ public class AutonStateMachine3 extends AutonStateMachineBase implements AutonSt
 
 		case 20:
 
-			Robot.drive
-					.setRightPower(rightFollower.calculate(frontRight.getSensorCollection().getQuadraturePosition()));
-			Robot.drive.setLeftPower(leftFollower.calculate(frontLeft.getSensorCollection().getQuadraturePosition()));
-
-			if (rightFollower.isFinished() && leftFollower.isFinished()) {
+		Robot.drive
+		.setRightPower(rightFollower.calculate(frontRight.getSensorCollection().getQuadraturePosition(), Side.RIGHT));
+		Robot.drive.setLeftPower(leftFollower.calculate(frontLeft.getSensorCollection().getQuadraturePosition(), Side.LEFT));
+		
+		if (rightFollower.isFinished() && leftFollower.isFinished()) {
 				nextState = 100;
 			}
 			break;

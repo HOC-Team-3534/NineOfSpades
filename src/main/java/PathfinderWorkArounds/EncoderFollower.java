@@ -1,5 +1,10 @@
 package PathfinderWorkArounds;
 
+import org.usfirst.frc3534.RobotBasic.Robot;
+import org.usfirst.frc3534.RobotBasic.RobotMap;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class EncoderFollower {
 
 	int encoder_offset, encoder_tick_count;
@@ -8,6 +13,8 @@ public class EncoderFollower {
 	double kp, ki, kd, kv, ka;
 
 	double last_error, heading;
+
+	double initialAngle;
 
 	int segment;
 	Segment[] segments;
@@ -64,6 +71,7 @@ public class EncoderFollower {
 		encoder_offset = initial_position;
 		encoder_tick_count = ticks_per_revolution;
 		wheel_circumference = Math.PI * wheel_diameter;
+		initialAngle = Robot.drive.getNavXAngle();
 	}
 
 	/**
@@ -84,13 +92,21 @@ public class EncoderFollower {
 	 * @param encoder_tick The amount of ticks the encoder has currently measured.
 	 * @return The desired output for your motor controller
 	 */
-	public double calculate(int encoder_tick) {
+	public double calculate(int encoder_tick, Side side) {
 		// Number of Revolutions * Wheel Circumference
 		double distance_covered = ((double) (encoder_tick - encoder_offset) / encoder_tick_count) * wheel_circumference;
 		if (segment < segments.length) {
 			Segment seg = segments[segment];
 			double error = seg.position - distance_covered;
+			SmartDashboard.putNumber("Segments Length", segments.length);
+			SmartDashboard.putNumber("Current Segment", segment);
+			double angleError = ((((Robot.drive.getNavXAngle() - initialAngle) / 180) * Math.PI) + segments[0].heading) - seg.heading;
+			SmartDashboard.putNumber("Angle Error", angleError);
+			if(side == Side.LEFT){
+				angleError = -angleError;
+			}
 			double calculated_value = kp * error + // Proportional
+					(angleError) * 4 * (.5 + (seg.velocity * .5) / RobotMap.robotMaxVeloctiy) + 
 					kd * ((error - last_error) / seg.dt) + // Derivative
 					(kv * seg.velocity + ka * seg.acceleration); // V and A Terms
 			last_error = error;
@@ -98,8 +114,9 @@ public class EncoderFollower {
 			segment++;
 
 			return calculated_value;
-		} else
+		} else {
 			return 0;
+		}
 	}
 
 	/**
@@ -121,6 +138,13 @@ public class EncoderFollower {
 	 */
 	public boolean isFinished() {
 		return segment >= segments.length;
+	}
+
+	public enum Side{
+
+		LEFT,
+		RIGHT
+
 	}
 
 }
