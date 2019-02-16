@@ -52,7 +52,7 @@ public class Climber extends SystemBase implements SystemInterface{
 
     }
 
-    private enum ClimberState{
+    public enum ClimberState{
         Climb(1),
         Retract(2);
 
@@ -63,6 +63,12 @@ public class Climber extends SystemBase implements SystemInterface{
             this.value = value;
 
         }
+    }
+
+    public void setClimberState(ClimberState state) {
+
+        climberState = state;
+
     }
 
     private void setCylinder1Extended() {
