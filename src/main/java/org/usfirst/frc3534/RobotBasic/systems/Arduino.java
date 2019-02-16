@@ -29,21 +29,31 @@ public class Arduino extends SystemBase implements SystemInterface{
 
         case OFF:
 
+            setLEDToOff();
+
             break;
 
         case BLUE:
+
+            setLEDToBlue();
 
             break;
 
         case RED:
 
+            setLEDToRed();
+
             break;
 
         case GREEN:
 
+            setLEDToGreen();
+
             break;
         
         case RAINBOW:
+
+            setLEDToRainbow();
 
             break;
         }
@@ -60,23 +70,69 @@ public class Arduino extends SystemBase implements SystemInterface{
 
     }
 
+    public void setLEDState(LEDState state){
+
+        ledState = state;
+
+    }
+
     public void setLEDToOff(){
+
+        String WriteString = "off"; //"test" will be the message we will send to the arduino
+        char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
+        byte[] WriteData = new byte[CharArray.length]; //Turns the array into a byte
+        for(int i = 0; i < CharArray.length; i++){
+            WriteData[i] = (byte) CharArray[i];
+        }
+        arduino.transaction(WriteData, WriteData.length, null, 0); //Send the message "test" to the arduino
         
     }
 
     public void setLEDToBlue(){
 
+        String WriteString = "blue"; //"test" will be the message we will send to the arduino
+        char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
+        byte[] WriteData = new byte[CharArray.length]; //Turns the array into a byte
+        for(int i = 0; i < CharArray.length; i++){
+            WriteData[i] = (byte) CharArray[i];
+        }
+        arduino.transaction(WriteData, WriteData.length, null, 0); //Send the message "test" to the arduino
+
     }
 
     public void setLEDToRed(){
+
+        String WriteString = "red"; //"test" will be the message we will send to the arduino
+        char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
+        byte[] WriteData = new byte[CharArray.length]; //Turns the array into a byte
+        for(int i = 0; i < CharArray.length; i++){
+            WriteData[i] = (byte) CharArray[i];
+        }
+        arduino.transaction(WriteData, WriteData.length, null, 0); //Send the message "test" to the arduino
 
     }
 
     public void setLEDToGreen(){
 
+        String WriteString = "green"; //"test" will be the message we will send to the arduino
+        char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
+        byte[] WriteData = new byte[CharArray.length]; //Turns the array into a byte
+        for(int i = 0; i < CharArray.length; i++){
+            WriteData[i] = (byte) CharArray[i];
+        }
+        arduino.transaction(WriteData, WriteData.length, null, 0); //Send the message "test" to the arduino
+
     }
 
     public void setLEDToRainbow(){
+
+        String WriteString = "rainbow"; //"test" will be the message we will send to the arduino
+        char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
+        byte[] WriteData = new byte[CharArray.length]; //Turns the array into a byte
+        for(int i = 0; i < CharArray.length; i++){
+            WriteData[i] = (byte) CharArray[i];
+        }
+        arduino.transaction(WriteData, WriteData.length, null, 0); //Send the message "test" to the arduino
 
     }
 
