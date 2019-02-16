@@ -77,7 +77,6 @@ public class RobotMap {
 
 	public static void init() {
 
-		/*
 		frontRightMotor = new WPI_TalonSRX(10);
 		frontRightMotor.set(ControlMode.PercentOutput, 0);
 		frontRightMotor.setNeutralMode(NeutralMode.Brake);
@@ -136,7 +135,7 @@ public class RobotMap {
 
 		panelCylinder1 = new Solenoid(0, 5);
 		panelCylinder2 = new Solenoid(0, 6);
-		panelCylinder3 = new Solenoid(0, 7);*/
+		panelCylinder3 = new Solenoid(0, 7);
 
 		arduino = new I2C(I2C.Port.kOnboard, 111);
 
