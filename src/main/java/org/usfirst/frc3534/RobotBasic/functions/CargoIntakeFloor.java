@@ -46,7 +46,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
                 Robot.elevator.setElevatorState(ElevatorState.Stage1A);
                 
-                if(System.currentTimeMillis() - originalTime > .75 * 1000){
+                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
                     this.state = 20;
                     originalTime = System.currentTimeMillis();
                 }

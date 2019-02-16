@@ -47,7 +47,7 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
             case 10:
                 
                 Robot.intake.setArmLiftState(ArmLiftState.COLLAPSED);
-                if(System.currentTimeMillis() - originalTime > .75 * 1000){
+                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
 
                     this.state = 20;
     
@@ -70,7 +70,7 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
 
                 Robot.intake.setArmLiftState(ArmLiftState.MID);
                 Robot.climber.setClimberState(ClimberState.Retract);
-                if(System.currentTimeMillis() - originalTime > .75 * 1000){
+                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
 
                     this.state = 50;
     

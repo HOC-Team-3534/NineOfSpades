@@ -39,7 +39,7 @@ public class XButtonReset extends FunctionBase implements FunctionInterface {
 
             Robot.intake.setArmLiftState(ArmLiftState.MID);
 
-            if(System.currentTimeMillis() - originalTime > .75 * 1000){
+            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
 
                 this.state = 20;
 
