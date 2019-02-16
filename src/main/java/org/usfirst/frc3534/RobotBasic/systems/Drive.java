@@ -58,7 +58,7 @@ public class Drive extends SystemBase implements SystemInterface {
 			double tx = table.getEntry("tx").getDouble(0.0);
 			SmartDashboard.putNumber("tx", tx);
 			double ty = table.getEntry("ty").getDouble(0.0);
-			double[] _3d6Axis = table.getEntry("camtran").getDoubleArray(defaultArray);
+			//double[] _3d6Axis = table.getEntry("camtran").getDoubleArray(defaultArray);
 
 			if(Robot.oi.getController1().getAButton()){
 
@@ -92,6 +92,7 @@ public class Drive extends SystemBase implements SystemInterface {
 				left_command = steering_adjust + distance_adjust ;
 				right_command = -steering_adjust + distance_adjust ;
 
+				/*
 				double sideToSideCorrection = Math.abs(_3d6Axis[0]) * kpTranslation;
 				if(sideToSideCorrection > max_side_to_side_correction){
 
@@ -107,7 +108,7 @@ public class Drive extends SystemBase implements SystemInterface {
 
 					left_command += sideToSideCorrection;
 
-				}
+				}*/
 
 				drive.tankDrive(left_command, right_command);
 
