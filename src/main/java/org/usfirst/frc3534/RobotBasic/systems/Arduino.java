@@ -10,6 +10,12 @@ public class Arduino extends SystemBase implements SystemInterface{
 
     private LEDState ledState = LEDState.OFF;
 
+    private boolean firstTimeOff = true;
+    private boolean firstTimeBlue = true;
+    private boolean firstTimeRed = true;
+    private boolean firstTimeGreen = true;
+    private boolean firstTimeRainbow = true;
+
     public Arduino(){
 
         String WriteString = "test"; //"test" will be the message we will send to the arduino
@@ -78,6 +84,12 @@ public class Arduino extends SystemBase implements SystemInterface{
 
     public void setLEDToOff(){
 
+        firstTimeOff = false;
+        firstTimeBlue = true;
+        firstTimeRed = true;
+        firstTimeGreen = true;
+        firstTimeRainbow = true;
+
         String WriteString = "off"; //"test" will be the message we will send to the arduino
         char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
         byte[] WriteData = new byte[CharArray.length]; //Turns the array into a byte
@@ -89,6 +101,12 @@ public class Arduino extends SystemBase implements SystemInterface{
     }
 
     public void setLEDToBlue(){
+
+        firstTimeOff = true;
+        firstTimeBlue = false;
+        firstTimeRed = true;
+        firstTimeGreen = true;
+        firstTimeRainbow = true;
 
         String WriteString = "blue"; //"test" will be the message we will send to the arduino
         char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
@@ -102,6 +120,12 @@ public class Arduino extends SystemBase implements SystemInterface{
 
     public void setLEDToRed(){
 
+        firstTimeOff = true;
+        firstTimeBlue = true;
+        firstTimeRed = false;
+        firstTimeGreen = true;
+        firstTimeRainbow = true;
+
         String WriteString = "red"; //"test" will be the message we will send to the arduino
         char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
         byte[] WriteData = new byte[CharArray.length]; //Turns the array into a byte
@@ -114,6 +138,12 @@ public class Arduino extends SystemBase implements SystemInterface{
 
     public void setLEDToGreen(){
 
+        firstTimeOff = true;
+        firstTimeBlue = true;
+        firstTimeRed = true;
+        firstTimeGreen = false;
+        firstTimeRainbow = true;
+
         String WriteString = "green"; //"test" will be the message we will send to the arduino
         char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
         byte[] WriteData = new byte[CharArray.length]; //Turns the array into a byte
@@ -125,6 +155,12 @@ public class Arduino extends SystemBase implements SystemInterface{
     }
 
     public void setLEDToRainbow(){
+
+        firstTimeOff = true;
+        firstTimeBlue = true;
+        firstTimeRed = true;
+        firstTimeGreen = true;
+        firstTimeRainbow = false;
 
         String WriteString = "rainbow"; //"test" will be the message we will send to the arduino
         char[] CharArray = WriteString.toCharArray(); //Turns the message into an array
