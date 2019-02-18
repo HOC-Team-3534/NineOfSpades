@@ -2,15 +2,14 @@ package org.usfirst.frc3534.RobotBasic.systems;
 
 import org.usfirst.frc3534.RobotBasic.RobotMap;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class HatchPanelApparatus extends SystemBase implements SystemInterface{
 
     private HatchPanelApparatusState hatchPanelApparatusState = HatchPanelApparatusState.COLLAPSED;
 
-    private Solenoid cylinder1 = RobotMap.panelCylinder1;
-    private Solenoid cylinder2 = RobotMap.panelCylinder2;
-    private Solenoid cylinder3 = RobotMap.panelCylinder3;
+    private DoubleSolenoid cylinders = RobotMap.panelCylinders;
 
     public HatchPanelApparatus(){
 
@@ -59,17 +58,13 @@ public class HatchPanelApparatus extends SystemBase implements SystemInterface{
 
     private void setHatchPanelCylindersExtended(){
 
-        cylinder1.set(true);
-        cylinder1.set(true);
-        cylinder3.set(true);
+        cylinders.set(Value.kForward);
 
     }
 
     private void setHatchPanelCylindersCollapsed(){
 
-        cylinder1.set(false);
-        cylinder2.set(false);
-        cylinder3.set(false);
+        cylinders.set(Value.kReverse);
 
     }
 

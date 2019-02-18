@@ -4,21 +4,19 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.usfirst.frc3534.RobotBasic.RobotMap;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Intake extends SystemBase implements SystemInterface{
 
     private SpeedControllerGroup cargoShooter = RobotMap.cargoShooter;
     private WPI_TalonSRX cargoRoller = RobotMap.cargoRoller;
 
-    private Solenoid leftShort = RobotMap.leftShortArmCylinder;
-    private Solenoid leftLong = RobotMap.leftLongArmCylinder;
-    private Solenoid rightShort = RobotMap.rightShortArmCylinder;
-    private Solenoid rightLong = RobotMap.rightLongArmCylinder;
+    private DoubleSolenoid shortCylinders = RobotMap.intakeDownCylinders;
+    private DoubleSolenoid longCylinders = RobotMap.intakeUpCylinders;
 
-    private Solenoid leftExtend = RobotMap.leftArmExtendCylinder;
-    private Solenoid rightExtend = RobotMap.rightArmExtendCylinder;
+    private DoubleSolenoid forwardAftCylinders = RobotMap.intakeForwardAftCylinders;
 
     private ArmExtendState armExtendState = ArmExtendState.COLLAPSED;
     private ArmLiftState armLiftState = ArmLiftState.COLLAPSED;
@@ -156,43 +154,37 @@ public class Intake extends SystemBase implements SystemInterface{
 
     private void setShortArmCylindersExtended(){
 
-        leftShort.set(true);
-        rightShort.set(true);
+        shortCylinders.set(Value.kForward);
 
     }
 
     private void setShortArmCylindersCollapsed(){
 
-        leftShort.set(false);
-        rightShort.set(false);
+        shortCylinders.set(Value.kReverse);
 
     }
 
     private void setLongArmCylindersExtended(){
 
-        leftLong.set(true);
-        rightLong.set(true);
+        longCylinders.set(Value.kForward);
 
     }
 
     private void setLongArmCylindersCollapsed(){
 
-        leftLong.set(false);
-        rightLong.set(false);
+        longCylinders.set(Value.kReverse);
 
     }
 
     private void setArmExtendCylindersExtended(){
 
-        leftExtend.set(true);
-        rightExtend.set(true);
+        forwardAftCylinders.set(Value.kForward);
 
     }
 
     private void setArmExtendCylindersCollapsed(){
 
-        leftExtend.set(false);
-        rightExtend.set(false);
+        forwardAftCylinders.set(Value.kReverse);
 
     }
 
