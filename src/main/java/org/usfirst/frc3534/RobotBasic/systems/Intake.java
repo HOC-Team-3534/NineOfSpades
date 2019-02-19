@@ -80,7 +80,7 @@ public class Intake extends SystemBase implements SystemInterface{
 
         case STOP:
 
-            cargoShooter.set(0.0);
+            cargoRoller.set(0.0);
 
             break;
 

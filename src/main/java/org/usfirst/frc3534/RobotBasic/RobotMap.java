@@ -28,8 +28,6 @@ public class RobotMap {
 	private static WPI_TalonSRX backLeftMotor;
 	private static WPI_TalonSRX centerLeftMotor;
 
-	public static WPI_TalonSRX shooter;
-
 	public static SpeedControllerGroup rightSideMotors;
 	public static SpeedControllerGroup leftSideMotors;
 

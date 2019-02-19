@@ -33,7 +33,7 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             if (cylinder1 == CylinderState.EXTENDED) {//if the first cylinder is extended
 
-                if (limitSwitch.get()) {//if the first cylinder is at the limit switch
+                if (!limitSwitch.get()) {//if the first cylinder is at the limit switch
 
                     limitSwitchMet = true;
                     cylinder1 = CylinderState.HALFWAY;
@@ -53,7 +53,7 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             } else if (cylinder1 == CylinderState.COLLAPSED) {//if the first cylinder is collapsed
 
-                if (limitSwitch.get()) {//if the first cylinder is at the limit switch
+                if (!limitSwitch.get()) {//if the first cylinder is at the limit switch
 
                     limitSwitchMet = true;
                     cylinder1 = CylinderState.HALFWAY;
@@ -82,7 +82,7 @@ public class Elevator extends SystemBase implements SystemInterface {
             setCylinder2Collapsed();
             if(cylinder1 == CylinderState.COLLAPSED){
 
-                if(limitSwitch.get()){
+                if(!limitSwitch.get()){
 
                     cylinder1 = CylinderState.EXTENDED;
 
@@ -103,7 +103,7 @@ public class Elevator extends SystemBase implements SystemInterface {
             setCylinder2Extended();
             if(cylinder1 == CylinderState.COLLAPSED){//if the first cylinder is collapsed 
 
-                if(limitSwitch.get()){//if the cylinder is at the limit switch
+                if(!limitSwitch.get()){//if the cylinder is at the limit switch
 
                     cylinder1 = CylinderState.EXTENDED;
 
@@ -120,11 +120,12 @@ public class Elevator extends SystemBase implements SystemInterface {
 
         case Floor:
 
+            limitSwitchMet = false;
             setCylinder1Collapsed();
             setCylinder2Collapsed();
             if(cylinder1 == CylinderState.EXTENDED){//if the first cylinder is extended
 
-                if(limitSwitch.get()){//if the cylinder is at the limit switch
+                if(!limitSwitch.get()){//if the cylinder is at the limit switch
 
                     cylinder1 = CylinderState.COLLAPSED;
 

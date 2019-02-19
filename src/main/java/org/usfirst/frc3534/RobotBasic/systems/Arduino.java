@@ -24,7 +24,7 @@ public class Arduino extends SystemBase implements SystemInterface{
         for(int i = 0; i < CharArray.length; i++){
             WriteData[i] = (byte) CharArray[i];
         }
-        arduino.transaction(WriteData, WriteData.length, null, 0); //Send the message "test" to the arduino
+        //arduino.transaction(WriteData, WriteData.length, null, 0); //Send the message "test" to the arduino
 
     }
 

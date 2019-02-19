@@ -20,14 +20,14 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
     @Override
     public void process(){
 
-        if(!Robot.oi.getController2().getAButton() && firstPartDone){
+        if(!Robot.oi.getController1().getAButton() && firstPartDone){
 
             this.state = 40;
             firstPartDone = false;
 
         }
 
-        if(!running && Robot.oi.getController2().getAButton()){
+        if(!running && Robot.oi.getController1().getAButton()){
 
             this.reset();
 
@@ -48,7 +48,6 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
                 
                 if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
                     this.state = 20;
-                    originalTime = System.currentTimeMillis();
                 }
                 break;
 
@@ -71,7 +70,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
                 Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
 
-                if(Robot.intake.isArmAft()){
+                if(!Robot.intake.isArmAft()){
 
                     this.state = 50;
 

@@ -62,7 +62,7 @@ public class Drive extends SystemBase implements SystemInterface {
 
 			SmartDashboard.putNumber("X value", _3d6Axis[0]);
 
-			if(Robot.oi.getController1().getBButton()){
+			if(Robot.oi.getController1().getBumper(Hand.kLeft)){
 
 				double heading_error = tx;
 				double distance_error = (ty - 27.0) * 5.5;
@@ -121,7 +121,7 @@ public class Drive extends SystemBase implements SystemInterface {
 
 				drive.tankDrive(left_command, right_command);
 
-			}else if(Robot.oi.getController1().getAButton()){
+			}else if(Robot.oi.getController1().getTriggerAxis(Hand.kLeft) >= 0.5){
 
 				double heading_error = tx;
 				double distance_error = ty;
