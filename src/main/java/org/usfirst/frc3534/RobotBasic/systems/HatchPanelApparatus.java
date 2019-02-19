@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class HatchPanelApparatus extends SystemBase implements SystemInterface{
 
-    private HatchPanelApparatusState hatchPanelApparatusState = HatchPanelApparatusState.COLLAPSED;
+    private HatchPanelApparatusState hatchPanelApparatusState = HatchPanelApparatusState.NULL;
 
     private DoubleSolenoid cylinders = RobotMap.panelCylinders;
 
@@ -32,6 +32,12 @@ public class HatchPanelApparatus extends SystemBase implements SystemInterface{
 
             break;
 
+        case NULL:
+
+            setHatchPanelCylindersOff();
+
+            break;
+
         }
 
     }
@@ -46,7 +52,8 @@ public class HatchPanelApparatus extends SystemBase implements SystemInterface{
     public enum HatchPanelApparatusState{
 
         EXTENDED,
-        COLLAPSED
+        COLLAPSED,
+        NULL
 
     }
 
@@ -65,6 +72,12 @@ public class HatchPanelApparatus extends SystemBase implements SystemInterface{
     private void setHatchPanelCylindersCollapsed(){
 
         cylinders.set(Value.kReverse);
+
+    }
+
+    private void setHatchPanelCylindersOff(){
+
+        cylinders.set(Value.kOff);
 
     }
 

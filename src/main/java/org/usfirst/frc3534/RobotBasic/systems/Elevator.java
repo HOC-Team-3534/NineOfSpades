@@ -18,7 +18,7 @@ public class Elevator extends SystemBase implements SystemInterface {
     CylinderState cylinder1 = CylinderState.COLLAPSED;
     CylinderState cylinder2 = CylinderState.COLLAPSED;
 
-    ElevatorState elevatorState = ElevatorState.Floor;
+    ElevatorState elevatorState = ElevatorState.NULL;
 
     public Elevator() {
 
@@ -139,6 +139,12 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             break;
 
+        case NULL:
+
+            setCylindersOff();
+
+            break;
+
         }
 
     }
@@ -153,18 +159,11 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     public enum ElevatorState{
 
-        Floor(1),
-        Stage1A(2),
-        Stage1B(3),
-        Stage2(4);
-
-        int value;
-
-        private ElevatorState(int value){
-
-            this.value = value;
-
-        }
+        Floor,
+        Stage1A,
+        Stage1B,
+        Stage2,
+        NULL
 
     }
 
@@ -174,7 +173,7 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     }
 
-    private ElevatorState getElevatorState(){
+    public ElevatorState getElevatorState(){
 
         return elevatorState;
 
@@ -215,6 +214,13 @@ public class Elevator extends SystemBase implements SystemInterface {
 
         //give power to solenoid2 top
         solenoid2.set(Value.kReverse);
+
+    }
+
+    private void setCylindersOff(){
+
+        solenoid1.set(Value.kOff);
+        solenoid2.set(Value.kOff);
 
     }
 

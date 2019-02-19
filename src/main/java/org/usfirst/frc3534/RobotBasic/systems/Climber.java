@@ -18,7 +18,7 @@ public class Climber extends SystemBase implements SystemInterface{
     CylinderState cylinder1 = CylinderState.COLLAPSED; //These two lines are used to create variables of type STATE
     CylinderState cylinder2 = CylinderState.COLLAPSED;
 
-    ClimberState climberState = ClimberState.Retract;
+    ClimberState climberState = ClimberState.NULL;
 
     public Climber(){} //The default constructor of the Climber class
 
@@ -41,6 +41,13 @@ public class Climber extends SystemBase implements SystemInterface{
             cylinder1 = CylinderState.COLLAPSED;
             cylinder2 = CylinderState.COLLAPSED;
             break;
+
+        case NULL:
+
+            setCylindersOff();
+
+            break;
+            
         }
 
     }
@@ -53,16 +60,9 @@ public class Climber extends SystemBase implements SystemInterface{
     }
 
     public enum ClimberState{
-        Climb(1),
-        Retract(2);
-
-        int value;
-
-        private ClimberState(int value){
-
-            this.value = value;
-
-        }
+        Climb,
+        Retract,
+        NULL
     }
 
     public void setClimberState(ClimberState state) {
@@ -98,4 +98,12 @@ public class Climber extends SystemBase implements SystemInterface{
         solenoid2.set(Value.kReverse);
 
     } 
+
+    private void setCylindersOff(){
+
+        solenoid1.set(Value.kOff);
+        solenoid2.set(Value.kOff);
+
+    }
+
 }

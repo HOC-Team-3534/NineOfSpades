@@ -30,7 +30,11 @@ public class Elevate extends FunctionBase implements FunctionInterface{
 
             }else{
 
-                Robot.elevator.setElevatorState(ElevatorState.Floor);
+                if(Robot.elevator.getElevatorState() != ElevatorState.NULL){
+
+                    Robot.elevator.setElevatorState(ElevatorState.Floor);
+
+                }
 
             }
 

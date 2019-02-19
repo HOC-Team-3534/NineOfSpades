@@ -5,12 +5,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import org.usfirst.frc3534.RobotBasic.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Intake extends SystemBase implements SystemInterface{
 
-    private SpeedControllerGroup cargoShooter = RobotMap.cargoShooter;
     private WPI_TalonSRX cargoRoller = RobotMap.cargoRoller;
 
     private DoubleSolenoid shortCylinders = RobotMap.intakeDownCylinders;
@@ -18,8 +16,8 @@ public class Intake extends SystemBase implements SystemInterface{
 
     private DoubleSolenoid forwardAftCylinders = RobotMap.intakeForwardAftCylinders;
 
-    private ArmExtendState armExtendState = ArmExtendState.COLLAPSED;
-    private ArmLiftState armLiftState = ArmLiftState.COLLAPSED;
+    private ArmExtendState armExtendState = ArmExtendState.NULL;
+    private ArmLiftState armLiftState = ArmLiftState.NULL;
     private RollerState rollerState = RollerState.STOP;
 
     public Intake(){
@@ -40,6 +38,12 @@ public class Intake extends SystemBase implements SystemInterface{
         case COLLAPSED:
 
             setArmExtendCylindersCollapsed();
+
+            break;
+
+        case NULL:
+
+            setArmExtendCylindersOff();
 
             break;
 
@@ -65,6 +69,13 @@ public class Intake extends SystemBase implements SystemInterface{
 
             setShortArmCylindersExtended();
             setLongArmCylindersExtended();
+
+            break;
+
+        case NULL:
+
+            setShortArmCylindersOff();
+            setLongArmCylindersOff();
 
             break;
 
@@ -97,7 +108,8 @@ public class Intake extends SystemBase implements SystemInterface{
     public enum ArmExtendState{
 
         EXTENDED,
-        COLLAPSED;
+        COLLAPSED,
+        NULL
 
     }
 
@@ -105,14 +117,15 @@ public class Intake extends SystemBase implements SystemInterface{
 
         COLLAPSED,
         MID,
-        UP;
+        UP,
+        NULL
 
     }
 
     public enum RollerState{
 
         INTAKE,
-        STOP;
+        STOP
 
     }
 
@@ -164,6 +177,12 @@ public class Intake extends SystemBase implements SystemInterface{
 
     }
 
+    private void setShortArmCylindersOff(){
+
+        shortCylinders.set(Value.kOff);
+
+    }
+
     private void setLongArmCylindersExtended(){
 
         longCylinders.set(Value.kForward);
@@ -176,6 +195,12 @@ public class Intake extends SystemBase implements SystemInterface{
 
     }
 
+    private void setLongArmCylindersOff(){
+
+        longCylinders.set(Value.kOff);
+
+    }
+
     private void setArmExtendCylindersExtended(){
 
         forwardAftCylinders.set(Value.kForward);
@@ -185,6 +210,12 @@ public class Intake extends SystemBase implements SystemInterface{
     private void setArmExtendCylindersCollapsed(){
 
         forwardAftCylinders.set(Value.kReverse);
+
+    }
+
+    private void setArmExtendCylindersOff(){
+
+        forwardAftCylinders.set(Value.kOff);
 
     }
 

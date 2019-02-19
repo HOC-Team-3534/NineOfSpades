@@ -156,6 +156,7 @@ public class Robot extends TimedRobot {
 				elevator.process();
 				intake.process();
 				climber.process();
+				shooter.process();
 				hatchPanelApparatus.process();
 
 			}
@@ -200,6 +201,7 @@ public class Robot extends TimedRobot {
 				// run processes
 				drive.process();
 				functionProcessor.process();
+				shooter.process();
 				elevator.process();
 				intake.process();
 				climber.process();
