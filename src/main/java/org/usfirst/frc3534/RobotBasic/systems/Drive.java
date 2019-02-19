@@ -29,13 +29,13 @@ public class Drive extends SystemBase implements SystemInterface {
 
 	private double last_error, distance_last_error;
 
-	private double KpAim = 0.065;
-	private double KdAim = 0.004;
-	private double KpDistance = 0.03;
+	private double KpAim = 0.0275;
+	private double KdAim = 0.0005;
+	private double KpDistance = 0.0275;
 	private double KdDistance = .015;
-	private double kpTranslation = 0.007;
+	private double kpTranslation = 0.004;
 	private double min_aim_command = 0.005;
-	private double max_side_to_side_correction = 0.1;
+	private double max_side_to_side_correction = 0.19;
 
 	private double[] defaultArray = {0.0, 0.0, 0.0, 0.0, 0.0 , 0.0};
 
@@ -58,22 +58,33 @@ public class Drive extends SystemBase implements SystemInterface {
 			double tx = table.getEntry("tx").getDouble(0.0);
 			SmartDashboard.putNumber("tx", tx);
 			double ty = table.getEntry("ty").getDouble(0.0);
-			//double[] _3d6Axis = table.getEntry("camtran").getDoubleArray(defaultArray);
+			double[] _3d6Axis = table.getEntry("camtran").getDoubleArray(defaultArray);
 
-			if(Robot.oi.getController1().getAButton()){
+			SmartDashboard.putNumber("X value", _3d6Axis[0]);
+
+			if(Robot.oi.getController1().getBButton()){
 
 				double heading_error = tx;
-				double distance_error = ty;
+				double distance_error = (ty - 27.0) * 5.5;
 				double steering_adjust = 0.0;
+				double usableKpAim = 0.0;
+
+				double sideToSideCorrection = Math.abs(_3d6Axis[0]) * kpTranslation;
+
+				if(Math.abs(sideToSideCorrection) > 6 || sideToSideCorrection == 0) {
+					usableKpAim = KpAim * .2;
+				} else {
+					usableKpAim = KpAim;
+				}
 
 				if ( tx > 1.0 ) {
 
-					steering_adjust = KpAim * heading_error + min_aim_command  + (heading_error - last_error) * KdAim ;
+					steering_adjust = usableKpAim * heading_error + min_aim_command  + (heading_error - last_error) * KdAim ;
 		
 				}
 				else if ( tx < -1.0 ) {
 
-					steering_adjust = KpAim * heading_error - min_aim_command + (heading_error - last_error) * KdAim;
+					steering_adjust = usableKpAim * heading_error - min_aim_command + (heading_error - last_error) * KdAim;
 				
 				}else{
 
@@ -92,8 +103,6 @@ public class Drive extends SystemBase implements SystemInterface {
 				left_command = steering_adjust + distance_adjust ;
 				right_command = -steering_adjust + distance_adjust ;
 
-				/*
-				double sideToSideCorrection = Math.abs(_3d6Axis[0]) * kpTranslation;
 				if(sideToSideCorrection > max_side_to_side_correction){
 
 					sideToSideCorrection = max_side_to_side_correction;
@@ -108,7 +117,66 @@ public class Drive extends SystemBase implements SystemInterface {
 
 					left_command += sideToSideCorrection;
 
-				}*/
+				}
+
+				drive.tankDrive(left_command, right_command);
+
+			}else if(Robot.oi.getController1().getAButton()){
+
+				double heading_error = tx;
+				double distance_error = ty;
+				double steering_adjust = 0.0;
+				double usableKpAim = 0.0;
+
+				double sideToSideCorrection = Math.abs(_3d6Axis[0]) * kpTranslation;
+
+				if(Math.abs(sideToSideCorrection) > 6 || sideToSideCorrection == 0) {
+					usableKpAim = KpAim * .2;
+				} else {
+					usableKpAim = KpAim;
+				}
+
+				if ( tx > 1.0 ) {
+
+					steering_adjust = usableKpAim * heading_error + min_aim_command  + (heading_error - last_error) * KdAim ;
+		
+				}
+				else if ( tx < -1.0 ) {
+
+					steering_adjust = usableKpAim * heading_error - min_aim_command + (heading_error - last_error) * KdAim;
+				
+				}else{
+
+					steering_adjust = 0.0;
+					left_command = 0.0;
+					right_command = 0.0;
+
+				}
+
+				last_error = heading_error;
+
+				double distance_adjust = KpDistance * distance_error + KdDistance * (distance_error - distance_last_error);
+				
+				distance_last_error = distance_error;
+
+				left_command = steering_adjust + distance_adjust ;
+				right_command = -steering_adjust + distance_adjust ;
+
+				if(sideToSideCorrection > max_side_to_side_correction){
+
+					sideToSideCorrection = max_side_to_side_correction;
+
+				}
+
+				if(_3d6Axis[0] > 0){
+
+					right_command += sideToSideCorrection;
+
+				}else{
+
+					left_command += sideToSideCorrection;
+
+				}
 
 				drive.tankDrive(left_command, right_command);
 
