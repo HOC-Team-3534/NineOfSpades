@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
@@ -57,6 +58,8 @@ public class RobotMap {
 	public static SpeedControllerGroup cargoShooter;
 
 	public static DoubleSolenoid panelCylinders;
+
+	public static Compressor compressor;
 
 	public static I2C arduino;
 
@@ -125,6 +128,10 @@ public class RobotMap {
 		cargoRoller = new WPI_TalonSRX(4);
 
 		panelCylinders = new DoubleSolenoid(1, 4, 5);
+
+		compressor = new Compressor(1);
+        compressor.start();
+        compressor.setClosedLoopControl(true);
 
 		arduino = new I2C(I2C.Port.kOnboard, 111);
 
