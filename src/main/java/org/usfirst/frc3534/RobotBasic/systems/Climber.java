@@ -1,9 +1,9 @@
 package org.usfirst.frc3534.RobotBasic.systems;
 
 import org.usfirst.frc3534.RobotBasic.RobotMap;
-import org.usfirst.frc3534.RobotBasic.Robot;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 /**
  * The Climber subsystem is used to control the pnuematic cylinders that are depended
  * on for the endgame climbing. In this subsystem the control of the pnuematic cylinders
@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.Solenoid;
  */
 public class Climber extends SystemBase implements SystemInterface{
 
-    private Solenoid solenoid1 = RobotMap.climbingCylinderOne; //These two lines are used to create variables of type Solenoid
-    private Solenoid solenoid2 = RobotMap.climbingCylinderTwo;
+    private DoubleSolenoid solenoid1 = RobotMap.climbingCylinderOne; //These two lines are used to create variables of type DoubleSolenoid
+    private DoubleSolenoid solenoid2 = RobotMap.climbingCylinderTwo;
 
     CylinderState cylinder1 = CylinderState.COLLAPSED; //These two lines are used to create variables of type STATE
     CylinderState cylinder2 = CylinderState.COLLAPSED;
@@ -74,28 +74,28 @@ public class Climber extends SystemBase implements SystemInterface{
     private void setCylinder1Extended() {
 
         //give power to solenoid1 bottom
-        solenoid1.set(true);
+        solenoid1.set(Value.kForward);
 
     }
 
     private void setCylinder1Collapsed() {
 
         //give power to solenoid1 top
-        solenoid1.set(false);
+        solenoid1.set(Value.kReverse);
 
     }
 
     private void setCylinder2Extended() {
 
         //give power to solenoid2 bottom
-        solenoid2.set(true);
+        solenoid2.set(Value.kForward);
 
     }
 
     private void setCylinder2Collapsed() {
 
         //give power to solenoid2 top
-        solenoid2.set(false);
+        solenoid2.set(Value.kReverse);
 
     } 
 }

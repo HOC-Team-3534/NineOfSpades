@@ -4,7 +4,6 @@ import org.usfirst.frc3534.RobotBasic.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Elevator extends SystemBase implements SystemInterface {
@@ -12,7 +11,7 @@ public class Elevator extends SystemBase implements SystemInterface {
     private boolean limitSwitchMet = false;
 
     private DoubleSolenoid solenoid1 = RobotMap.elevatorCylinderOne;
-    private Solenoid solenoid2 = RobotMap.elevatorCylinderTwo;
+    private DoubleSolenoid solenoid2 = RobotMap.elevatorCylinderTwo;
 
     private DigitalInput limitSwitch = RobotMap.limitSwitch;
 
@@ -207,14 +206,14 @@ public class Elevator extends SystemBase implements SystemInterface {
     private void setCylinder2Extended() {
 
         //give power to solenoid2 bottom
-        solenoid2.set(true);
+        solenoid2.set(Value.kForward);
 
     }
 
     private void setCylinder2Collapsed() {
 
         //give power to solenoid2 top
-        solenoid2.set(false);
+        solenoid2.set(Value.kReverse);
 
     }
 

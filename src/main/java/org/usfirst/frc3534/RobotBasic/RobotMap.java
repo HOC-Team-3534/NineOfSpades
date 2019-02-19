@@ -6,11 +6,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 /**
@@ -36,20 +36,17 @@ public class RobotMap {
 	public static AHRS navx;
 
 	public static DoubleSolenoid elevatorCylinderOne;
-	public static Solenoid elevatorCylinderTwo;
+	public static DoubleSolenoid elevatorCylinderTwo;
 
 	public static DigitalInput limitSwitch;
 
-	public static Solenoid climbingCylinderOne;
-	public static Solenoid climbingCylinderTwo;
+	public static DoubleSolenoid climbingCylinderOne;
+	public static DoubleSolenoid climbingCylinderTwo;
 
-	public static Solenoid leftShortArmCylinder;
-	public static Solenoid leftLongArmCylinder;
-	public static Solenoid rightShortArmCylinder;
-	public static Solenoid rightLongArmCylinder;
+	public static DoubleSolenoid intakeDownCylinders;
+	public static DoubleSolenoid intakeUpCylinders;
 
-	public static Solenoid leftArmExtendCylinder;
-	public static Solenoid rightArmExtendCylinder;
+	public static DoubleSolenoid intakeForwardAftCylinders;
 
 	public static DigitalInput forwardAftSensor;
 
@@ -60,9 +57,9 @@ public class RobotMap {
 
 	public static SpeedControllerGroup cargoShooter;
 
-	public static Solenoid panelCylinder1;
-	public static Solenoid panelCylinder2;
-	public static Solenoid panelCylinder3;
+	public static DoubleSolenoid panelCylinders;
+
+	public static Compressor compressor;
 
 	public static I2C arduino;
 
@@ -108,21 +105,18 @@ public class RobotMap {
 
 		navx = new AHRS(SerialPort.Port.kMXP);
 
-		elevatorCylinderOne = new DoubleSolenoid(0, 0, 1);
-		elevatorCylinderTwo = new Solenoid(0, 2);
+		elevatorCylinderOne = new DoubleSolenoid(1, 0, 1);
+		elevatorCylinderTwo = new DoubleSolenoid(1, 2, 3);
 
 		limitSwitch = new DigitalInput(0);
 
-		climbingCylinderOne = new Solenoid(0, 3);
-		climbingCylinderTwo = new Solenoid(0, 4);
+		climbingCylinderOne = new DoubleSolenoid(2, 4, 5);
+		climbingCylinderTwo = new DoubleSolenoid(2, 6, 7);
 
-		leftShortArmCylinder = new Solenoid(1, 0);
-		leftLongArmCylinder = new Solenoid(1, 1);
-		rightShortArmCylinder = new Solenoid(1, 2);
-		rightLongArmCylinder = new Solenoid(1, 3);
+		intakeDownCylinders = new DoubleSolenoid(2, 0, 1);
+		intakeUpCylinders = new DoubleSolenoid(1, 6, 7);
 
-		leftArmExtendCylinder = new Solenoid(1, 4);
-		rightArmExtendCylinder = new Solenoid(1, 5);
+		intakeForwardAftCylinders = new DoubleSolenoid(2, 2, 3);
 
 		forwardAftSensor = new DigitalInput(1);
 
@@ -133,9 +127,11 @@ public class RobotMap {
 
 		cargoRoller = new WPI_TalonSRX(4);
 
-		panelCylinder1 = new Solenoid(0, 5);
-		panelCylinder2 = new Solenoid(0, 6);
-		panelCylinder3 = new Solenoid(0, 7);
+		panelCylinders = new DoubleSolenoid(1, 4, 5);
+
+		compressor = new Compressor(1);
+        compressor.start();
+        compressor.setClosedLoopControl(true);
 
 		arduino = new I2C(I2C.Port.kOnboard, 111);
 
