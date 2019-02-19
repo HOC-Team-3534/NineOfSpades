@@ -27,7 +27,7 @@ public class HabLevel3ClimbPart1 extends FunctionBase implements FunctionInterfa
 
         switch(this.state) {
         case 0:
-            if((Robot.oi.getController2().getXButton() && (!Robot.functionProcessor.cargoIntakeTop.running && !Robot.functionProcessor.hatchPlace.running)) && ((!Robot.functionProcessor.cargoShoot.running && !Robot.functionProcessor.cargoIntakeFloor.running) && (!Robot.functionProcessor.habLevel3ClimbPart2.running && !Robot.functionProcessor.xButtonReset.running))) {
+            if((Robot.oi.getController2().getXButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                 this.started();
                 this.state = 10;
                 originalTime = System.currentTimeMillis();

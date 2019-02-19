@@ -14,7 +14,7 @@ public class Elevate extends FunctionBase implements FunctionInterface{
     @Override
     public void process(){
 
-        if((!Robot.functionProcessor.cargoIntakeFloor.running && !Robot.functionProcessor.cargoIntakeTop.running) && ((!Robot.functionProcessor.habLevel3ClimbPart1.running) && (!Robot.functionProcessor.habLevel3ClimbPart2.running && !Robot.functionProcessor.xButtonReset.running))){
+        if((!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.cargoIntakeTop.isRunning()) && ((!Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))){
 
             if(Robot.oi.getController2().getAButton()){
 

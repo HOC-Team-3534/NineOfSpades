@@ -12,4 +12,6 @@ public interface FunctionInterface{
 
     public void started();
 
+    public boolean isRunning();
+
 }

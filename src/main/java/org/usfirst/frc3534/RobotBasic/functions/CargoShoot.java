@@ -27,7 +27,7 @@ public class CargoShoot extends FunctionBase implements FunctionInterface{
 
         switch(this.state) {
             case 0:
-                if((Robot.oi.getController2().getBumper(Hand.kRight) && (!Robot.functionProcessor.cargoIntakeTop.running && !Robot.functionProcessor.hatchPlace.running)) && ((!Robot.functionProcessor.cargoIntakeFloor.running && !Robot.functionProcessor.habLevel3ClimbPart1.running) && (!Robot.functionProcessor.habLevel3ClimbPart2.running && !Robot.functionProcessor.xButtonReset.running))) {
+                if((Robot.oi.getController2().getBumper(Hand.kRight) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                     this.started();
                     this.state = 10;
                     originalTime = System.currentTimeMillis();

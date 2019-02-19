@@ -42,4 +42,11 @@ public class FunctionBase implements FunctionInterface{
 
     }
 
+    @Override
+    public boolean isRunning(){
+
+        return running;
+
+    }
+
 }
