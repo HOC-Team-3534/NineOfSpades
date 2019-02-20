@@ -26,46 +26,49 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
         }
 
         switch(this.state) {
+
             case 0:
-                if((Robot.oi.getController2().getTriggerAxis(Hand.kRight) >= 0.5 && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
-                    this.started();
-                    this.state = 10;
-                }
-                break;
-    
-            case 10:
 
-                originalTime = System.currentTimeMillis();
-                Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.EXTENDED);
-                this.state = 20;
+            if((Robot.oi.getController2().getTriggerAxis(Hand.kRight) >= 0.5 && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                 
-                break;
+                this.started();
+                this.state = 10;
 
-            case 20:
+            }
+            
+            break;
 
-                if(System.currentTimeMillis() - originalTime > .75 * 1000){
+        case 10:
 
-                    this.state = 30;
+            originalTime = System.currentTimeMillis();
+            Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.EXTENDED);
+            this.state = 20;
+            
+            break;
 
-                }
+        case 20:
 
-                break;
+            if(System.currentTimeMillis() - originalTime > .75 * 1000){
 
-            case 30:
-                
-                Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.COLLAPSED);
-                this.state = 40;
+                this.state = 30;
 
-                break;
-
-            case 40:
-
-                completed();
-
-                break;
-    
             }
 
-    }
+            break;
 
+        case 30:
+            
+            Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.COLLAPSED);
+            this.state = 40;
+
+            break;
+
+        case 40:
+
+            completed();
+
+            break;
+
+        }
+    }
 }

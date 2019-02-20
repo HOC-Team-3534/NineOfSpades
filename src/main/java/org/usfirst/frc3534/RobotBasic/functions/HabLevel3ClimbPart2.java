@@ -36,97 +36,97 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
 
         switch(this.state) {
 
-            case 0:
-                if(((Robot.oi.getController1().getXButton() && Robot.intake.getArmLiftState() == ArmLiftState.UP) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
-                    
-                    this.started();
-                    this.state = 10;
-                    
-                }
-                break;
-    
-            case 10:
+        case 0:
+
+            if(((Robot.oi.getController1().getXButton() && Robot.intake.getArmLiftState() == ArmLiftState.UP) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                 
-                originalTime = System.currentTimeMillis();
-                Robot.intake.setArmLiftState(ArmLiftState.COLLAPSED);
-                this.state = 20;
-
-                break;
-
-            case 20:
-
-                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
-
-                    this.state = 30;
-
-                }
-
-                break;
-
-            case 30:
-
-                Robot.climber.setClimberState(ClimberState.Climb);
-                this.state = 40;
-
-                break;
-
-            case 40:
+                this.started();
+                this.state = 10;
                 
-                firstPartDone = true;
-                
-                break;
-
-            case 50:
-
-                originalTime = System.currentTimeMillis();
-                Robot.intake.setArmLiftState(ArmLiftState.MID);
-                Robot.climber.setClimberState(ClimberState.Retract);
-                this.state = 60;
-
-                break;
-
-            case 60:
-
-                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
-
-                    this.state = 70;
-
-                }
-
-                break;
-
-            case 70:
-
-                Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
-                this.state = 80;
-
-                break;
-
-            case 80:
-
-                if(Robot.intake.isArmAft()) {
-
-                    this.state = 90;
-
-                }
-
-                break;
-
-            case 90:
-
-                Robot.elevator.setElevatorState(ElevatorState.Floor);
-                this.state = 100;
-                
-                break;
-
-            case 100:
-                
-                completed();
-
-                break;
-    
             }
-        
-    }
+            
+            break;
 
+        case 10:
+            
+            originalTime = System.currentTimeMillis();
+            Robot.intake.setArmLiftState(ArmLiftState.COLLAPSED);
+            this.state = 20;
+
+            break;
+
+        case 20:
+
+            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+
+                this.state = 30;
+
+            }
+
+            break;
+
+        case 30:
+
+            Robot.climber.setClimberState(ClimberState.Climb);
+            this.state = 40;
+
+            break;
+
+        case 40:
+            
+            firstPartDone = true;
+            
+            break;
+
+        case 50:
+
+            originalTime = System.currentTimeMillis();
+            Robot.intake.setArmLiftState(ArmLiftState.MID);
+            Robot.climber.setClimberState(ClimberState.Retract);
+            this.state = 60;
+
+            break;
+
+        case 60:
+
+            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+
+                this.state = 70;
+
+            }
+
+            break;
+
+        case 70:
+
+            Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
+            this.state = 80;
+
+            break;
+
+        case 80:
+
+            if(Robot.intake.isArmAft()) {
+
+                this.state = 90;
+
+            }
+
+            break;
+
+        case 90:
+
+            Robot.elevator.setElevatorState(ElevatorState.Floor);
+            this.state = 100;
+
+            break;
+
+        case 100:
+            
+            completed();
+
+            break;
+    
+        }
+    }
 }

@@ -48,5 +48,4 @@ public class FunctionBase implements FunctionInterface{
         return running;
 
     }
-
 }

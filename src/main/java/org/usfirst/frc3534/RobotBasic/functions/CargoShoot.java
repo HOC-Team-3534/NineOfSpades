@@ -26,41 +26,49 @@ public class CargoShoot extends FunctionBase implements FunctionInterface{
         }
 
         switch(this.state) {
-            case 0:
-                if((Robot.oi.getController2().getBumper(Hand.kRight) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
-                    this.started();
-                    this.state = 10;
-                    originalTime = System.currentTimeMillis();
-                }
-                break;
-    
-            case 10:
 
-                Robot.shooter.setShooterState(ShooterState.SHOOT);
+        case 0:
 
-                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
-
-                    this.state = 20;
-
-                }
+            if((Robot.oi.getController2().getBumper(Hand.kRight) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                 
-                break;
-
-            case 20:
-
-                Robot.shooter.setShooterState(ShooterState.STOP);
-                this.state = 30;
-
-                break;
-
-            case 30:
-
-                completed();
-
-                break;
-    
+                this.started();
+                this.state = 10;
+                
             }
 
-    }
+            break;
 
+        case 10:
+
+            originalTime = System.currentTimeMillis();
+            Robot.shooter.setShooterState(ShooterState.SHOOT);
+            this.state = 20;
+            
+            break;
+
+        case 20:
+
+            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+
+                this.state = 30;
+
+            }
+
+            break;
+
+        case 30:
+
+            Robot.shooter.setShooterState(ShooterState.STOP);
+            this.state = 40;
+
+            break;
+
+        case 40:
+
+            completed();
+
+            break;
+    
+        }
+    }
 }

@@ -40,5 +40,4 @@ public class FunctionProcessor{
         elevate.process();
 
     }
-
 }

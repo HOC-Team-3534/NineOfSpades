@@ -36,11 +36,7 @@ public class Elevate extends FunctionBase implements FunctionInterface{
                     Robot.elevator.setElevatorState(ElevatorState.Floor);
 
                 }
-
             }
-
         }
-
     }
-
 }

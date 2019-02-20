@@ -26,12 +26,16 @@ public class XButtonReset extends FunctionBase implements FunctionInterface {
         }
         
         switch(this.state) {
+
         case 0:
 
             if(Robot.oi.getController2().getBackButton()) {
+
                 this.started();
                 this.state = 10;
+
             }
+
             break;
 
         case 10:
@@ -83,7 +87,5 @@ public class XButtonReset extends FunctionBase implements FunctionInterface {
             break;
 
         }
-
     }
-
 }
