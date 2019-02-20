@@ -19,14 +19,14 @@ public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
     @Override
     public void process(){
 
-        if(!Robot.oi.getController2().getBButton() && firstPartDone){
+        if(!Robot.oi.getController1().getBButton() && firstPartDone){
 
             this.state = 30;
             firstPartDone = false;
 
         }
 
-        if(!running && Robot.oi.getController2().getBButton()){
+        if(!running && Robot.oi.getController1().getBButton()){
 
             this.reset();
 

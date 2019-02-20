@@ -120,6 +120,7 @@ public class RobotMap {
 
 		cargoShooterMaster = new WPI_TalonSRX(6);
 		cargoShooterSlave = new WPI_TalonSRX(7);
+		cargoShooterSlave.setInverted(true);
 
 		cargoShooter = new SpeedControllerGroup(cargoShooterMaster, cargoShooterSlave);
 

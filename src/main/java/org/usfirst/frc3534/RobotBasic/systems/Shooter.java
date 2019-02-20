@@ -42,8 +42,8 @@ public class Shooter extends SystemBase implements SystemInterface{
 
     public enum ShooterState{
         
-        INTAKE(-.3),
-        SHOOT(.4),
+        INTAKE(-.5),
+        SHOOT(1),
         STOP(0);
 
         double value;

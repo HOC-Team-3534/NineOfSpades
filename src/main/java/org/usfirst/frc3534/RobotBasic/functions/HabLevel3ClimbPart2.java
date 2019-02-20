@@ -37,7 +37,7 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
 
         switch(this.state) {
             case 0:
-                if(((Robot.oi.getController1().getXButton() && Robot.oi.getController2().getXButton()) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
+                if(((Robot.oi.getController1().getXButton() && Robot.intake.getArmLiftState() == ArmLiftState.UP) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                     this.started();
                     this.state = 10;
                     originalTime = System.currentTimeMillis();
@@ -80,7 +80,7 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
             case 50:
 
                 Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
-                if(Robot.intake.isArmAft()) {
+                if(!Robot.intake.isArmAft()) {
 
                     this.state = 60;
 
