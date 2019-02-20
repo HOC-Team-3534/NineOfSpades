@@ -80,7 +80,7 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
             case 50:
 
                 Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
-                if(!Robot.intake.isArmAft()) {
+                if(Robot.intake.isArmAft()) {
 
                     this.state = 60;
 

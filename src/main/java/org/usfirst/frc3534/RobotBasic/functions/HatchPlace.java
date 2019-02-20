@@ -30,29 +30,35 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
                 if((Robot.oi.getController2().getTriggerAxis(Hand.kRight) >= 0.5 && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                     this.started();
                     this.state = 10;
-                    originalTime = System.currentTimeMillis();
                 }
                 break;
     
             case 10:
 
+                originalTime = System.currentTimeMillis();
                 Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.EXTENDED);
-                if(System.currentTimeMillis() - originalTime > .75 * 1000){
-
-                    this.state = 20;
-
-                }
+                this.state = 20;
                 
                 break;
 
             case 20:
-                
-                Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.COLLAPSED);
-                this.state = 30;
+
+                if(System.currentTimeMillis() - originalTime > .75 * 1000){
+
+                    this.state = 30;
+
+                }
 
                 break;
 
             case 30:
+                
+                Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.COLLAPSED);
+                this.state = 40;
+
+                break;
+
+            case 40:
 
                 completed();
 

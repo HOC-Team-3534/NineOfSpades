@@ -11,6 +11,8 @@ public class HatchPanelApparatus extends SystemBase implements SystemInterface{
 
     private DoubleSolenoid cylinders = RobotMap.panelCylinders;
 
+    private long originalTimeHatchPanelApparatus = 0l;
+
     public HatchPanelApparatus(){
 
     }
@@ -29,6 +31,17 @@ public class HatchPanelApparatus extends SystemBase implements SystemInterface{
         case COLLAPSED:
 
             setHatchPanelCylindersCollapsed();
+            if(System.currentTimeMillis() - originalTimeHatchPanelApparatus > 3 * 1000){
+
+                hatchPanelApparatusState = HatchPanelApparatusState.OFF;
+
+            }
+
+            break;
+
+        case OFF:
+
+            setHatchPanelCylindersOff();
 
             break;
 
@@ -53,6 +66,7 @@ public class HatchPanelApparatus extends SystemBase implements SystemInterface{
 
         EXTENDED,
         COLLAPSED,
+        OFF,
         NULL
 
     }
@@ -60,6 +74,7 @@ public class HatchPanelApparatus extends SystemBase implements SystemInterface{
     public void setHatchPanelApparatusState(HatchPanelApparatusState state){
 
         hatchPanelApparatusState = state;
+        originalTimeHatchPanelApparatus = System.currentTimeMillis();
 
     }
 

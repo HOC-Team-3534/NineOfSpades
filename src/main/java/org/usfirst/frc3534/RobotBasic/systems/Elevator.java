@@ -1,6 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.systems;
 
 import org.usfirst.frc3534.RobotBasic.RobotMap;
+import org.usfirst.frc3534.RobotBasic.RobotMap.DelayToOff;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -19,6 +20,8 @@ public class Elevator extends SystemBase implements SystemInterface {
     CylinderState cylinder2 = CylinderState.COLLAPSED;
 
     ElevatorState elevatorState = ElevatorState.NULL;
+
+    private long originalTimeElevator = 0l;
 
     public Elevator() {
 
@@ -74,6 +77,12 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             } 
 
+            if(System.currentTimeMillis() - originalTimeElevator > DelayToOff.elevator_stage1a.time){
+
+                elevatorState = ElevatorState.OFF;
+
+            }
+
             break;
 
         case Stage1B:
@@ -94,6 +103,12 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             }
             cylinder2 = CylinderState.COLLAPSED;
+
+            if(System.currentTimeMillis() - originalTimeElevator > DelayToOff.elevator_stage1b.time){
+
+                elevatorState = ElevatorState.OFF;
+
+            }
 
             break;
 
@@ -116,6 +131,12 @@ public class Elevator extends SystemBase implements SystemInterface {
             }
             cylinder2 = CylinderState.EXTENDED;
 
+            if(System.currentTimeMillis() - originalTimeElevator > DelayToOff.elevator_stage2.time){
+
+                elevatorState = ElevatorState.OFF;
+
+            }
+
             break;
 
         case Floor:
@@ -136,6 +157,18 @@ public class Elevator extends SystemBase implements SystemInterface {
                 cylinder1 = CylinderState.COLLAPSED;
 
             }
+
+            if(System.currentTimeMillis() - originalTimeElevator > DelayToOff.elevator_floor.time){
+
+                elevatorState = ElevatorState.OFF;
+
+            }
+
+            break;
+
+        case OFF:
+
+            setCylindersOff();
 
             break;
 
@@ -163,6 +196,7 @@ public class Elevator extends SystemBase implements SystemInterface {
         Stage1A,
         Stage1B,
         Stage2,
+        OFF,
         NULL
 
     }
@@ -170,6 +204,7 @@ public class Elevator extends SystemBase implements SystemInterface {
     public void setElevatorState(ElevatorState state){
 
         elevatorState = state;
+        originalTimeElevator = System.currentTimeMillis();
 
     }
 
@@ -179,8 +214,9 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     }
 
-    //solenoid_.set(true) pushes air through the bottom
-    //solenoid_.set(false) pushes air through the top
+    //solenoid_.set(Value.kForward) pushes air through the bottom
+    //solenoid_.set(Value.kReverse) pushes air through the top
+    //solenoid_.set(Value.kOff) puts the value in the center position
 
     private void setCylinder1Extended() {
 

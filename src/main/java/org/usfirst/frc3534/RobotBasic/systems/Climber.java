@@ -1,6 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.systems;
 
 import org.usfirst.frc3534.RobotBasic.RobotMap;
+import org.usfirst.frc3534.RobotBasic.RobotMap.DelayToOff;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -19,6 +20,8 @@ public class Climber extends SystemBase implements SystemInterface{
     CylinderState cylinder2 = CylinderState.COLLAPSED;
 
     ClimberState climberState = ClimberState.NULL;
+
+    private long originalTimeClimber = 0l;
 
     public Climber(){} //The default constructor of the Climber class
 
@@ -40,6 +43,19 @@ public class Climber extends SystemBase implements SystemInterface{
             setCylinder2Collapsed();
             cylinder1 = CylinderState.COLLAPSED;
             cylinder2 = CylinderState.COLLAPSED;
+            
+            if(System.currentTimeMillis() - originalTimeClimber > DelayToOff.climber_retract.time){
+
+                climberState = ClimberState.OFF;
+
+            }
+
+            break;
+
+        case OFF:
+
+            setCylindersOff();
+
             break;
 
         case NULL:
@@ -62,12 +78,14 @@ public class Climber extends SystemBase implements SystemInterface{
     public enum ClimberState{
         Climb,
         Retract,
+        OFF,
         NULL
     }
 
     public void setClimberState(ClimberState state) {
 
         climberState = state;
+        originalTimeClimber = System.currentTimeMillis();
 
     }
 

@@ -134,6 +134,29 @@ public class RobotMap {
 
 		arduino = new I2C(I2C.Port.kOnboard, 111);
 
+	}
+
+	public enum DelayToOff{
+
+		climber_retract(4.0),
+		elevator_stage1a(3.0),
+		elevator_stage1b(3.0),
+		elevator_stage2(3.0),
+		elevator_floor(3.0),
+		hatchPanelApparatus_collapsed(2.0),
+		armExtend_extended(3.0),
+		armLift_collapsed(2.0),
+		armLift_mid(2.0),
+		armLift_up(2.0);
+
+		public double time;
+
+		private DelayToOff(double time){
+
+			this.time = time * 1000;
+
+		}
 
 	}
+
 }

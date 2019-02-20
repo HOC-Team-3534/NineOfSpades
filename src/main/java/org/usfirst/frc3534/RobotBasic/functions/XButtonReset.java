@@ -31,27 +31,20 @@ public class XButtonReset extends FunctionBase implements FunctionInterface {
             if(Robot.oi.getController2().getBackButton()) {
                 this.started();
                 this.state = 10;
-                originalTime = System.currentTimeMillis();
             }
             break;
 
         case 10:
 
+            originalTime = System.currentTimeMillis();
             Robot.intake.setArmLiftState(ArmLiftState.MID);
-
-            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
-
-                this.state = 20;
-
-            }
+            this.state = 20;
             
             break;
 
         case 20:
 
-            Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
-           
-            if(Robot.intake.isArmAft()){
+            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
 
                 this.state = 30;
 
@@ -61,13 +54,29 @@ public class XButtonReset extends FunctionBase implements FunctionInterface {
 
         case 30:
 
-            Robot.elevator.setElevatorState(ElevatorState.Floor);
-
+            Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
             this.state = 40;
 
             break;
 
         case 40:
+
+            if(Robot.intake.isArmAft()){
+
+                this.state = 50;
+
+            }
+
+            break;
+
+        case 50:
+
+            Robot.elevator.setElevatorState(ElevatorState.Floor);
+            this.state = 60;
+
+            break;
+
+        case 60:
 
             completed();
             

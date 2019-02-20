@@ -20,6 +20,9 @@ public class Intake extends SystemBase implements SystemInterface{
     private ArmLiftState armLiftState = ArmLiftState.NULL;
     private RollerState rollerState = RollerState.STOP;
 
+    private long originalTimeArmExtend = 0l;
+    private long originalTimeArmLift = 0l;
+
     public Intake(){
 
     }
@@ -33,11 +36,29 @@ public class Intake extends SystemBase implements SystemInterface{
 
             setArmExtendCylindersExtended();
 
+            if(System.currentTimeMillis() - originalTimeArmExtend > 3 * 1000){
+
+                armExtendState = ArmExtendState.OFF;
+
+            }
+
             break;
 
         case COLLAPSED:
 
             setArmExtendCylindersCollapsed();
+
+            if(isArmAft()){
+
+                armExtendState = ArmExtendState.OFF;
+
+            }
+
+            break;
+
+        case OFF:
+
+            setArmExtendCylindersOff();
 
             break;
 
@@ -56,6 +77,12 @@ public class Intake extends SystemBase implements SystemInterface{
             setShortArmCylindersCollapsed();
             setLongArmCylindersCollapsed();
 
+            if(System.currentTimeMillis() - originalTimeArmLift > 3 * 1000){
+
+                armLiftState = ArmLiftState.OFF;
+
+            }
+
             break;
 
         case MID:
@@ -63,12 +90,31 @@ public class Intake extends SystemBase implements SystemInterface{
             setShortArmCylindersExtended();
             setLongArmCylindersCollapsed();
 
+            if(System.currentTimeMillis() - originalTimeArmLift > 3 * 1000){
+
+                armLiftState = ArmLiftState.OFF;
+
+            }
+
             break;
 
         case UP:
 
             setShortArmCylindersExtended();
             setLongArmCylindersExtended();
+
+            if(System.currentTimeMillis() - originalTimeArmLift > 3 * 1000){
+
+                armLiftState = ArmLiftState.OFF;
+
+            }
+
+            break;
+
+        case OFF:
+
+            setShortArmCylindersOff();
+            setLongArmCylindersOff();
 
             break;
 
@@ -109,6 +155,7 @@ public class Intake extends SystemBase implements SystemInterface{
 
         EXTENDED,
         COLLAPSED,
+        OFF,
         NULL
 
     }
@@ -118,6 +165,7 @@ public class Intake extends SystemBase implements SystemInterface{
         COLLAPSED,
         MID,
         UP,
+        OFF,
         NULL
 
     }
@@ -132,12 +180,14 @@ public class Intake extends SystemBase implements SystemInterface{
     public void setArmExtendState(ArmExtendState state){
 
         armExtendState = state;
+        originalTimeArmExtend = System.currentTimeMillis();
 
     }
 
     public void setArmLiftState(ArmLiftState state){
 
         armLiftState = state;
+        originalTimeArmLift = System.currentTimeMillis();
 
     }
 
@@ -221,7 +271,7 @@ public class Intake extends SystemBase implements SystemInterface{
 
     public boolean isArmAft(){
 
-        return RobotMap.forwardAftSensor.get();
+        return !RobotMap.forwardAftSensor.get();
 
     }
 }
