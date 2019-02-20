@@ -23,9 +23,8 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
 
         if(!Robot.oi.getController1().getXButton() && firstPartDone){
 
-            this.state = 40;
+            this.state = 50;
             firstPartDone = false;
-            originalTime = System.currentTimeMillis();
 
         }
 
@@ -36,65 +35,91 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
         }
 
         switch(this.state) {
+
             case 0:
                 if(((Robot.oi.getController1().getXButton() && Robot.intake.getArmLiftState() == ArmLiftState.UP) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
+                    
                     this.started();
                     this.state = 10;
-                    originalTime = System.currentTimeMillis();
+                    
                 }
                 break;
     
             case 10:
                 
+                originalTime = System.currentTimeMillis();
                 Robot.intake.setArmLiftState(ArmLiftState.COLLAPSED);
-                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+                this.state = 20;
 
-                    this.state = 20;
-    
-                }
                 break;
 
             case 20:
 
-                Robot.climber.setClimberState(ClimberState.Climb);
-                this.state = 30;
+                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+
+                    this.state = 30;
+
+                }
+
                 break;
 
             case 30:
+
+                Robot.climber.setClimberState(ClimberState.Climb);
+                this.state = 40;
+
+                break;
+
+            case 40:
                 
                 firstPartDone = true;
                 
                 break;
 
-            case 40:
-
-                Robot.intake.setArmLiftState(ArmLiftState.MID);
-                Robot.climber.setClimberState(ClimberState.Retract);
-                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
-
-                    this.state = 50;
-    
-                }
-                break;
-
             case 50:
 
-                Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
-                if(Robot.intake.isArmAft()) {
-
-                    this.state = 60;
-
-                }
+                originalTime = System.currentTimeMillis();
+                Robot.intake.setArmLiftState(ArmLiftState.MID);
+                Robot.climber.setClimberState(ClimberState.Retract);
+                this.state = 60;
 
                 break;
 
             case 60:
 
-                Robot.elevator.setElevatorState(ElevatorState.Floor);
-                this.state = 70;
+                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+
+                    this.state = 70;
+
+                }
+
                 break;
 
             case 70:
+
+                Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
+                this.state = 80;
+
+                break;
+
+            case 80:
+
+                if(Robot.intake.isArmAft()) {
+
+                    this.state = 90;
+
+                }
+
+                break;
+
+            case 90:
+
+                Robot.elevator.setElevatorState(ElevatorState.Floor);
+                this.state = 100;
+                
+                break;
+
+            case 100:
                 
                 completed();
 

@@ -30,38 +30,53 @@ public class HabLevel3ClimbPart1 extends FunctionBase implements FunctionInterfa
             if((Robot.oi.getController2().getXButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                 this.started();
                 this.state = 10;
-                originalTime = System.currentTimeMillis();
             }
             break;
 
         case 10:
 
+            originalTime = System.currentTimeMillis();
             Robot.elevator.setElevatorState(ElevatorState.Stage1A);
-            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+            this.state = 20;
 
-                this.state = 20;
-                originalTime = System.currentTimeMillis();
-            }
             break;
 
         case 20:
-            
-            Robot.intake.setArmExtendState(ArmExtendState.EXTENDED);
+
             if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
 
                 this.state = 30;
-
+                
             }
+        
             break;
 
         case 30:
-
-            Robot.intake.setArmLiftState(ArmLiftState.UP);
+            
+            originalTime = System.currentTimeMillis();
+            Robot.intake.setArmExtendState(ArmExtendState.EXTENDED);
             this.state = 40;
 
             break;
 
         case 40:
+
+            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+
+                this.state = 50;
+
+            }
+
+            break;
+
+        case 50:
+
+            Robot.intake.setArmLiftState(ArmLiftState.UP);
+            this.state = 60;
+
+            break;
+
+        case 60:
 
             completed();
 

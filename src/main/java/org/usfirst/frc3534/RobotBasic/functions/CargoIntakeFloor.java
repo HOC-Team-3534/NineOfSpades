@@ -22,7 +22,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
         if(!Robot.oi.getController1().getAButton() && firstPartDone){
 
-            this.state = 40;
+            this.state = 50;
             firstPartDone = false;
 
         }
@@ -38,47 +38,60 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
                 if((Robot.oi.getController1().getAButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                     this.started();
                     this.state = 10;
-                    originalTime = System.currentTimeMillis();
                 }
                 break;
     
             case 10:
 
+                originalTime = System.currentTimeMillis();
                 Robot.elevator.setElevatorState(ElevatorState.Stage1A);
+                this.state = 20;
                 
-                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
-                    this.state = 20;
-                }
                 break;
 
             case 20:
 
-                Robot.intake.setArmExtendState(ArmExtendState.EXTENDED);
-                Robot.intake.setRollerState(RollerState.INTAKE);
+                if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+                    
+                    this.state = 30;
 
-                this.state = 30;
+                }
 
                 break;
 
             case 30:
 
-                firstPartDone = true;
+                Robot.intake.setArmExtendState(ArmExtendState.EXTENDED);
+                Robot.intake.setRollerState(RollerState.INTAKE);
+
+                this.state = 40;
 
                 break;
 
             case 40:
 
+                firstPartDone = true;
+
+                break;
+
+            case 50:
+
                 Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
+                this.state = 60;
+
+                break;
+
+            case 60:
 
                 if(!Robot.intake.isArmAft()){
 
-                    this.state = 50;
+                    this.state = 70;
 
                 }
 
                 break;
 
-            case 50:
+            case 70:
 
                 Robot.intake.setRollerState(RollerState.STOP);
                 Robot.elevator.setElevatorState(ElevatorState.Floor);

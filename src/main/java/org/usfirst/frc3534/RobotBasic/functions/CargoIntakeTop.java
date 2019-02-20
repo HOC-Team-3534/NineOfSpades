@@ -42,7 +42,6 @@ public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
     
             case 10:
 
-                Robot.elevator.setElevatorState(ElevatorState.Floor);
                 Robot.shooter.setShooterState(ShooterState.INTAKE);
                 
                 this.state = 20;
@@ -58,7 +57,6 @@ public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
             case 30:
 
                 Robot.shooter.setShooterState(ShooterState.STOP);
-                Robot.elevator.setElevatorState(ElevatorState.Floor);
 
                 completed();
 
