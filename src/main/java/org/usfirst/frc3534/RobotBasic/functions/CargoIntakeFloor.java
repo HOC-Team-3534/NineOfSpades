@@ -1,6 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
+import org.usfirst.frc3534.RobotBasic.RobotMap.FunctionStateDelay;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.RollerState;
@@ -56,7 +57,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
         case 20:
 
-            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+            if(System.currentTimeMillis() - originalTime > FunctionStateDelay.cargoIntakeFloor_elevatorStage1A_to_armExtendExtended_rollerIntake.time){
                 
                 this.state = 30;
 

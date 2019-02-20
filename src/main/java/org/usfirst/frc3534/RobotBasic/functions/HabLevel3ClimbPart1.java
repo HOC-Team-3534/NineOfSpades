@@ -1,6 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
+import org.usfirst.frc3534.RobotBasic.RobotMap.FunctionStateDelay;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmLiftState;
@@ -48,7 +49,7 @@ public class HabLevel3ClimbPart1 extends FunctionBase implements FunctionInterfa
 
         case 20:
 
-            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+            if(System.currentTimeMillis() - originalTime > FunctionStateDelay.habLevel3ClimbPart1_elevatorStage1A_to_armExtendExtended.time){
 
                 this.state = 30;
                 
@@ -66,7 +67,7 @@ public class HabLevel3ClimbPart1 extends FunctionBase implements FunctionInterfa
 
         case 40:
 
-            if(System.currentTimeMillis() - originalTime > 3.0 * 1000){
+            if(System.currentTimeMillis() - originalTime > FunctionStateDelay.habLevel3ClimbPart1_armExtendExtended_to_armLiftUp.time){
 
                 this.state = 50;
 

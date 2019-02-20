@@ -1,6 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
+import org.usfirst.frc3534.RobotBasic.RobotMap.FunctionStateDelay;
 import org.usfirst.frc3534.RobotBasic.systems.HatchPanelApparatus.HatchPanelApparatusState;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -48,7 +49,7 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
 
         case 20:
 
-            if(System.currentTimeMillis() - originalTime > .75 * 1000){
+            if(System.currentTimeMillis() - originalTime > FunctionStateDelay.hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed.time){
 
                 this.state = 30;
 

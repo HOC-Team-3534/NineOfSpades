@@ -47,7 +47,6 @@ public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
         case 10:
 
             Robot.shooter.setShooterState(ShooterState.INTAKE);
-            
             this.state = 20;
 
             break;

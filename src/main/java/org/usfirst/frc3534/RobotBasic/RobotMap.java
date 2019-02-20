@@ -149,14 +149,32 @@ public class RobotMap {
 		armLift_mid(2.0),
 		armLift_up(2.0);
 
-		public double time;
+		public final double time;
 
 		private DelayToOff(double time){
 
 			this.time = time * 1000;
 
 		}
-
 	}
 
+	public enum FunctionStateDelay{
+
+		cargoIntakeFloor_elevatorStage1A_to_armExtendExtended_rollerIntake(3.0),
+		cargoShoot_shooterShoot_to_shooterStop(1.0),
+		habLevel3ClimbPart1_elevatorStage1A_to_armExtendExtended(3.0),
+		habLevel3ClimbPart1_armExtendExtended_to_armLiftUp(3.0),
+		habLevel3ClimbPart2_armLiftCollapsed_to_climberClimb(3.0),
+		habLevel3ClimbPart2_armLiftMid_climberRetract_to_armExtendCollapsed(3.0),
+		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.75),
+		xButtonReset_armLiftMid_to_armExtendCollapsed(3.0);
+
+		public final double time;
+
+		private FunctionStateDelay(double time){
+
+			this.time = time * 1000;
+
+		}
+	}
 }
