@@ -1,6 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
+import org.usfirst.frc3534.RobotBasic.OI.Buttons;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmLiftState;
 
@@ -17,15 +18,15 @@ public class Elevate extends FunctionBase implements FunctionInterface{
 
         if(((!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.cargoIntakeTop.isRunning()) && Robot.intake.getArmLiftState() != ArmLiftState.UP ) && ((!Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))){
 
-            if(Robot.oi.getController2().getAButton()){
+            if(Buttons.Elevate_Stage1A.getButton()){
 
                 Robot.elevator.setElevatorState(ElevatorState.Stage1A);
 
-            }else if(Robot.oi.getController2().getBButton()){
+            }else if(Buttons.Elevate_Stage1B.getButton()){
 
                 Robot.elevator.setElevatorState(ElevatorState.Stage1B);
 
-            }else if(Robot.oi.getController2().getYButton()){
+            }else if(Buttons.Elevate_Stage2.getButton()){
 
                 Robot.elevator.setElevatorState(ElevatorState.Stage2);
 

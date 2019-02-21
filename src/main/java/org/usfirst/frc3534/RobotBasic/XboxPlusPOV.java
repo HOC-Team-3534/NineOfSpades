@@ -66,4 +66,11 @@ public class XboxPlusPOV extends XboxController {
 
 		}
 	}
+
+	public Boolean getAButtonBoolean(){
+
+		return Boolean.valueOf(this.getAButton());
+
+	}
+
 }

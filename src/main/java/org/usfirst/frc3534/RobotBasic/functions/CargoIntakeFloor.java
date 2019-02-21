@@ -1,6 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
+import org.usfirst.frc3534.RobotBasic.OI.Buttons;
 import org.usfirst.frc3534.RobotBasic.RobotMap.FunctionStateDelay;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
@@ -21,14 +22,14 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
     @Override
     public void process(){
 
-        if(!Robot.oi.getController1().getAButton() && firstPartDone){
+        if(!Buttons.CargoIntakeFloor.getButton() && firstPartDone){
 
             this.state = 50;
             firstPartDone = false;
 
         }
 
-        if(!running && Robot.oi.getController1().getAButton()){
+        if(!running && Buttons.CargoIntakeFloor.getButton()){
 
             this.reset();
 
@@ -38,7 +39,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
         case 0:
 
-            if((Robot.oi.getController1().getAButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
+            if((Buttons.CargoIntakeFloor.getButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                
                 this.started();
                 this.state = 10;

@@ -2,6 +2,7 @@ package org.usfirst.frc3534.RobotBasic.systems;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
 import org.usfirst.frc3534.RobotBasic.RobotMap;
+import org.usfirst.frc3534.RobotBasic.OI.Axes;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.networktables.NetworkTable;
@@ -62,7 +63,7 @@ public class Drive extends SystemBase implements SystemInterface {
 
 			SmartDashboard.putNumber("X value", _3d6Axis[0]);
 
-			if(Robot.oi.getController1().getTriggerAxis(Hand.kLeft) >= 0.5){
+			if(Axes.DriverTargetMode.getAxis() >= 0.5){
 
 				double heading_error = tx;
 				double distance_error = ty;
@@ -72,9 +73,13 @@ public class Drive extends SystemBase implements SystemInterface {
 				double sideToSideCorrection = Math.abs(_3d6Axis[0]) * kpTranslation;
 
 				if(Math.abs(sideToSideCorrection) > 6 || sideToSideCorrection == 0) {
+
 					usableKpAim = KpAim * .2;
+
 				} else {
+
 					usableKpAim = KpAim;
+
 				}
 
 				if ( tx > 1.0 ) {
@@ -124,7 +129,7 @@ public class Drive extends SystemBase implements SystemInterface {
 			}else{
 
 				negative = false;
-				yInput = -Robot.oi.getController1().getY(Hand.kLeft);
+				yInput = Axes.Drive_ForwardBackward.getAxis();
 				if(yInput < 0) negative = true;
 
 				yOut = Math.abs(yInput);
@@ -143,7 +148,7 @@ public class Drive extends SystemBase implements SystemInterface {
 				}
 
 				negative = false;
-				xInput = Robot.oi.getController1().getX(Hand.kLeft);
+				xInput = Axes.Drive_LeftRight.getAxis();
 				if(xInput < 0) negative = true;
 				
 				xOut = Math.abs(xInput);

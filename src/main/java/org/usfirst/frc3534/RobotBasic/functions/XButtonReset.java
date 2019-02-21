@@ -1,6 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
+import org.usfirst.frc3534.RobotBasic.OI.Buttons;
 import org.usfirst.frc3534.RobotBasic.RobotMap.FunctionStateDelay;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
@@ -20,7 +21,7 @@ public class XButtonReset extends FunctionBase implements FunctionInterface {
     @Override
     public void process() {
 
-        if((!running && Robot.oi.getController2().getBackButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))){
+        if((!running && Buttons.XButtonReset.getButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))){
 
             this.reset();
 
@@ -30,7 +31,7 @@ public class XButtonReset extends FunctionBase implements FunctionInterface {
 
         case 0:
 
-            if(Robot.oi.getController2().getBackButton()) {
+            if(Buttons.XButtonReset.getButton()) {
 
                 this.started();
                 this.state = 10;
