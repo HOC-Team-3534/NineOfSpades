@@ -42,9 +42,9 @@ public class Shooter extends SystemBase implements SystemInterface{
 
     public enum ShooterState{
         
-        INTAKE(-.5),
-        SHOOT(1),
-        STOP(0);
+        INTAKE(RobotMap.PowerOutput.shooter_shooter_intake.power),
+        SHOOT(RobotMap.PowerOutput.shooter_shooter_shoot.power),
+        STOP(RobotMap.PowerOutput.shooter_shooter_shoot.power);
 
         double value;
 

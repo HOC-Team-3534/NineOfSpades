@@ -177,4 +177,22 @@ public class RobotMap {
 
 		}
 	}
+
+	public enum PowerOutput{
+
+		intake_roller_intake(0.5),
+		intake_roller_stop(0.0),
+		shooter_shooter_intake(-0.5),
+		shooter_shooter_shoot(1.0),
+		shooter_shooter_stop(0.0);
+
+		public double power;
+
+		private PowerOutput(double power){
+
+			this.power = power;
+
+		}
+
+	}
 }

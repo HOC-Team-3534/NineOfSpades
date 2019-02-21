@@ -131,13 +131,13 @@ public class Intake extends SystemBase implements SystemInterface{
 
         case INTAKE:
 
-            cargoRoller.set(0.5);
+            cargoRoller.set(RollerState.INTAKE.value);
 
             break;
 
         case STOP:
 
-            cargoRoller.set(0.0);
+            cargoRoller.set(RollerState.STOP.value);
 
             break;
 
@@ -172,8 +172,16 @@ public class Intake extends SystemBase implements SystemInterface{
 
     public enum RollerState{
 
-        INTAKE,
-        STOP
+        INTAKE(RobotMap.PowerOutput.intake_roller_intake.power),
+        STOP(RobotMap.PowerOutput.intake_roller_stop.power);
+
+        double value;
+
+        private RollerState(double value){
+
+            this.value = value;
+
+        }
 
     }
 
