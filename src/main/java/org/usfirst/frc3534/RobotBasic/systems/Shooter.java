@@ -44,7 +44,7 @@ public class Shooter extends SystemBase implements SystemInterface{
         
         INTAKE(RobotMap.PowerOutput.shooter_shooter_intake.power),
         SHOOT(RobotMap.PowerOutput.shooter_shooter_shoot.power),
-        STOP(RobotMap.PowerOutput.shooter_shooter_shoot.power);
+        STOP(RobotMap.PowerOutput.shooter_shooter_stop.power);
 
         double value;
 

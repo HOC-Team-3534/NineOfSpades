@@ -149,7 +149,7 @@ public class RobotMap {
 		armLift_mid(2.0),
 		armLift_up(2.0);
 
-		public final double time;
+		public double time;
 
 		private DelayToOff(double time){
 
@@ -160,7 +160,7 @@ public class RobotMap {
 
 	public enum FunctionStateDelay{
 
-		cargoIntakeFloor_elevatorStage1A_to_armExtendExtended_rollerIntake(3.0),
+		cargoIntakeFloor_elevatorStage1A_to_armExtendExtended_rollerIntake(1.0),
 		cargoShoot_shooterShoot_to_shooterStop(1.0),
 		habLevel3ClimbPart1_elevatorStage1A_to_armExtendExtended(3.0),
 		habLevel3ClimbPart1_armExtendExtended_to_armLiftUp(3.0),
@@ -169,7 +169,7 @@ public class RobotMap {
 		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.75),
 		xButtonReset_armLiftMid_to_armExtendCollapsed(3.0);
 
-		public final double time;
+		public double time;
 
 		private FunctionStateDelay(double time){
 
@@ -180,7 +180,7 @@ public class RobotMap {
 
 	public enum PowerOutput{
 
-		intake_roller_intake(0.5),
+		intake_roller_intake(1.0),
 		intake_roller_stop(0.0),
 		shooter_shooter_intake(-0.5),
 		shooter_shooter_shoot(1.0),
