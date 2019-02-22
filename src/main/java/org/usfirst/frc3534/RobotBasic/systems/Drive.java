@@ -57,8 +57,6 @@ public class Drive extends SystemBase implements SystemInterface {
 			//Attempt at calling the Network Tables for Limelight and setting it 
 			NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 			double tx = table.getEntry("tx").getDouble(0.0);
-			SmartDashboard.putNumber("tx", tx);
-			double ty = table.getEntry("ty").getDouble(0.0);
 			double[] _3d6Axis = table.getEntry("camtran").getDoubleArray(defaultArray);
 
 			SmartDashboard.putNumber("X value", _3d6Axis[0]);
@@ -66,7 +64,7 @@ public class Drive extends SystemBase implements SystemInterface {
 			if(Axes.DriverTargetMode.getAxis() >= 0.5){
 
 				double heading_error = tx;
-				double distance_error = ty;
+				double distance_error = Math.pow(Math.pow(_3d6Axis[0], 2) + Math.pow(_3d6Axis[2], 2), 0.5) - 16.5;
 				double steering_adjust = 0.0;
 				double usableKpAim = 0.0;
 
