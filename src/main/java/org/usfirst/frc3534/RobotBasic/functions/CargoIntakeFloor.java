@@ -89,7 +89,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
         case 60:
 
-            if(!Robot.intake.isArmAft()){
+            if(Robot.intake.isArmAft()){
 
                 this.state = 70;
 
