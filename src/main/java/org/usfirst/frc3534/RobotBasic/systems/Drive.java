@@ -30,12 +30,13 @@ public class Drive extends SystemBase implements SystemInterface {
 
 	private double last_error, distance_last_error;
 
-	private double KpAim = 0.0275;
-	private double KdAim = 0.0005;
-	private double KpDistance = 0.0275;
-	private double KdDistance = .015;
-	private double kpTranslation = 0.004;
+	private double KpAim = 0.0275; //.0275
+	private double KdAim = 0.0007;
+	private double KpDistance = 0.02;
+	private double KdDistance = .08;
+	private double kpTranslation = 0.004; //.004
 	private double min_aim_command = 0.005;
+	private double max_distance_command = 0.8;
 	private double max_side_to_side_correction = 0.19;
 
 	private double[] defaultArray = {0.0, 0.0, 0.0, 0.0, 0.0 , 0.0};
@@ -64,13 +65,13 @@ public class Drive extends SystemBase implements SystemInterface {
 			if(Axes.DriverTargetMode.getAxis() >= 0.5){
 
 				double heading_error = tx;
-				double distance_error = Math.pow(Math.pow(_3d6Axis[0], 2) + Math.pow(_3d6Axis[2], 2), 0.5) - 16.5;
+				double distance_error = Math.pow(Math.pow(_3d6Axis[0], 2) + Math.pow(-_3d6Axis[2], 2), 0.5) - 15.0;
 				double steering_adjust = 0.0;
 				double usableKpAim = 0.0;
 
 				double sideToSideCorrection = Math.abs(_3d6Axis[0]) * kpTranslation;
 
-				if(Math.abs(sideToSideCorrection) > 6 || sideToSideCorrection == 0) {
+				if(Math.abs(sideToSideCorrection) > 4 || sideToSideCorrection == 0) {
 
 					usableKpAim = KpAim * .2;
 
@@ -101,6 +102,12 @@ public class Drive extends SystemBase implements SystemInterface {
 
 				double distance_adjust = KpDistance * distance_error + KdDistance * (distance_error - distance_last_error);
 				
+				if(Math.abs(distance_adjust) > max_distance_command){
+
+					distance_adjust = max_distance_command * Math.abs(distance_adjust) / distance_adjust;
+					
+				}
+
 				distance_last_error = distance_error;
 
 				left_command = steering_adjust + distance_adjust ;

@@ -6,6 +6,7 @@ import org.usfirst.frc3534.RobotBasic.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends SystemBase implements SystemInterface{
 
@@ -29,6 +30,8 @@ public class Intake extends SystemBase implements SystemInterface{
 
     @Override
     public void process(){
+
+        SmartDashboard.putBoolean("extension", !isArmAft());
 
         switch(armExtendState){
 

@@ -6,6 +6,7 @@ import org.usfirst.frc3534.RobotBasic.RobotMap.DelayToOff;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevator extends SystemBase implements SystemInterface {
 
@@ -29,6 +30,8 @@ public class Elevator extends SystemBase implements SystemInterface {
 
     @Override
     public void process() {
+
+        SmartDashboard.putBoolean("Stage 1A", !limitSwitch.get());
 
         switch(elevatorState){
 
