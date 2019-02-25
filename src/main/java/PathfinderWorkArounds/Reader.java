@@ -23,10 +23,8 @@ public class Reader {
 		int rows = 0;
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(
-					new FileReader(new File(side.toString() + "trajectorystep" + step + "traj" + traj)));
+			reader = new BufferedReader(new FileReader(new File(side.toString() + "trajectorystep" + step + "traj" + traj)));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Segment[] segments = new Segment[1024];

@@ -2,6 +2,7 @@ package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
 import org.usfirst.frc3534.RobotBasic.OI.Buttons;
+import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmLiftState;
 import org.usfirst.frc3534.RobotBasic.systems.Shooter.ShooterState;
 
 public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
@@ -36,7 +37,7 @@ public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
 
         case 0:
 
-            if((Buttons.CargoIntakeTop.getButton() && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
+            if(((Buttons.CargoIntakeTop.getButton() && Robot.intake.getArmLiftState() != ArmLiftState.UP) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                
                 this.started();
                 this.state = 10;

@@ -1,11 +1,7 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
-import java.util.concurrent.Callable;
-
 import org.usfirst.frc3534.RobotBasic.Robot;
 import org.usfirst.frc3534.RobotBasic.systems.Arduino.LEDState;
-
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 public class FunctionProcessor{
 
