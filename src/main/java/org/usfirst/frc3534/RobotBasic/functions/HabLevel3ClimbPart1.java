@@ -79,6 +79,7 @@ public class HabLevel3ClimbPart1 extends FunctionBase implements FunctionInterfa
         case 50:
 
             Robot.intake.setArmLiftState(ArmLiftState.UP);
+            Robot.elevator.setElevatorState(ElevatorState.OFF);
             this.state = 60;
 
             break;
