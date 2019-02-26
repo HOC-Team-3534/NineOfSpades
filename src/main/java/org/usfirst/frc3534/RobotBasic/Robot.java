@@ -48,6 +48,8 @@ public class Robot extends TimedRobot {
 	public static boolean teleop;
 	public static boolean enabled;
 
+	public static boolean firstTimeEnabled = true;
+
 	private AutonStateMachineInterface autonStateMachine;
 
 	/**
@@ -94,6 +96,7 @@ public class Robot extends TimedRobot {
 		hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.NULL);
 		intake.setArmExtendState(ArmExtendState.NULL);
 		intake.setArmLiftState(ArmLiftState.NULL);
+		firstTimeEnabled = true;
 
 	}
 
@@ -225,6 +228,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+
+		if(firstTimeEnabled){
+
+			intake.setArmLiftState(ArmLiftState.MID);
+			firstTimeEnabled = false;
+
+		}
 
 		log();
 

@@ -19,6 +19,7 @@ public class Intake extends SystemBase implements SystemInterface{
 
     private ArmExtendState armExtendState = ArmExtendState.NULL;
     private ArmLiftState armLiftState = ArmLiftState.NULL;
+    private ArmLiftState prevArmLiftStateBeforeOff = ArmLiftState.NULL;
     private RollerState rollerState = RollerState.STOP;
 
     private long originalTimeArmExtend = 0l;
@@ -83,6 +84,7 @@ public class Intake extends SystemBase implements SystemInterface{
             if(System.currentTimeMillis() - originalTimeArmLift > 3 * 1000){
 
                 armLiftState = ArmLiftState.OFF;
+                prevArmLiftStateBeforeOff = ArmLiftState.COLLAPSED;
 
             }
 
@@ -96,6 +98,7 @@ public class Intake extends SystemBase implements SystemInterface{
             if(System.currentTimeMillis() - originalTimeArmLift > 3 * 1000){
 
                 armLiftState = ArmLiftState.OFF;
+                prevArmLiftStateBeforeOff = ArmLiftState.MID;
 
             }
 
@@ -109,6 +112,7 @@ public class Intake extends SystemBase implements SystemInterface{
             if(System.currentTimeMillis() - originalTimeArmLift > 3 * 1000){
 
                 armLiftState = ArmLiftState.OFF;
+                prevArmLiftStateBeforeOff = ArmLiftState.UP;
 
             }
 
@@ -217,6 +221,12 @@ public class Intake extends SystemBase implements SystemInterface{
     public ArmLiftState getArmLiftState(){
 
         return armLiftState;
+
+    }
+
+    public ArmLiftState getPrevArmLiftState(){
+
+        return prevArmLiftStateBeforeOff;
 
     }
 
