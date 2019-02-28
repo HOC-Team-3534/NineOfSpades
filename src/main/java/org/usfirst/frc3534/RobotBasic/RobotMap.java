@@ -39,7 +39,7 @@ public class RobotMap {
 	public static DigitalInput limitSwitch;
 
 	public static DoubleSolenoid climbingCylinderOne;
-	public static DoubleSolenoid climbingCylinderTwo;
+	//public static DoubleSolenoid climbingCylinderTwo;
 
 	public static DoubleSolenoid intakeDownCylinders;
 	public static DoubleSolenoid intakeUpCylinders;
@@ -56,6 +56,8 @@ public class RobotMap {
 	public static SpeedControllerGroup cargoShooter;
 
 	public static DoubleSolenoid panelCylinders;
+
+	public static DoubleSolenoid panelIntakeCylinders;
 
 	public static Compressor compressor;
 
@@ -109,7 +111,7 @@ public class RobotMap {
 		limitSwitch = new DigitalInput(0);
 
 		climbingCylinderOne = new DoubleSolenoid(2, 4, 5);
-		climbingCylinderTwo = new DoubleSolenoid(2, 6, 7);
+		//climbingCylinderTwo = new DoubleSolenoid(2, 6, 7);
 
 		intakeDownCylinders = new DoubleSolenoid(2, 0, 1);
 		intakeUpCylinders = new DoubleSolenoid(1, 6, 7);
@@ -128,6 +130,8 @@ public class RobotMap {
 
 		panelCylinders = new DoubleSolenoid(1, 4, 5);
 
+		panelIntakeCylinders = new DoubleSolenoid(2, 6, 7);
+
 		compressor = new Compressor(1);
         compressor.start();
         compressor.setClosedLoopControl(true);
@@ -144,6 +148,7 @@ public class RobotMap {
 		elevator_stage2(3.0),
 		elevator_floor(3.0),
 		hatchPanelApparatus_collapsed(2.0),
+		hatchIntake_hold(2.0),
 		armExtend_extended(3.0),
 		armLift_collapsed(2.0),
 		armLift_mid(2.0),
@@ -166,6 +171,7 @@ public class RobotMap {
 		habLevel3ClimbPart1_armExtendExtended_to_armLiftUp(3.0),
 		habLevel3ClimbPart2_armLiftCollapsed_to_climberClimb(3.0),
 		habLevel3ClimbPart2_armLiftMid_climberRetract_to_armExtendCollapsed(3.0),
+		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.75),
 		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.75),
 		xButtonReset_armLiftMid_to_armExtendCollapsed(3.0);
 

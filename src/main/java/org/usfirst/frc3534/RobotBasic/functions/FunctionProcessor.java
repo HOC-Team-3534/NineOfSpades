@@ -11,6 +11,7 @@ public class FunctionProcessor{
     HabLevel3ClimbPart2 habLevel3ClimbPart2;
     Elevate elevate;
     HatchPlace hatchPlace;
+    HatchPickUp hatchPickUp;
     CargoShoot cargoShoot;
     XButtonReset xButtonReset;
 
@@ -22,6 +23,7 @@ public class FunctionProcessor{
         habLevel3ClimbPart2 = new HabLevel3ClimbPart2();
         elevate = new Elevate();
         hatchPlace = new HatchPlace();
+        hatchPickUp = new HatchPickUp();
         cargoShoot = new CargoShoot();
         xButtonReset = new XButtonReset();
 
@@ -36,6 +38,7 @@ public class FunctionProcessor{
         habLevel3ClimbPart2.process();
         xButtonReset.process();
         hatchPlace.process();
+        hatchPickUp.process();
         cargoShoot.process();
         elevate.process();
 

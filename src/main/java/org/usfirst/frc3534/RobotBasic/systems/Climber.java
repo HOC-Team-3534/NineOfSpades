@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 public class Climber extends SystemBase implements SystemInterface{
 
     private DoubleSolenoid solenoid1 = RobotMap.climbingCylinderOne; //These two lines are used to create variables of type DoubleSolenoid
-    private DoubleSolenoid solenoid2 = RobotMap.climbingCylinderTwo;
+    //private DoubleSolenoid solenoid2 = RobotMap.climbingCylinderTwo;
 
     CylinderState cylinder1 = CylinderState.COLLAPSED; //These two lines are used to create variables of type STATE
     CylinderState cylinder2 = CylinderState.COLLAPSED;
@@ -106,21 +106,21 @@ public class Climber extends SystemBase implements SystemInterface{
     private void setCylinder2Extended() {
 
         //give power to solenoid2 bottom
-        solenoid2.set(Value.kForward);
+        //solenoid2.set(Value.kForward);
 
     }
 
     private void setCylinder2Collapsed() {
 
         //give power to solenoid2 top
-        solenoid2.set(Value.kReverse);
+        //solenoid2.set(Value.kReverse);
 
     } 
 
     private void setCylindersOff(){
 
         solenoid1.set(Value.kOff);
-        solenoid2.set(Value.kOff);
+        //solenoid2.set(Value.kOff);
 
     }
 

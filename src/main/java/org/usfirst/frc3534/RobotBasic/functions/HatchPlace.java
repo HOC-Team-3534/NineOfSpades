@@ -1,8 +1,10 @@
 package org.usfirst.frc3534.RobotBasic.functions;
 
 import org.usfirst.frc3534.RobotBasic.Robot;
+import org.usfirst.frc3534.RobotBasic.RobotMap;
 import org.usfirst.frc3534.RobotBasic.OI.Axes;
 import org.usfirst.frc3534.RobotBasic.RobotMap.FunctionStateDelay;
+import org.usfirst.frc3534.RobotBasic.systems.HatchPanelApparatus.HatchIntakeState;
 import org.usfirst.frc3534.RobotBasic.systems.HatchPanelApparatus.HatchPanelApparatusState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmLiftState;
 
@@ -28,7 +30,7 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
 
         switch(this.state) {
 
-            case 0:
+        case 0:
 
             if(((Axes.HatchPlace.getAxis() >= 0.5 && Robot.intake.getArmLiftState() != ArmLiftState.UP) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                 
@@ -41,15 +43,15 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
 
         case 10:
 
-            originalTime = System.currentTimeMillis();
-            Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.EXTENDED);
+            originalTime = System.currentTimeMillis();    
+            Robot.hatchPanelApparatus.setHatchIntakeState(HatchIntakeState.RELEASE);
             this.state = 20;
-            
+
             break;
 
         case 20:
 
-            if(System.currentTimeMillis() - originalTime > FunctionStateDelay.hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed.time){
+            if(System.currentTimeMillis() - originalTime > RobotMap.FunctionStateDelay.hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended.time){
 
                 this.state = 30;
 
@@ -58,13 +60,31 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
             break;
 
         case 30:
-            
-            Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.COLLAPSED);
-            this.state = 40;
 
+            originalTime = System.currentTimeMillis();
+            Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.EXTENDED);
+            this.state = 20;
+            
             break;
 
         case 40:
+
+            if(System.currentTimeMillis() - originalTime > FunctionStateDelay.hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed.time){
+
+                this.state = 50;
+
+            }
+
+            break;
+
+        case 50:
+            
+            Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.COLLAPSED);
+            this.state = 60;
+
+            break;
+
+        case 60:
 
             completed();
 

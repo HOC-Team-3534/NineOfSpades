@@ -74,7 +74,7 @@ public class OI {
             @Override
             public Boolean call() throws Exception{
 
-                return Boolean.valueOf(Robot.oi.getController1().getBButton());
+                return Boolean.valueOf(Robot.oi.getController1().getYButton());
 
             }
 
@@ -85,6 +85,16 @@ public class OI {
             public Boolean call() throws Exception{
 
                 return Boolean.valueOf(Robot.oi.getController2().getBumper(Hand.kRight));
+
+            }
+
+        }),
+        HatchPickUp(new Callable<Boolean>(){
+
+            @Override
+            public Boolean call() throws Exception{
+
+                return Boolean.valueOf(Robot.oi.getController1().getBButton());
 
             }
 
