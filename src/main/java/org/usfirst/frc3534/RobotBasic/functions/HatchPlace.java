@@ -63,7 +63,7 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
 
             originalTime = System.currentTimeMillis();
             Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.EXTENDED);
-            this.state = 20;
+            this.state = 40;
             
             break;
 

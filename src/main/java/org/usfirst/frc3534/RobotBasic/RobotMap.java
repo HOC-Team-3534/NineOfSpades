@@ -171,8 +171,8 @@ public class RobotMap {
 		habLevel3ClimbPart1_armExtendExtended_to_armLiftUp(3.0),
 		habLevel3ClimbPart2_armLiftCollapsed_to_climberClimb(3.0),
 		habLevel3ClimbPart2_armLiftMid_climberRetract_to_armExtendCollapsed(3.0),
-		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.75),
-		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.75),
+		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.25),
+		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.25),
 		xButtonReset_armLiftMid_to_armExtendCollapsed(3.0);
 
 		public double time;
@@ -186,7 +186,7 @@ public class RobotMap {
 
 	public enum PowerOutput{
 
-		intake_roller_intake(1.0),
+		intake_roller_intake(0.8),
 		intake_roller_stop(0.0),
 		shooter_shooter_intake(-0.5),
 		shooter_shooter_shoot(1.0),
