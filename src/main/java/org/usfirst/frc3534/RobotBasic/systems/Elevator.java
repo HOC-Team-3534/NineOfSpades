@@ -3,6 +3,7 @@ package org.usfirst.frc3534.RobotBasic.systems;
 import org.usfirst.frc3534.RobotBasic.RobotMap;
 import org.usfirst.frc3534.RobotBasic.RobotMap.DelayToOff;
 
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -16,6 +17,7 @@ public class Elevator extends SystemBase implements SystemInterface {
     private DoubleSolenoid solenoid2 = RobotMap.elevatorCylinderTwo;
 
     private DigitalInput limitSwitch = RobotMap.limitSwitch;
+    private Counter switchCounter = new Counter(limitSwitch);
 
     CylinderState cylinder1 = CylinderState.COLLAPSED;
     CylinderState cylinder2 = CylinderState.COLLAPSED;
@@ -31,7 +33,7 @@ public class Elevator extends SystemBase implements SystemInterface {
     @Override
     public void process() {
 
-        SmartDashboard.putBoolean("Stage 1A", !limitSwitch.get());
+        SmartDashboard.putBoolean("Stage 1A", getElevatorSwitchCounter());
 
         switch(elevatorState){
 
@@ -40,7 +42,7 @@ public class Elevator extends SystemBase implements SystemInterface {
             if (cylinder1 == CylinderState.EXTENDED) {//if the first cylinder is extended
 
                 /*
-                if (!limitSwitch.get()) {//if the first cylinder is at the limit switch
+                if (getElevatorSwitchCounter()) {//if the first cylinder is at the limit switch
 
                     limitSwitchMet = true;
                     cylinder1 = CylinderState.HALFWAY;
@@ -60,7 +62,7 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             } else if (cylinder1 == CylinderState.COLLAPSED) {//if the first cylinder is collapsed
 
-                if (!limitSwitch.get()) {//if the first cylinder is at the limit switch
+                if (getElevatorSwitchCounter()) {//if the first cylinder is at the limit switch
 
                     limitSwitchMet = true;
                     cylinder1 = CylinderState.HALFWAY;
@@ -95,7 +97,7 @@ public class Elevator extends SystemBase implements SystemInterface {
             setCylinder2Collapsed();
             if(cylinder1 == CylinderState.COLLAPSED){
 
-                if(!limitSwitch.get()){
+                if(getElevatorSwitchCounter()){
 
                     cylinder1 = CylinderState.EXTENDED;
 
@@ -122,7 +124,7 @@ public class Elevator extends SystemBase implements SystemInterface {
             setCylinder2Extended();
             if(cylinder1 == CylinderState.COLLAPSED){//if the first cylinder is collapsed 
 
-                if(!limitSwitch.get()){//if the cylinder is at the limit switch
+                if(getElevatorSwitchCounter()){//if the cylinder is at the limit switch
 
                     cylinder1 = CylinderState.EXTENDED;
 
@@ -150,7 +152,7 @@ public class Elevator extends SystemBase implements SystemInterface {
             setCylinder2Collapsed();
             if(cylinder1 == CylinderState.EXTENDED){//if the first cylinder is extended
 
-                //if(!limitSwitch.get()){//if the cylinder is at the limit switch
+                //if(getElevatorSwitchCounter()){//if the cylinder is at the limit switch
 
                     cylinder1 = CylinderState.COLLAPSED;
 
@@ -183,6 +185,8 @@ public class Elevator extends SystemBase implements SystemInterface {
             break;
 
         }
+
+        setSwitchCounterReset();
 
     }
 
@@ -261,6 +265,18 @@ public class Elevator extends SystemBase implements SystemInterface {
 
         solenoid1.set(Value.kOff);
         solenoid2.set(Value.kOff);
+
+    }
+
+    private boolean getElevatorSwitchCounter(){
+
+        return switchCounter.get() > 0;
+
+    }
+
+    private void setSwitchCounterReset(){
+
+        switchCounter.reset();
 
     }
 
