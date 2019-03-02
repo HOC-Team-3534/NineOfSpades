@@ -34,12 +34,10 @@ public class Drive extends SystemBase implements SystemInterface {
 	private double KdAim = 0.0007;
 	private double KpDistance = 0.02;
 	private double KdDistance = .08;
-	private double kpTranslation = 0.004; //.004
+	private double kpSkew = 0.004; //.004
 	private double min_aim_command = 0.005;
-	private double max_distance_command = 0.8;
-	private double max_side_to_side_correction = 0.19;
-
-	private double[] defaultArray = {0.0, 0.0, 0.0, 0.0, 0.0 , 0.0};
+	private double max_distance_command = 0.7;
+	private double max_side_to_side_correction = 0.2;
 
 	public Drive() {
 
@@ -58,22 +56,62 @@ public class Drive extends SystemBase implements SystemInterface {
 			//Attempt at calling the Network Tables for Limelight and setting it 
 			NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 			double tx = table.getEntry("tx").getDouble(0.0);
-			double[] _3d6Axis = table.getEntry("camtran").getDoubleArray(defaultArray);
-
-			SmartDashboard.putNumber("X value", _3d6Axis[0]);
+			double height = table.getEntry("tvert").getDouble(0.0);
+			double skew = table.getEntry("ts").getDouble(0.0);
+			double width = table.getEntry("thor").getDouble(0.0);
 
 			if(Axes.DriverTargetMode.getAxis() >= 0.5){
 
 				double heading_error = tx;
-				double distance_error = Math.pow(Math.pow(_3d6Axis[0], 2) + Math.pow(-_3d6Axis[2], 2), 0.5) - 15.0;
+				double distance_error;
 				double steering_adjust = 0.0;
 				double usableKpAim = 0.0;
 
-				double sideToSideCorrection = Math.abs(_3d6Axis[0]) * kpTranslation;
+				double sideToSideCorrection;
 
-				if(Math.abs(sideToSideCorrection) > 4 || sideToSideCorrection == 0) {
+				if(skew >  -45){
 
-					usableKpAim = KpAim * .2;
+					sideToSideCorrection = (-90 - (skew)) ;
+
+				}else{
+
+					sideToSideCorrection = (skew);
+
+				}
+
+				sideToSideCorrection = (90 + sideToSideCorrection) * kpSkew;
+
+				if(height != 0.0){
+
+					if(sideToSideCorrection <= 3){
+
+						distance_error = 124.36 * Math.pow(.989, height);
+	
+					}else if(sideToSideCorrection <= 7){
+	
+						distance_error = 122.09 * Math.pow(.991, height);
+	
+					}else if(sideToSideCorrection <= 10){
+	
+						distance_error = 133.658 * Math.pow(.991, height);
+	
+					}else{
+	
+						distance_error = 98.2 * Math.pow(.994, height);
+	
+					}
+
+				}
+
+				if(width > 425 && height < 130){
+
+					distance_error = 20;
+
+				}
+
+				if(Math.abs(sideToSideCorrection) > 5 || sideToSideCorrection == 0) {
+
+					usableKpAim = KpAim * .3;
 
 				} else {
 
@@ -119,13 +157,15 @@ public class Drive extends SystemBase implements SystemInterface {
 
 				}
 
-				if(_3d6Axis[0] > 0){
+				if(skew > -45){
 
-					right_command += sideToSideCorrection;
+					left_command += sideToSideCorrection;
+					right_command -= sideToSideCorrection;
 
 				}else{
 
-					left_command += sideToSideCorrection;
+					right_command += sideToSideCorrection;
+					left_command -= sideToSideCorrection;
 
 				}
 
