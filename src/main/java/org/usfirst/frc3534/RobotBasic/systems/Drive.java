@@ -30,8 +30,6 @@ public class Drive extends SystemBase implements SystemInterface {
 
 	private double last_error, distance_last_error;
 
-	private int prevEncoderCounts = -RobotMap.frontRightMotor.getSensorCollection().getQuadraturePosition();
-
 	private double KpAim = 0.0275; //.0275
 	private double KdAim = 0.0007;
 	private double KpDistance = 0.02;
@@ -250,13 +248,8 @@ public class Drive extends SystemBase implements SystemInterface {
 		 * SmartDashboard.putNumber("Velocity", velocity);
 		 */
 
-		double velocity = 0;
+		double velocity = -RobotMap.frontRightMotor.getSensorCollection().getQuadratureVelocity() * RobotMap.codesPer100MillisToInchesPerSecond;
 		
-		int encoderCounts = 0;
-		encoderCounts = -RobotMap.frontRightMotor.getSensorCollection().getQuadraturePosition();
-		velocity = (encoderCounts - prevEncoderCounts) / 1440.0 * Math.PI * RobotMap.wheelDiameter * 50;
-		prevEncoderCounts = encoderCounts;
-		SmartDashboard.putNumber("right encoder counts", encoderCounts);
 		SmartDashboard.putNumber("Velocity", velocity);
 
 	}

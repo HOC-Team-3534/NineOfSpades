@@ -64,13 +64,14 @@ public class RobotMap {
 	public static I2C arduino;
 
 	public static final double wheelBase_width = 36;
-	public static final double robotMaxVeloctiy = 168; // inches per second
+	public static final double robotMaxVeloctiy = 150; // inches per second
 	public static final double minMoveSpeed = .375;
 
 	// Wheel Encoder Calculations
 	public static final int countsPerRevEncoders = 1440; // 1440 if plugged into talon. 360 if directly into the roborio; just go with, it its weird
 	public static final double wheelDiameter = 6.25; // measured in inches
 	public static final double inchesPerCountMultiplier = wheelDiameter * Math.PI / countsPerRevEncoders;
+	public static final double codesPer100MillisToInchesPerSecond = inchesPerCountMultiplier * 10;
 
 	public static void init() {
 

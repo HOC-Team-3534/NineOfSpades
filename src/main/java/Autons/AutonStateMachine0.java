@@ -53,7 +53,6 @@ public class AutonStateMachine0 extends AutonStateMachineBase implements AutonSt
 
 		case 1:
 
-			navX.zeroYaw();
 			frontRight.getSensorCollection().setQuadraturePosition(0, 0);
 			frontLeft.getSensorCollection().setQuadraturePosition(0, 0);
 
