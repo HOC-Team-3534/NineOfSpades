@@ -23,8 +23,12 @@ public class Elevator extends SystemBase implements SystemInterface {
     CylinderState cylinder2 = CylinderState.COLLAPSED;
 
     ElevatorState elevatorState = ElevatorState.NULL;
+    ElevatorState prevElevatorState = ElevatorState.OFF;
 
     private long originalTimeElevator = 0l;
+    private long originalTimeFloor = 0l;
+
+    boolean notReadyYet = false;
 
     public Elevator() {
 
@@ -83,8 +87,11 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             } 
 
+            originalTimeFloor = System.currentTimeMillis();
+
             if(System.currentTimeMillis() - originalTimeElevator > DelayToOff.elevator_stage1a.time){
 
+                prevElevatorState = elevatorState;
                 elevatorState = ElevatorState.OFF;
 
             }
@@ -110,8 +117,11 @@ public class Elevator extends SystemBase implements SystemInterface {
             }
             cylinder2 = CylinderState.COLLAPSED;
 
+            originalTimeFloor = System.currentTimeMillis();
+
             if(System.currentTimeMillis() - originalTimeElevator > DelayToOff.elevator_stage1b.time){
 
+                prevElevatorState = elevatorState;
                 elevatorState = ElevatorState.OFF;
 
             }
@@ -137,8 +147,11 @@ public class Elevator extends SystemBase implements SystemInterface {
             }
             cylinder2 = CylinderState.EXTENDED;
 
+            originalTimeFloor = System.currentTimeMillis();
+
             if(System.currentTimeMillis() - originalTimeElevator > DelayToOff.elevator_stage2.time){
 
+                prevElevatorState = elevatorState;
                 elevatorState = ElevatorState.OFF;
 
             }
@@ -150,6 +163,17 @@ public class Elevator extends SystemBase implements SystemInterface {
             limitSwitchMet = false;
             setCylinder1Collapsed();
             setCylinder2Collapsed();
+
+            if((prevElevatorState == ElevatorState.Stage1A || prevElevatorState == ElevatorState.Stage2) && System.currentTimeMillis() - originalTimeFloor < 2 * 1000){
+
+                notReadyYet = true;
+
+            }else{
+
+                notReadyYet = false;
+
+            }
+
             if(cylinder1 == CylinderState.EXTENDED){//if the first cylinder is extended
 
                 //if(getElevatorSwitchCounter()){//if the cylinder is at the limit switch
@@ -166,6 +190,7 @@ public class Elevator extends SystemBase implements SystemInterface {
 
             if(System.currentTimeMillis() - originalTimeElevator > DelayToOff.elevator_floor.time){
 
+                prevElevatorState = elevatorState;
                 elevatorState = ElevatorState.OFF;
 
             }
@@ -219,6 +244,12 @@ public class Elevator extends SystemBase implements SystemInterface {
     public ElevatorState getElevatorState(){
 
         return elevatorState;
+
+    }
+
+    public ElevatorState getPrevElevatorState(){
+
+        return prevElevatorState;
 
     }
 
@@ -277,6 +308,12 @@ public class Elevator extends SystemBase implements SystemInterface {
     private void setSwitchCounterReset(){
 
         switchCounter.reset();
+
+    }
+
+    public boolean getNotReadyYet(){
+
+        return notReadyYet;
 
     }
 
