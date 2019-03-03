@@ -16,6 +16,8 @@ public class AutonStateMachine0 extends AutonStateMachineBase implements AutonSt
 	int state = 1;
 	int stateCnt = 0;
 
+	double minVel = RobotMap.minMoveSpeed;
+
 	AHRS navX = RobotMap.navx;
 	WPI_TalonSRX frontRight = RobotMap.frontRightMotor;
 	WPI_TalonSRX frontLeft = RobotMap.frontLeftMotor;
@@ -38,8 +40,6 @@ public class AutonStateMachine0 extends AutonStateMachineBase implements AutonSt
 
 	public AutonStateMachine0() {
 
-		rightFollower.configurePIDVA(0.8, 0.0, 0.0, 1 / RobotMap.robotMaxVeloctiy, 0.0);
-		leftFollower.configurePIDVA(0.8, 0.0, 0.0, 1 / RobotMap.robotMaxVeloctiy, 0.0);
 		reader = new Reader();
 
 	}
@@ -66,12 +66,14 @@ public class AutonStateMachine0 extends AutonStateMachineBase implements AutonSt
 			rightTraj = reader.getSegments(Reader.Side.right, posTraj, step);
 			leftTraj = reader.getSegments(Reader.Side.left, posTraj, step);
 
-			rightFollower.setTrajectory(rightTraj);
-			leftFollower.setTrajectory(leftTraj);
+			rightFollower = new EncoderFollower(rightTraj);
+			leftFollower = new EncoderFollower(leftTraj);
+			rightFollower.configurePIDVA(0.2, 0.0, 0.0, 1 / RobotMap.robotMaxVeloctiy, 0.0);
+			leftFollower.configurePIDVA(0.2, 0.0, 0.0, 1 / RobotMap.robotMaxVeloctiy, 0.0);
 
-			rightFollower.configureEncoder(frontRight.getSensorCollection().getQuadraturePosition(),
+			rightFollower.configureEncoder(-frontRight.getSensorCollection().getQuadraturePosition(),
 					RobotMap.countsPerRevEncoders, RobotMap.wheelDiameter);
-			leftFollower.configureEncoder(frontLeft.getSensorCollection().getQuadraturePosition(),
+			leftFollower.configureEncoder(-frontLeft.getSensorCollection().getQuadraturePosition(),
 					RobotMap.countsPerRevEncoders, RobotMap.wheelDiameter);
 
 			nextState = 20;
@@ -79,9 +81,33 @@ public class AutonStateMachine0 extends AutonStateMachineBase implements AutonSt
 
 		case 20:
 
-			Robot.drive
-					.setRightPower(rightFollower.calculate(frontRight.getSensorCollection().getQuadraturePosition(), Side.RIGHT));
-			Robot.drive.setLeftPower(leftFollower.calculate(frontLeft.getSensorCollection().getQuadraturePosition(), Side.LEFT));
+			System.out.println("What's up my peeps!?!?!");
+
+			double rightPower = rightFollower.calculate(-frontRight.getSensorCollection().getQuadraturePosition(), Side.RIGHT);
+			double leftPower = leftFollower.calculate(-frontLeft.getSensorCollection().getQuadraturePosition(), Side.LEFT);
+
+			if(rightPower > 0){
+
+				rightPower = (rightPower * (1 - minVel)) + minVel;
+
+			}else{
+
+				rightPower = (rightPower * (1 - minVel)) - minVel;
+
+			}
+
+			if(leftPower > 0){
+
+				leftPower = (leftPower * (1 - minVel)) + minVel;
+
+			}else{
+
+				leftPower = (leftPower * (1 - minVel)) - minVel;
+
+			}
+
+			Robot.drive.setRightPower(rightPower);
+			Robot.drive.setLeftPower(leftPower);
 
 			if (rightFollower.isFinished() && leftFollower.isFinished()) {
 				nextState = 100;
@@ -89,6 +115,9 @@ public class AutonStateMachine0 extends AutonStateMachineBase implements AutonSt
 			break;
 
 		case 100:
+
+			Robot.drive.setLeftPower(0.0);
+			Robot.drive.setRightPower(0.0);
 
 			break;
 		}

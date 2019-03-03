@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Reader {
 
 	public enum Side {
@@ -23,7 +25,7 @@ public class Reader {
 		int rows = 0;
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader(new File(side.toString() + "trajectorystep" + step + "traj" + traj)));
+			reader = new BufferedReader(new FileReader(new File("../../../../../../../home/admin/trajectory" + traj + "/" + side.toString() + "trajectorystep" + step + "traj" + traj + ".csv")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

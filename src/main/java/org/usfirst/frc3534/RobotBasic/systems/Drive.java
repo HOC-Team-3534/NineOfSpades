@@ -251,6 +251,7 @@ public class Drive extends SystemBase implements SystemInterface {
 		double velocity = -RobotMap.frontRightMotor.getSensorCollection().getQuadratureVelocity() * RobotMap.codesPer100MillisToInchesPerSecond;
 		
 		SmartDashboard.putNumber("Velocity", velocity);
+		SmartDashboard.putNumber("NavX", getNavXAngle());
 
 	}
 
@@ -268,7 +269,7 @@ public class Drive extends SystemBase implements SystemInterface {
 
 	public double getNavXAngle(){
 
-		return RobotMap.navx.getRoll();
+		return RobotMap.navx.getAngle();
 
 	}
 }

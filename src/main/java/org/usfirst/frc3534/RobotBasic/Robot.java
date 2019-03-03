@@ -110,6 +110,7 @@ public class Robot extends TimedRobot {
 			desiredAutonMode = (int) SmartDashboard.getNumber("autonMode", 0);
 
 		} catch (Exception ex) {
+
 		}
 
 		System.out.println("Running Auton " + desiredAutonMode);
@@ -147,10 +148,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		/*
+		
 		long prevLoopTime = 0;
 
-		while (this.isAutonomous()) {
+		while (this.isAutonomous() && this.isEnabled()) {
 
 			RobotState("autonomous enabled");
 
@@ -179,42 +180,7 @@ public class Robot extends TimedRobot {
 
 		}
 
-		RobotState("autonomous disabled");*/
-
-		log();
-
-		long prevLoopTime = 0;
-
-		while (this.isOperatorControl() && this.isEnabled()) {
-
-			log();
-
-			RobotState("teleop enabled");
-
-			long currentTime = System.currentTimeMillis();
-
-			if (currentTime - prevLoopTime >= designatedLoopPeriod) {
-
-				loopPeriod = (int) (currentTime - prevLoopTime);
-				prevLoopTime = currentTime;
-				loopCnt++;
-
-				// run processes
-				drive.process();
-				functionProcessor.process();
-				shooter.process();
-				elevator.process();
-				intake.process();
-				climber.process();
-				hatchPanelApparatus.process();
-
-			}
-
-			Timer.delay(0.001);
-
-		}
-
-		RobotState("teleop disabled");
+		RobotState("autonomous disabled");
 
 	}
 

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
@@ -63,13 +64,13 @@ public class RobotMap {
 
 	public static I2C arduino;
 
-	public static final double wheelBase_width = 36;
+	public static final double wheelBase_width = 24.75;
 	public static final double robotMaxVeloctiy = 150; // inches per second
 	public static final double minMoveSpeed = .375;
 
 	// Wheel Encoder Calculations
 	public static final int countsPerRevEncoders = 1440; // 1440 if plugged into talon. 360 if directly into the roborio; just go with, it its weird
-	public static final double wheelDiameter = 6.25; // measured in inches
+	public static final double wheelDiameter = 6.0; // measured in inches
 	public static final double inchesPerCountMultiplier = wheelDiameter * Math.PI / countsPerRevEncoders;
 	public static final double codesPer100MillisToInchesPerSecond = inchesPerCountMultiplier * 10;
 
@@ -104,7 +105,7 @@ public class RobotMap {
 		rightSideMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor, centerRightMotor);
 		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor, centerLeftMotor);
 
-		navx = new AHRS(SerialPort.Port.kMXP);
+		navx = new AHRS(SPI.Port.kMXP);
 
 		elevatorCylinderOne = new DoubleSolenoid(1, 0, 1);
 		elevatorCylinderTwo = new DoubleSolenoid(1, 2, 3);
