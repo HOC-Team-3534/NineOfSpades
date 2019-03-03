@@ -48,6 +48,8 @@ public class Robot extends TimedRobot {
 	public static boolean teleop;
 	public static boolean enabled;
 
+	public static boolean firstTimeAutonomous = true;
+
 	public static boolean firstTimeEnabled = true;
 
 	private AutonStateMachineInterface autonStateMachine;
@@ -86,6 +88,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 
+		SmartDashboard.putNumber("autonMode", 0);
+
 	}
 
 	@Override
@@ -97,49 +101,12 @@ public class Robot extends TimedRobot {
 		intake.setArmExtendState(ArmExtendState.NULL);
 		intake.setArmLiftState(ArmLiftState.NULL);
 		firstTimeEnabled = true;
+		firstTimeAutonomous = true;
 
 	}
 
 	@Override
 	public void autonomousInit() {
-
-		int desiredAutonMode = 0;
-
-		try {
-
-			desiredAutonMode = (int) SmartDashboard.getNumber("autonMode", 0);
-
-		} catch (Exception ex) {
-
-		}
-
-		System.out.println("Running Auton " + desiredAutonMode);
-
-		switch (desiredAutonMode) {
-
-		case 0:
-
-			autonStateMachine = new AutonStateMachine0();
-			break;
-
-		case 1:
-
-			autonStateMachine = new AutonStateMachine1();
-			break;
-
-		case 2:
-
-			autonStateMachine = new AutonStateMachine2();
-			break;
-
-		case 3:
-
-			autonStateMachine = new AutonStateMachine3();
-			break;
-
-		}
-
-		SmartDashboard.putNumber("aMode", desiredAutonMode);
 
 	}
 
@@ -148,6 +115,50 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+
+		if(firstTimeAutonomous){
+
+			int desiredAutonMode = 0;
+
+			try {
+
+				desiredAutonMode = (int) SmartDashboard.getNumber("autonMode", 0);
+	
+			} catch (Exception ex) {
+	
+			}
+	
+			System.out.println("Running Auton " + desiredAutonMode);
+	
+			switch (desiredAutonMode) {
+	
+			case 0:
+	
+				autonStateMachine = new AutonStateMachine0();
+				break;
+	
+			case 1:
+	
+				autonStateMachine = new AutonStateMachine1();
+				break;
+	
+			case 2:
+	
+				autonStateMachine = new AutonStateMachine2();
+				break;
+	
+			case 3:
+	
+				autonStateMachine = new AutonStateMachine3();
+				break;
+	
+			}
+	
+			SmartDashboard.putNumber("aMode", desiredAutonMode);
+
+			firstTimeAutonomous = false;
+
+		}
 		
 		long prevLoopTime = 0;
 
@@ -248,7 +259,6 @@ public class Robot extends TimedRobot {
 			// SmartDashboard Numbers
 			SmartDashboard.putNumber("Loop Period", loopPeriod);
 			SmartDashboard.putNumber("Loop Count", loopCnt);
-			SmartDashboard.putNumber("autonMode", 0);
 
 			logCounter = 0;
 
