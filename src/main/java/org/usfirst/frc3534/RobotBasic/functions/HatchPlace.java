@@ -22,7 +22,7 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
     @Override
     public void process(){
 
-        if(!running && Axes.HatchPlace.getAxis() >= 0.5){
+        if(!running && Axes.HatchPlace.getAxis() >= 0.9){
 
             this.reset();
 
@@ -79,6 +79,7 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
 
         case 50:
             
+            originalTime = System.currentTimeMillis();
             Robot.hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.COLLAPSED);
             this.state = 60;
 
@@ -86,7 +87,11 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
 
         case 60:
 
-            completed();
+            if(System.currentTimeMillis() - originalTime > 3 * 1000){
+
+                completed();
+
+            }
 
             break;
 
