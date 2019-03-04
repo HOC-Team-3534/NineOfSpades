@@ -53,6 +53,7 @@ public class AutonStateMachine0 extends AutonStateMachineBase implements AutonSt
 
 		case 1:
 
+			//not in CBOTTEST2018
 			frontRight.getSensorCollection().setQuadraturePosition(0, 0);
 			frontLeft.getSensorCollection().setQuadraturePosition(0, 0);
 
