@@ -40,7 +40,7 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
 
         case 0:
 
-            if(((Buttons.HabLevel3ClimbPart2.getButton() && (Robot.intake.getArmLiftState() == ArmLiftState.UP || (Robot.intake.getArmLiftState() == ArmLiftState.OFF && Robot.intake.getPrevArmLiftState() == ArmLiftState.UP)) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
+            if(((Buttons.HabLevel3ClimbPart2.getButton() && (Robot.intake.getArmLiftState() == ArmLiftState.UP || (Robot.intake.getArmLiftState() == ArmLiftState.OFF && Robot.intake.getPrevArmLiftState() == ArmLiftState.UP))) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                 
                 this.started();
                 this.state = 10;
