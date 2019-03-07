@@ -2,6 +2,7 @@ package org.usfirst.frc3534.RobotBasic;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc3534.RobotBasic.functions.FunctionProcessor;
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot {
 	public static boolean firstTimeEnabled = true;
 
 	private AutonStateMachineInterface autonStateMachine;
+	private SendableChooser<Boolean> compressorChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -78,6 +80,12 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 
 		functionProcessor = new FunctionProcessor();
+
+		compressorChooser = new SendableChooser<Boolean>();
+		compressorChooser.addDefault("ON", true);
+		compressorChooser.addObject("OFF", false);
+
+		SmartDashboard.putData("Compressor ON / OFF", compressorChooser);
 
 	}
 
@@ -239,6 +247,16 @@ public class Robot extends TimedRobot {
 				intake.process();
 				climber.process();
 				hatchPanelApparatus.process();
+
+				if((Boolean)compressorChooser.getSelected()){
+
+					RobotMap.compressor.start();
+
+				}else{
+
+					RobotMap.compressor.stop();
+
+				}
 
 			}
 
