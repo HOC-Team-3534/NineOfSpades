@@ -36,7 +36,7 @@ public class Drive extends SystemBase implements SystemInterface {
 	private double KdDistance = .08;
 	private double kpSkew = 0.004; //.004
 	private double min_aim_command = 0.005;
-	private double max_distance_command = 0.65;
+	private double max_distance_command = 0.65; //was .7 before kettering
 	private double max_side_to_side_correction = 0.2;
 
 	public Drive() {
