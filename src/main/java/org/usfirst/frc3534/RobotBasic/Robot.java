@@ -280,6 +280,7 @@ public class Robot extends TimedRobot {
 			// SmartDashboard Numbers
 			SmartDashboard.putNumber("Loop Period", loopPeriod);
 			SmartDashboard.putNumber("Loop Count", loopCnt);
+			SmartDashboard.putBoolean("Compressor", RobotMap.compressor.enabled());
 
 			logCounter = 0;
 
