@@ -169,13 +169,13 @@ public class RobotMap {
 
 		cargoIntakeFloor_elevatorStage1A_to_armExtendExtended_rollerIntake(1.0),
 		cargoShoot_shooterShoot_to_shooterStop(1.0),
-		habLevel3ClimbPart1_elevatorStage1A_to_armExtendExtended(3.0),
-		habLevel3ClimbPart1_armExtendExtended_to_armLiftUp(3.0),
+		habLevel3ClimbPart1_elevatorStage1A_to_armExtendExtended(1.0),
+		habLevel3ClimbPart1_armExtendExtended_to_armLiftUp(1.0),
 		habLevel3ClimbPart2_armLiftCollapsed_to_climberClimb(3.0),
 		habLevel3ClimbPart2_armLiftMid_climberRetract_to_armExtendCollapsed(3.0),
 		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.25),
 		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.25),
-		xButtonReset_armLiftMid_to_armExtendCollapsed(3.0);
+		xButtonReset_armLiftMid_to_armExtendCollapsed(1.0);
 
 		public double time;
 
