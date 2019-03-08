@@ -85,23 +85,25 @@ public class Drive extends SystemBase implements SystemInterface {
 
 					if(sideToSideCorrection <= 3){
 
-						distance_error = 124.36 * Math.pow(.989, height);
+						distance_error = 108.632 * Math.pow(.990, height);
 	
 					}else if(sideToSideCorrection <= 7){
 	
-						distance_error = 122.09 * Math.pow(.991, height);
+						distance_error = 118.046 * Math.pow(.991, height);
 	
 					}else if(sideToSideCorrection <= 10){
 	
-						distance_error = 133.658 * Math.pow(.991, height);
+						distance_error = 131.471 * Math.pow(.991, height);
 	
 					}else{
 	
-						distance_error = 98.2 * Math.pow(.994, height);
+						distance_error = 122.591 * Math.pow(.9914, height);
 	
 					}
 
 				}
+
+				SmartDashboard.putNumber("Distance", distance_error);
 
 				if(width > 425 && height < 130){
 

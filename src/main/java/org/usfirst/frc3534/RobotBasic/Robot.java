@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
 	public static boolean firstTimeEnabled = true;
 
 	private AutonStateMachineInterface autonStateMachine;
-	private SendableChooser<Boolean> compressorChooser;
+	SendableChooser compressorChooser = new SendableChooser();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -81,9 +81,8 @@ public class Robot extends TimedRobot {
 
 		functionProcessor = new FunctionProcessor();
 
-		compressorChooser = new SendableChooser<Boolean>();
-		compressorChooser.addDefault("ON", true);
-		compressorChooser.addObject("OFF", false);
+		compressorChooser.addDefault("ON", new Boolean(true));
+		compressorChooser.addObject("OFF", new Boolean(false));
 
 		SmartDashboard.putData("Compressor ON / OFF", compressorChooser);
 
@@ -123,6 +122,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+
+		teleopPeriodic();
+
+		/*
 
 		if(firstTimeAutonomous){
 
@@ -199,7 +202,7 @@ public class Robot extends TimedRobot {
 
 		}
 
-		RobotState("autonomous disabled");
+		RobotState("autonomous disabled");*/
 
 	}
 
@@ -225,7 +228,7 @@ public class Robot extends TimedRobot {
 
 		long prevLoopTime = 0;
 
-		while (this.isOperatorControl() && this.isEnabled()) {
+		while (this.isEnabled()) {
 
 			log();
 
