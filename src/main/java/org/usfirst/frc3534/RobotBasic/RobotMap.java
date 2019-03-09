@@ -47,7 +47,7 @@ public class RobotMap {
 
 	public static DoubleSolenoid intakeForwardAftCylinders;
 
-	public static DigitalInput forwardAftSensor;
+	public static DigitalInput rightArmSensor;
 
 	public static WPI_TalonSRX cargoShooterMaster;
 	public static WPI_TalonSRX cargoShooterSlave;
@@ -120,7 +120,7 @@ public class RobotMap {
 
 		intakeForwardAftCylinders = new DoubleSolenoid(2, 2, 3);
 
-		forwardAftSensor = new DigitalInput(1);
+		rightArmSensor = new DigitalInput(1);
 
 		cargoShooterMaster = new WPI_TalonSRX(6);
 		cargoShooterSlave = new WPI_TalonSRX(7);

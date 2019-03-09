@@ -4,6 +4,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.usfirst.frc3534.RobotBasic.RobotMap;
 
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,6 +18,9 @@ public class Intake extends SystemBase implements SystemInterface{
     private DoubleSolenoid longCylinders = RobotMap.intakeUpCylinders;
 
     private DoubleSolenoid forwardAftCylinders = RobotMap.intakeForwardAftCylinders;
+
+    private DigitalInput rightArmSwitch = RobotMap.rightArmSensor;
+    private Counter rightArmCounter = new Counter(rightArmSwitch);
 
     private ArmExtendState armExtendState = ArmExtendState.NULL;
     private ArmLiftState armLiftState = ArmLiftState.NULL;
@@ -149,6 +154,9 @@ public class Intake extends SystemBase implements SystemInterface{
             break;
 
         }
+
+        setArmCountersReset();
+
     }
 
     public enum CylinderState{
@@ -292,7 +300,13 @@ public class Intake extends SystemBase implements SystemInterface{
 
     public boolean isArmAft(){
 
-        return !RobotMap.forwardAftSensor.get();
+        return rightArmCounter.get() > 0;
+
+    }
+
+    public void setArmCountersReset(){
+
+        rightArmCounter.reset();
 
     }
 }
