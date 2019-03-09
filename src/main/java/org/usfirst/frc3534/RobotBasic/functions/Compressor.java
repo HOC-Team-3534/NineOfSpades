@@ -32,7 +32,7 @@ public class Compressor extends FunctionBase implements FunctionInterface{
 
         }else{
 
-            RobotMap.compressor.stop();d
+            RobotMap.compressor.stop();
 
         }
 

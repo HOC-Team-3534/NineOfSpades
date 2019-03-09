@@ -135,7 +135,6 @@ public class RobotMap {
 		panelIntakeCylinders = new DoubleSolenoid(2, 6, 7);
 
 		compressor = new Compressor(1);
-        compressor.start();
         compressor.setClosedLoopControl(true);
 
 		arduino = new I2C(I2C.Port.kOnboard, 111);
