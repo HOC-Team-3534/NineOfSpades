@@ -52,6 +52,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
         case 10:
 
             originalTime = System.currentTimeMillis();
+            Robot.intake.setArmLiftState(ArmLiftState.MID);
             Robot.elevator.setElevatorState(ElevatorState.Stage1A);
             this.state = 20;
             
@@ -83,6 +84,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
         case 50:
 
+            Robot.intake.setArmLiftState(ArmLiftState.MID);
             Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
             this.state = 60;
 
