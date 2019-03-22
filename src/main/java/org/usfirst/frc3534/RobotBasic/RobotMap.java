@@ -160,6 +160,7 @@ public class RobotMap {
 		habLevel3ClimbPart2_armLiftMid_climberRetract_to_armExtendCollapsed(3.0),
 		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.25),
 		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.25),
+		hatchPlace_hatchPanelApparatusCollapsed_to_hatchPlaceCompleted(3.0),
 		xButtonReset_armLiftMid_to_armExtendCollapsed(1.0);
 
 		public double time;

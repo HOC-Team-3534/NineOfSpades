@@ -86,7 +86,7 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
 
         case 60:
 
-            if(System.currentTimeMillis() - originalTime > 3 * 1000){
+            if(System.currentTimeMillis() - originalTime > FunctionStateDelay.hatchPlace_hatchPanelApparatusCollapsed_to_hatchPlaceCompleted.time){
 
                 completed();
 
