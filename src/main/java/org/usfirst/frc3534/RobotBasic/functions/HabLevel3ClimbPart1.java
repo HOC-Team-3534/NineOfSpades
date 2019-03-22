@@ -30,7 +30,7 @@ public class HabLevel3ClimbPart1 extends FunctionBase implements FunctionInterfa
 
         case 0:
 
-            if((Buttons.HabLevel3ClimbPart1.getButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
+            if(((Buttons.HabLevel3ClimbPart1Forward.getButton() && Buttons.HabLevel3Part1Lockout.getButton()) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning()) && !Robot.functionProcessor.habLevel3ClimbPart2.isRunning())) {
                
                 this.started();
                 this.state = 10;

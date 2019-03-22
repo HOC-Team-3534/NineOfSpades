@@ -139,7 +139,7 @@ public class OI {
             }
 
         }),
-        HabLevel3ClimbPart1(new Callable<Boolean>(){
+        HabLevel3ClimbPart1Up(new Callable<Boolean>(){
 
             @Override
             public Boolean call() throws Exception{
@@ -149,12 +149,52 @@ public class OI {
             }
 
         }),
-        HabLevel3ClimbPart2(new Callable<Boolean>(){
+        HabLevel3ClimbPart1Down(new Callable<Boolean>(){
+
+            @Override
+            public Boolean call() throws Exception{
+
+                return Boolean.valueOf(Robot.oi.getController2().getBumper(Hand.kLeft));
+
+            }
+
+        }),
+        HabLevel3ClimbPart1Lockout(new Callable<Boolean>(){
+
+            @Override
+            public Boolean call() throws Exception{
+
+                return Boolean.valueOf(Robot.oi.getController2().getBackButton());
+
+            }
+
+        }),
+        HabLevel3ClimbPart2Thrust(new Callable<Boolean>(){
 
             @Override
             public Boolean call() throws Exception{
 
                 return Boolean.valueOf(Robot.oi.getController1().getXButton());
+
+            }
+
+        }),
+        HabLevel3ClimbPart2Down(new Callable<Boolean>(){
+
+            @Override
+            public Boolean call() throws Exception{
+
+                return Boolean.valueOf(Robot.oi.getController1().getBumper(Hand.kLeft));
+
+            }
+
+        }),
+        HabLevel3ClimbPart2Lockout(new Callable<Boolean>(){
+
+            @Override
+            public Boolean call() throws Exception{
+
+                return Boolean.valueOf(Robot.oi.getController2().getBackButton());
 
             }
 
