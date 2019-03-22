@@ -39,6 +39,7 @@ public class RobotMap {
 
 	public static DoubleSolenoid climbingCylinderOne;
 	//public static DoubleSolenoid climbingCylinderTwo;
+	public static DoubleSolenoid superThrusters;
 
 	public static DoubleSolenoid intakeForwardAftCylinders;
 
@@ -101,6 +102,7 @@ public class RobotMap {
 
 		climbingCylinderOne = new DoubleSolenoid(2, 4, 5);
 		//climbingCylinderTwo = new DoubleSolenoid(2, 6, 7);
+		superThrusters = new DoubleSolenoid(1, 6, 7);
 
 		intakeForwardAftCylinders = new DoubleSolenoid(2, 2, 3);
 

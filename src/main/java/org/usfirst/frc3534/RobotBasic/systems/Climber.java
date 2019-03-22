@@ -16,10 +16,13 @@ public class Climber extends SystemBase implements SystemInterface{
     private DoubleSolenoid solenoid1 = RobotMap.climbingCylinderOne; //These two lines are used to create variables of type DoubleSolenoid
     //private DoubleSolenoid solenoid2 = RobotMap.climbingCylinderTwo;
 
+    private DoubleSolenoid superThrusters = RobotMap.superThrusters;
+
     CylinderState cylinder1 = CylinderState.COLLAPSED; //These two lines are used to create variables of type STATE
     CylinderState cylinder2 = CylinderState.COLLAPSED;
 
     ClimberState climberState = ClimberState.NULL;
+    SuperThrustersState superThrustersState = SuperThrustersState.NULL;
 
     private long originalTimeClimber = 0l;
 
@@ -66,6 +69,34 @@ public class Climber extends SystemBase implements SystemInterface{
             
         }
 
+        switch(superThrustersState){
+
+        case Thrust:
+
+            setSuperThrustersExtended();
+
+            break;
+        
+        case Retract:
+
+            setSuperThrustersCollapsed();
+
+            break;
+
+        case OFF:
+
+            setSuperThrustersOff();
+            
+            break;
+
+        case NULL:
+
+            setSuperThrustersOff();
+
+            break;
+
+        }
+
     }
 
     private enum CylinderState{ //This method is used to describe all possible states of the cylinders
@@ -82,10 +113,25 @@ public class Climber extends SystemBase implements SystemInterface{
         NULL
     }
 
+    public enum SuperThrustersState{
+
+        Thrust,
+        Retract,
+        OFF,
+        NULL
+
+    }
+
     public void setClimberState(ClimberState state) {
 
         climberState = state;
         originalTimeClimber = System.currentTimeMillis();
+
+    }
+
+    public void setSuperThrustersState(SuperThrustersState state){
+
+        superThrustersState = state;
 
     }
 
@@ -121,6 +167,24 @@ public class Climber extends SystemBase implements SystemInterface{
 
         solenoid1.set(Value.kOff);
         //solenoid2.set(Value.kOff);
+
+    }
+
+    private void setSuperThrustersExtended(){
+
+        superThrusters.set(Value.kForward);
+
+    }
+
+    private void setSuperThrustersCollapsed(){
+
+        superThrusters.set(Value.kReverse);
+
+    }
+
+    private void setSuperThrustersOff(){
+
+        superThrusters.set(Value.kOff);
 
     }
 
