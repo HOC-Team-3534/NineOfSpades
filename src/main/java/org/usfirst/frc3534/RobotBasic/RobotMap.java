@@ -154,8 +154,7 @@ public class RobotMap {
 
 		cargoIntakeFloor_elevatorStage1A_to_armExtendExtended_rollerIntake(1.0),
 		cargoShoot_shooterShoot_to_shooterStop(1.0),
-		habLevel3ClimbPart1_elevatorStage1A_to_armExtendExtended(1.0),
-		habLevel3ClimbPart1_armExtendExtended_to_armLiftUp(1.0),
+		habLevel3ClimbPart1_superThrustersRetract_to_climberClimb(0.2),
 		habLevel3ClimbPart2_armLiftCollapsed_to_climberClimb(3.0),
 		habLevel3ClimbPart2_armLiftMid_climberRetract_to_armExtendCollapsed(3.0),
 		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.25),

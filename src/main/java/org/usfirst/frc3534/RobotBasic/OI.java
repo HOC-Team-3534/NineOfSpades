@@ -144,7 +144,7 @@ public class OI {
             @Override
             public Boolean call() throws Exception{
 
-                return Boolean.valueOf(Robot.oi.getController2().getXButton());
+                return Boolean.valueOf(Robot.oi.getController1().getXButton());
 
             }
 
@@ -154,7 +154,7 @@ public class OI {
             @Override
             public Boolean call() throws Exception{
 
-                return Boolean.valueOf(Robot.oi.getController2().getBumper(Hand.kLeft));
+                return Boolean.valueOf(Robot.oi.getController1().getBumper(Hand.kLeft));
 
             }
 
@@ -164,7 +164,7 @@ public class OI {
             @Override
             public Boolean call() throws Exception{
 
-                return Boolean.valueOf(Robot.oi.getController2().getBackButton());
+                return Boolean.valueOf(Robot.oi.getController1().getBackButton());
 
             }
 
@@ -174,17 +174,17 @@ public class OI {
             @Override
             public Boolean call() throws Exception{
 
-                return Boolean.valueOf(Robot.oi.getController1().getXButton());
+                return Boolean.valueOf(Robot.oi.getController2().getXButton());
 
             }
 
         }),
-        HabLevel3ClimbPart2Down(new Callable<Boolean>(){
+        HabLevel3ClimbPart2Back(new Callable<Boolean>(){
 
             @Override
             public Boolean call() throws Exception{
 
-                return Boolean.valueOf(Robot.oi.getController1().getBumper(Hand.kLeft));
+                return Boolean.valueOf(Robot.oi.getController2().getBumper(Hand.kLeft));
 
             }
 
