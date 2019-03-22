@@ -14,7 +14,7 @@ public class FunctionProcessor{
     HatchPickUp hatchPickUp;
     CargoShoot cargoShoot;
     XButtonReset xButtonReset;
-    Compressor compressor;
+    //Compressor compressor;
 
     public FunctionProcessor(){
 
@@ -27,7 +27,7 @@ public class FunctionProcessor{
         hatchPickUp = new HatchPickUp();
         cargoShoot = new CargoShoot();
         xButtonReset = new XButtonReset();
-        compressor = new Compressor();
+        //compressor = new Compressor();
 
     }
 
@@ -43,7 +43,7 @@ public class FunctionProcessor{
         hatchPickUp.process();
         cargoShoot.process();
         elevate.process();
-        compressor.process();
+        //compressor.process();
 
     }
 }
