@@ -24,10 +24,8 @@ public class RobotMap {
 
 	public static WPI_TalonSRX frontRightMotor;
 	private static WPI_TalonSRX backRightMotor;
-	private static WPI_TalonSRX centerRightMotor;
 	public static WPI_TalonSRX frontLeftMotor;
 	private static WPI_TalonSRX backLeftMotor;
-	private static WPI_TalonSRX centerLeftMotor;
 
 	public static SpeedControllerGroup rightSideMotors;
 	public static SpeedControllerGroup leftSideMotors;
@@ -85,10 +83,6 @@ public class RobotMap {
 		backRightMotor.setNeutralMode(NeutralMode.Brake);
 		backRightMotor.set(ControlMode.PercentOutput, 0);
 
-		centerRightMotor = new WPI_TalonSRX(8);
-		centerRightMotor.setNeutralMode(NeutralMode.Brake);
-		centerRightMotor.set(ControlMode.PercentOutput, 0);
-
 		frontLeftMotor = new WPI_TalonSRX(1);
 		frontLeftMotor.setNeutralMode(NeutralMode.Brake);
 		frontLeftMotor.set(ControlMode.PercentOutput, 0);
@@ -98,12 +92,8 @@ public class RobotMap {
 		backLeftMotor.setNeutralMode(NeutralMode.Brake);
 		backLeftMotor.set(ControlMode.PercentOutput, 0);
 
-		centerLeftMotor = new WPI_TalonSRX(3);
-		centerLeftMotor.setNeutralMode(NeutralMode.Brake);
-		centerLeftMotor.set(ControlMode.PercentOutput, 0);
-
-		rightSideMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor, centerRightMotor);
-		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor, centerLeftMotor);
+		rightSideMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
+		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
 
 		navx = new AHRS(SPI.Port.kMXP);
 
