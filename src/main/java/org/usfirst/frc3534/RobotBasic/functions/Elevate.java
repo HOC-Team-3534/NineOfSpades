@@ -3,7 +3,6 @@ package org.usfirst.frc3534.RobotBasic.functions;
 import org.usfirst.frc3534.RobotBasic.Robot;
 import org.usfirst.frc3534.RobotBasic.OI.Buttons;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
-import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmLiftState;
 
 public class Elevate extends FunctionBase implements FunctionInterface{
 
@@ -16,7 +15,7 @@ public class Elevate extends FunctionBase implements FunctionInterface{
     @Override
     public void process(){
 
-        if((!Robot.functionProcessor.cargoIntakeFloor.isRunning() && (Robot.intake.getArmLiftState() != ArmLiftState.UP && !(Robot.intake.getArmLiftState() == ArmLiftState.OFF && Robot.intake.getPrevArmLiftState() == ArmLiftState.UP))) && ((!Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))){
+        if(!Robot.functionProcessor.cargoIntakeFloor.isRunning() && ((!Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))){
 
             if(Buttons.Elevate_Stage1A.getButton()){
 

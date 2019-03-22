@@ -40,9 +40,6 @@ public class RobotMap {
 	public static DoubleSolenoid climbingCylinderOne;
 	//public static DoubleSolenoid climbingCylinderTwo;
 
-	public static DoubleSolenoid intakeDownCylinders;
-	public static DoubleSolenoid intakeUpCylinders;
-
 	public static DoubleSolenoid intakeForwardAftCylinders;
 
 	public static DigitalInput rightArmSensor;
@@ -104,9 +101,6 @@ public class RobotMap {
 
 		climbingCylinderOne = new DoubleSolenoid(2, 4, 5);
 		//climbingCylinderTwo = new DoubleSolenoid(2, 6, 7);
-
-		intakeDownCylinders = new DoubleSolenoid(2, 0, 1);
-		intakeUpCylinders = new DoubleSolenoid(1, 6, 7);
 
 		intakeForwardAftCylinders = new DoubleSolenoid(2, 2, 3);
 

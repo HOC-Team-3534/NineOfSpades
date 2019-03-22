@@ -5,7 +5,6 @@ import org.usfirst.frc3534.RobotBasic.OI.Buttons;
 import org.usfirst.frc3534.RobotBasic.RobotMap.FunctionStateDelay;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
-import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmLiftState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.RollerState;
 
 public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
@@ -40,7 +39,7 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
         case 0:
 
-            if(((Buttons.CargoIntakeFloor.getButton() && Robot.intake.getArmLiftState() != ArmLiftState.UP) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
+            if((Buttons.CargoIntakeFloor.getButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.habLevel3ClimbPart2.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                
                 this.started();
                 this.state = 10;
@@ -52,7 +51,6 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
         case 10:
 
             originalTime = System.currentTimeMillis();
-            Robot.intake.setArmLiftState(ArmLiftState.MID);
             Robot.elevator.setElevatorState(ElevatorState.Stage1A);
             this.state = 20;
             
@@ -84,7 +82,6 @@ public class CargoIntakeFloor extends FunctionBase implements FunctionInterface{
 
         case 50:
 
-            Robot.intake.setArmLiftState(ArmLiftState.MID);
             Robot.intake.setArmExtendState(ArmExtendState.COLLAPSED);
             this.state = 60;
 

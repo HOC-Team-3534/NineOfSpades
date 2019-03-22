@@ -14,21 +14,15 @@ public class Intake extends SystemBase implements SystemInterface{
 
     private WPI_TalonSRX cargoRoller = RobotMap.cargoRoller;
 
-    private DoubleSolenoid shortCylinders = RobotMap.intakeDownCylinders;
-    private DoubleSolenoid longCylinders = RobotMap.intakeUpCylinders;
-
     private DoubleSolenoid forwardAftCylinders = RobotMap.intakeForwardAftCylinders;
 
     private DigitalInput rightArmSwitch = RobotMap.rightArmSensor;
     private Counter rightArmCounter = new Counter(rightArmSwitch);
 
     private ArmExtendState armExtendState = ArmExtendState.NULL;
-    private ArmLiftState armLiftState = ArmLiftState.NULL;
-    private ArmLiftState prevArmLiftStateBeforeOff = ArmLiftState.NULL;
     private RollerState rollerState = RollerState.STOP;
 
     private long originalTimeArmExtend = 0l;
-    private long originalTimeArmLift = 0l;
 
     public Intake(){
 
@@ -79,66 +73,6 @@ public class Intake extends SystemBase implements SystemInterface{
 
         }
 
-        switch(armLiftState){
-
-        case COLLAPSED:
-
-            setShortArmCylindersCollapsed();
-            setLongArmCylindersCollapsed();
-
-            if(System.currentTimeMillis() - originalTimeArmLift > 3 * 1000){
-
-                armLiftState = ArmLiftState.OFF;
-                prevArmLiftStateBeforeOff = ArmLiftState.COLLAPSED;
-
-            }
-
-            break;
-
-        case MID:
-
-            setShortArmCylindersExtended();
-            setLongArmCylindersCollapsed();
-
-            if(System.currentTimeMillis() - originalTimeArmLift > 3 * 1000){
-
-                armLiftState = ArmLiftState.OFF;
-                prevArmLiftStateBeforeOff = ArmLiftState.MID;
-
-            }
-
-            break;
-
-        case UP:
-
-            setShortArmCylindersExtended();
-            setLongArmCylindersExtended();
-
-            if(System.currentTimeMillis() - originalTimeArmLift > 3 * 1000){
-
-                armLiftState = ArmLiftState.OFF;
-                prevArmLiftStateBeforeOff = ArmLiftState.UP;
-
-            }
-
-            break;
-
-        case OFF:
-
-            setShortArmCylindersOff();
-            setLongArmCylindersOff();
-
-            break;
-
-        case NULL:
-
-            setShortArmCylindersOff();
-            setLongArmCylindersOff();
-
-            break;
-
-        }
-
         switch(rollerState){
 
         case INTAKE:
@@ -175,16 +109,6 @@ public class Intake extends SystemBase implements SystemInterface{
 
     }
 
-    public enum ArmLiftState{
-
-        COLLAPSED,
-        MID,
-        UP,
-        OFF,
-        NULL
-
-    }
-
     public enum RollerState{
 
         INTAKE(RobotMap.PowerOutput.intake_roller_intake.power),
@@ -207,13 +131,6 @@ public class Intake extends SystemBase implements SystemInterface{
 
     }
 
-    public void setArmLiftState(ArmLiftState state){
-
-        armLiftState = state;
-        originalTimeArmLift = System.currentTimeMillis();
-
-    }
-
     public void setRollerState(RollerState state){
 
         rollerState = state;
@@ -226,57 +143,9 @@ public class Intake extends SystemBase implements SystemInterface{
 
     }
 
-    public ArmLiftState getArmLiftState(){
-
-        return armLiftState;
-
-    }
-
-    public ArmLiftState getPrevArmLiftState(){
-
-        return prevArmLiftStateBeforeOff;
-
-    }
-
     public RollerState getRollerState(){
 
         return rollerState;
-
-    }
-
-    private void setShortArmCylindersExtended(){
-
-        shortCylinders.set(Value.kForward);
-
-    }
-
-    private void setShortArmCylindersCollapsed(){
-
-        shortCylinders.set(Value.kReverse);
-
-    }
-
-    private void setShortArmCylindersOff(){
-
-        shortCylinders.set(Value.kOff);
-
-    }
-
-    private void setLongArmCylindersExtended(){
-
-        longCylinders.set(Value.kForward);
-
-    }
-
-    private void setLongArmCylindersCollapsed(){
-
-        longCylinders.set(Value.kReverse);
-
-    }
-
-    private void setLongArmCylindersOff(){
-
-        longCylinders.set(Value.kOff);
 
     }
 

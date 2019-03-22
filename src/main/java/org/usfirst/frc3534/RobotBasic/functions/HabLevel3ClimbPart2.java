@@ -6,7 +6,6 @@ import org.usfirst.frc3534.RobotBasic.RobotMap.FunctionStateDelay;
 import org.usfirst.frc3534.RobotBasic.systems.Climber.ClimberState;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
-import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmLiftState;
 
 public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterface{
 
@@ -40,7 +39,7 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
 
         case 0:
 
-            if(((Buttons.HabLevel3ClimbPart2.getButton() && (Robot.intake.getArmLiftState() == ArmLiftState.UP || (Robot.intake.getArmLiftState() == ArmLiftState.OFF && Robot.intake.getPrevArmLiftState() == ArmLiftState.UP))) && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
+            if((Buttons.HabLevel3ClimbPart2.getButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.xButtonReset.isRunning()))) {
                 
                 this.started();
                 this.state = 10;
@@ -52,7 +51,6 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
         case 10:
             
             originalTime = System.currentTimeMillis();
-            Robot.intake.setArmLiftState(ArmLiftState.COLLAPSED);
             this.state = 20;
 
             break;
@@ -83,7 +81,6 @@ public class HabLevel3ClimbPart2 extends FunctionBase implements FunctionInterfa
         case 50:
 
             originalTime = System.currentTimeMillis();
-            Robot.intake.setArmLiftState(ArmLiftState.MID);
             Robot.climber.setClimberState(ClimberState.Retract);
             this.state = 60;
 

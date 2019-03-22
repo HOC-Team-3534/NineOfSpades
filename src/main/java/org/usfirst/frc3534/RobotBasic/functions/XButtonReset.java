@@ -5,7 +5,6 @@ import org.usfirst.frc3534.RobotBasic.OI.Buttons;
 import org.usfirst.frc3534.RobotBasic.RobotMap.FunctionStateDelay;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
-import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmLiftState;
 
 public class XButtonReset extends FunctionBase implements FunctionInterface {
 
@@ -43,7 +42,6 @@ public class XButtonReset extends FunctionBase implements FunctionInterface {
         case 10:
 
             originalTime = System.currentTimeMillis();
-            Robot.intake.setArmLiftState(ArmLiftState.MID);
             this.state = 20;
             
             break;

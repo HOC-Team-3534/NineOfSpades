@@ -11,7 +11,6 @@ import org.usfirst.frc3534.RobotBasic.systems.Climber.ClimberState;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.HatchPanelApparatus.HatchPanelApparatusState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
-import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmLiftState;
 
 import Autons.AutonStateMachine0;
 import Autons.AutonStateMachine1;
@@ -106,7 +105,6 @@ public class Robot extends TimedRobot {
 		elevator.setElevatorState(ElevatorState.NULL);
 		hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.NULL);
 		intake.setArmExtendState(ArmExtendState.NULL);
-		intake.setArmLiftState(ArmLiftState.NULL);
 		firstTimeEnabled = true;
 		firstTimeAutonomous = true;
 
@@ -125,85 +123,6 @@ public class Robot extends TimedRobot {
 
 		teleopPeriodic();
 
-		/*
-
-		if(firstTimeAutonomous){
-
-			int desiredAutonMode = 0;
-
-			try {
-
-				desiredAutonMode = (int) SmartDashboard.getNumber("autonMode", 0);
-	
-			} catch (Exception ex) {
-	
-			}
-	
-			System.out.println("Running Auton " + desiredAutonMode);
-	
-			switch (desiredAutonMode) {
-	
-			case 0:
-	
-				autonStateMachine = new AutonStateMachine0();
-				break;
-	
-			case 1:
-	
-				autonStateMachine = new AutonStateMachine1();
-				break;
-	
-			case 2:
-	
-				autonStateMachine = new AutonStateMachine2();
-				break;
-	
-			case 3:
-	
-				autonStateMachine = new AutonStateMachine3();
-				break;
-	
-			}
-	
-			SmartDashboard.putNumber("aMode", desiredAutonMode);
-
-			firstTimeAutonomous = false;
-
-		}
-		
-		long prevLoopTime = 0;
-
-		while (this.isAutonomous() && this.isEnabled()) {
-
-			RobotState("autonomous enabled");
-
-			long currentTime = System.currentTimeMillis();
-
-			if (currentTime - prevLoopTime >= designatedLoopPeriod) {
-
-				log();
-
-				loopPeriod = (int) (currentTime - prevLoopTime);
-				prevLoopTime = currentTime;
-				loopCnt++;
-
-				// run processes
-				autonStateMachine.process();
-				drive.process();
-				elevator.process();
-				intake.process();
-				climber.process();
-				shooter.process();
-				hatchPanelApparatus.process();
-
-			}
-
-			Timer.delay(0.001);
-
-		}
-
-		RobotState("autonomous disabled");*/
-
 	}
 
 	@Override
@@ -219,7 +138,6 @@ public class Robot extends TimedRobot {
 
 		if(firstTimeEnabled){
 
-			intake.setArmLiftState(ArmLiftState.MID);
 			firstTimeEnabled = false;
 
 		}
