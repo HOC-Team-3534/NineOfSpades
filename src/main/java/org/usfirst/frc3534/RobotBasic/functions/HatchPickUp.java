@@ -26,7 +26,7 @@ public class HatchPickUp extends FunctionBase implements FunctionInterface{
 
         case 0:
 
-            if((Buttons.HatchPickUp.getButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && !Robot.functionProcessor.habLevel3ClimbPart2.isRunning())) {
+            if((Buttons.HatchPickUp.getButton() && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning())) && !Robot.functionProcessor.cargoShoot.isRunning()) {
                     
                 this.started();
                 this.state = 10;

@@ -36,7 +36,7 @@ public class CargoIntakeTop extends FunctionBase implements FunctionInterface{
 
         case 0:
 
-            if((Buttons.CargoIntakeTop.getButton() && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && !Robot.functionProcessor.habLevel3ClimbPart2.isRunning())) {
+            if((Buttons.CargoIntakeTop.getButton() && (!Robot.functionProcessor.cargoIntakeFloor.isRunning() && !Robot.functionProcessor.hatchPlace.isRunning())) && !Robot.functionProcessor.cargoShoot.isRunning()) {
                
                 this.started();
                 this.state = 10;

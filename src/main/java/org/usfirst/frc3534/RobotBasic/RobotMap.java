@@ -37,10 +37,6 @@ public class RobotMap {
 
 	public static DigitalInput limitSwitch;
 
-	public static DoubleSolenoid climbingCylinderOne;
-	//public static DoubleSolenoid climbingCylinderTwo;
-	public static DoubleSolenoid superThrusters;
-
 	public static DoubleSolenoid intakeForwardAftCylinders;
 
 	public static DigitalInput rightArmSensor;
@@ -100,10 +96,6 @@ public class RobotMap {
 
 		limitSwitch = new DigitalInput(0);
 
-		climbingCylinderOne = new DoubleSolenoid(2, 4, 5);
-		//climbingCylinderTwo = new DoubleSolenoid(2, 6, 7);
-		superThrusters = new DoubleSolenoid(1, 6, 7);
-
 		intakeForwardAftCylinders = new DoubleSolenoid(2, 2, 3);
 
 		rightArmSensor = new DigitalInput(1);
@@ -129,7 +121,6 @@ public class RobotMap {
 
 	public enum DelayToOff{
 
-		climber_retract(4.0),
 		elevator_stage1a(3.0),
 		elevator_stage1b(3.0),
 		elevator_stage2(3.0),
@@ -154,9 +145,6 @@ public class RobotMap {
 
 		cargoIntakeFloor_elevatorStage1A_to_armExtendExtended_rollerIntake(1.0),
 		cargoShoot_shooterShoot_to_shooterStop(1.0),
-		habLevel3ClimbPart1_superThrustersRetract_to_climberClimb(0.2),
-		habLevel3ClimbPart2_armLiftCollapsed_to_climberClimb(3.0),
-		habLevel3ClimbPart2_armLiftMid_climberRetract_to_armExtendCollapsed(3.0),
 		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.25),
 		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.25),
 		hatchPlace_hatchPanelApparatusCollapsed_to_hatchPlaceCompleted(3.0),

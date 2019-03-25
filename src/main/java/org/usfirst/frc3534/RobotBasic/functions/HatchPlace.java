@@ -31,7 +31,7 @@ public class HatchPlace extends FunctionBase implements FunctionInterface{
 
         case 0:
 
-            if((Axes.HatchPlace.getAxis() >= 0.5 && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning())) && ((!Robot.functionProcessor.cargoShoot.isRunning() && !Robot.functionProcessor.habLevel3ClimbPart1.isRunning()) && !Robot.functionProcessor.habLevel3ClimbPart2.isRunning())) {
+            if((Axes.HatchPlace.getAxis() >= 0.5 && (!Robot.functionProcessor.cargoIntakeTop.isRunning() && !Robot.functionProcessor.cargoIntakeFloor.isRunning())) && !Robot.functionProcessor.cargoShoot.isRunning()) {
                 
                 this.started();
                 this.state = 10;

@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc3534.RobotBasic.functions.FunctionProcessor;
 import org.usfirst.frc3534.RobotBasic.systems.*;
-import org.usfirst.frc3534.RobotBasic.systems.Climber.ClimberState;
 import org.usfirst.frc3534.RobotBasic.systems.Elevator.ElevatorState;
 import org.usfirst.frc3534.RobotBasic.systems.HatchPanelApparatus.HatchPanelApparatusState;
 import org.usfirst.frc3534.RobotBasic.systems.Intake.ArmExtendState;
@@ -31,7 +30,6 @@ public class Robot extends TimedRobot {
 	public static Drive drive;
 	public static Elevator elevator;
 	public static Intake intake;
-	public static Climber climber;
 	public static HatchPanelApparatus hatchPanelApparatus;
 	public static Arduino arduino;
 	public static Shooter shooter;
@@ -67,7 +65,6 @@ public class Robot extends TimedRobot {
 		drive = new Drive();
 		elevator = new Elevator();
 		intake = new Intake();
-		climber = new Climber();
 		hatchPanelApparatus = new HatchPanelApparatus();
 		arduino = new Arduino();
 		shooter = new Shooter();
@@ -101,7 +98,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 
-		climber.setClimberState(ClimberState.NULL);
 		elevator.setElevatorState(ElevatorState.NULL);
 		hatchPanelApparatus.setHatchPanelApparatusState(HatchPanelApparatusState.NULL);
 		intake.setArmExtendState(ArmExtendState.NULL);
@@ -166,7 +162,6 @@ public class Robot extends TimedRobot {
 				shooter.process();
 				elevator.process();
 				intake.process();
-				climber.process();
 				hatchPanelApparatus.process();
 
 				if((Boolean)compressorChooser.getSelected()){
