@@ -99,8 +99,8 @@ public class RobotMap {
 		frontRightMotor.setNeutralMode(NeutralMode.Brake);
 		frontRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-		rightSideMotors = new SpeedControllerGroup(frontRightMotor, backRightMotor);
-		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
+		rightSideMotors = new SpeedControllerGroup(frontRightMotor, centerRightMotor, backRightMotor);
+		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, centerLeftMotor, backLeftMotor);
 		cargoShooter = new SpeedControllerGroup(cargoShooterMaster, cargoShooterSlave);
 
 		elevatorCylinderOne = new DoubleSolenoid(1, 0, 1);
