@@ -17,7 +17,9 @@ public class Intake extends SystemBase implements SystemInterface{
     private DoubleSolenoid forwardAftCylinders = RobotMap.intakeForwardAftCylinders;
 
     private DigitalInput rightArmSwitch = RobotMap.rightArmSensor;
+    private DigitalInput leftArmSwitch = RobotMap.leftArmSensor;
     private Counter rightArmCounter = new Counter(rightArmSwitch);
+    private Counter leftArmCounter = new Counter(leftArmSwitch);
 
     private ArmExtendState armExtendState = ArmExtendState.NULL;
     private RollerState rollerState = RollerState.STOP;
@@ -169,13 +171,14 @@ public class Intake extends SystemBase implements SystemInterface{
 
     public boolean isArmAft(){
 
-        return rightArmCounter.get() > 0;
+        return rightArmCounter.get() > 0 || leftArmCounter.get() > 0;
 
     }
 
     public void setArmCountersReset(){
 
         rightArmCounter.reset();
+        leftArmCounter.reset();
 
     }
 }

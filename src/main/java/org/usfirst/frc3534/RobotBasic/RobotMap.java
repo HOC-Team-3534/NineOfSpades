@@ -46,6 +46,7 @@ public class RobotMap {
 
 	public static DigitalInput limitSwitch;
 	public static DigitalInput rightArmSensor;
+	public static DigitalInput leftArmSensor;
 
 	public static Compressor compressor;
 
@@ -112,6 +113,7 @@ public class RobotMap {
 
 		limitSwitch = new DigitalInput(0);
 		rightArmSensor = new DigitalInput(1);
+		leftArmSensor = new DigitalInput(2);
 
 		compressor = new Compressor(1);
         compressor.setClosedLoopControl(true);
