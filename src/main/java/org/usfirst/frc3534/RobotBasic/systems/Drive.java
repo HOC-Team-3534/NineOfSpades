@@ -111,6 +111,20 @@ public class Drive extends SystemBase implements SystemInterface {
 
 				}
 
+				if(Math.abs(sideToSideCorrection) < 5){
+
+					RobotMap.blinkin.set(0.77); //green
+
+				}else if(sideToSideCorrection >= 5){
+
+					RobotMap.blinkin.set(0.61); //red
+
+				}else{
+
+					RobotMap.blinkin.set(0.87); //blue
+
+				}
+
 				if(Math.abs(sideToSideCorrection) > 3 || sideToSideCorrection == 0) { //skew correction was 5 looking for outcome of calmer bot
 
 					usableKpAim = KpAim * .3;
@@ -174,6 +188,8 @@ public class Drive extends SystemBase implements SystemInterface {
 				drive.tankDrive(left_command, right_command);
 
 			}else{
+
+				RobotMap.blinkin.set(0.53); //color waves of team colors
 
 				negative = false;
 				yInput = Axes.Drive_ForwardBackward.getAxis();

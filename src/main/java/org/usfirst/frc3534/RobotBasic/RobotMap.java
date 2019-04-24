@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 /**
@@ -31,6 +32,8 @@ public class RobotMap {
 	private static WPI_TalonSRX backRightMotor;		//8
 	public static WPI_TalonSRX centerRightMotor;	//9
 	public static WPI_TalonSRX frontRightMotor;		//10
+
+	public static Spark blinkin;
 
 	public static SpeedControllerGroup rightSideMotors;
 	public static SpeedControllerGroup leftSideMotors;
@@ -102,6 +105,8 @@ public class RobotMap {
 		rightSideMotors = new SpeedControllerGroup(frontRightMotor, centerRightMotor, backRightMotor);
 		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, centerLeftMotor, backLeftMotor);
 		cargoShooter = new SpeedControllerGroup(cargoShooterMaster, cargoShooterSlave);
+
+		blinkin = new Spark(0);
 
 		elevatorCylinderOne = new DoubleSolenoid(1, 0, 1);
 		elevatorCylinderTwo = new DoubleSolenoid(1, 2, 3);
