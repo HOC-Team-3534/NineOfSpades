@@ -86,7 +86,7 @@ public class RobotMap {
 		cargoShooterSlave = new WPI_TalonSRX(7);
 		cargoShooterSlave.setInverted(true);
 
-		backRightMotor = new WPI_TalonSRX((9));
+		backRightMotor = new WPI_TalonSRX((8));
 		backRightMotor.setNeutralMode(NeutralMode.Brake);
 		backRightMotor.set(ControlMode.PercentOutput, 0);
 
@@ -148,7 +148,7 @@ public class RobotMap {
 
 		cargoIntakeFloor_elevatorStage1A_to_armExtendExtended_rollerIntake(1.0),
 		cargoShoot_shooterShoot_to_shooterStop(1.0),
-		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.25),
+		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.15),
 		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.25),
 		hatchPlace_hatchPanelApparatusCollapsed_to_hatchPlaceCompleted(3.0),
 		xButtonReset_armLiftMid_to_armExtendCollapsed(1.0);
@@ -164,7 +164,7 @@ public class RobotMap {
 
 	public enum PowerOutput{
 
-		intake_roller_intake(0.8),
+		intake_roller_intake(0.85), //was .8 before testing right before marysville
 		intake_roller_stop(0.0),
 		shooter_shooter_intake(-0.5),
 		shooter_shooter_shoot(1.0),

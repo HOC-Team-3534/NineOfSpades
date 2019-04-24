@@ -30,13 +30,13 @@ public class Drive extends SystemBase implements SystemInterface {
 
 	private double last_error, distance_last_error;
 
-	private double KpAim = 0.0275; //.0275
-	private double KdAim = 0.0007;
+	private double KpAim = 0.02; //.0275
+	private double KdAim = 0.0010; //.0007
 	private double KpDistance = 0.02;
 	private double KdDistance = .08;
 	private double kpSkew = 0.003; //.004 changed after kettering while testing at kettering
 	private double min_aim_command = 0.005;
-	private double max_distance_command = 0.6; //was .7 before kettering
+	private double max_distance_command = 0.6; //was .7 before kettering //was .6 after kettering
 	private double max_side_to_side_correction = 0.2;
 
 	public Drive() {
@@ -217,7 +217,7 @@ public class Drive extends SystemBase implements SystemInterface {
 
 				}else{
 
-					drive.arcadeDrive(yOut, xOut * 0.7);
+					drive.arcadeDrive(yOut * 0.9, xOut * 1.0);
 
 				}
 
@@ -249,11 +249,11 @@ public class Drive extends SystemBase implements SystemInterface {
 		 * 
 		 * SmartDashboard.putNumber("Velocity", velocity);
 		 */
-
+			/*
 		double velocity = -RobotMap.frontRightMotor.getSensorCollection().getQuadratureVelocity() * RobotMap.codesPer100MillisToInchesPerSecond;
 		
 		SmartDashboard.putNumber("Velocity", velocity);
-		SmartDashboard.putNumber("NavX", getNavXAngle());
+		SmartDashboard.putNumber("NavX", getNavXAngle());*/
 
 	}
 

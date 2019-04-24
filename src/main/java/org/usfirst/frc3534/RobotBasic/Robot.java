@@ -80,7 +80,7 @@ public class Robot extends TimedRobot {
 		compressorChooser.addDefault("ON", new Boolean(true));
 		compressorChooser.addObject("OFF", new Boolean(false));
 
-		SmartDashboard.putData("Compressor ON / OFF", compressorChooser);
+		//SmartDashboard.putData("Compressor ON / OFF", compressorChooser);
 
 	}
 
@@ -91,7 +91,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 
-		SmartDashboard.putNumber("autonMode", 0);
+		//SmartDashboard.putNumber("autonMode", 0);
 
 	}
 
@@ -191,10 +191,12 @@ public class Robot extends TimedRobot {
 		if (logCounter >= 5) {
 
 			// SmartDashboard Numbers
+			/*
 			SmartDashboard.putNumber("Loop Period", loopPeriod);
 			SmartDashboard.putNumber("Loop Count", loopCnt);
 			SmartDashboard.putBoolean("Compressor", RobotMap.compressor.enabled());
-
+			SmartDashboard.putBoolean("extension", intake.isArmAft());
+			*/
 			logCounter = 0;
 
 		}

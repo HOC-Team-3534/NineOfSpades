@@ -33,8 +33,6 @@ public class Intake extends SystemBase implements SystemInterface{
     @Override
     public void process(){
 
-        SmartDashboard.putBoolean("extension", isArmAft());
-
         switch(armExtendState){
 
         case EXTENDED:
