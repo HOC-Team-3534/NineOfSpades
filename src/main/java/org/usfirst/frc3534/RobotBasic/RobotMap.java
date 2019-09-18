@@ -106,7 +106,7 @@ public class RobotMap {
 		leftSideMotors = new SpeedControllerGroup(frontLeftMotor, centerLeftMotor, backLeftMotor);
 		cargoShooter = new SpeedControllerGroup(cargoShooterMaster, cargoShooterSlave);
 
-		blinkin = new Spark(0);
+		blinkin = new Spark(1);
 
 		elevatorCylinderOne = new DoubleSolenoid(1, 0, 1);
 		elevatorCylinderTwo = new DoubleSolenoid(1, 2, 3);
@@ -152,8 +152,8 @@ public class RobotMap {
 	public enum FunctionStateDelay{
 
 		cargoIntakeFloor_elevatorStage1A_to_armExtendExtended_rollerIntake(1.0),
-		cargoShoot_shooterShoot_to_shooterStop(1.0),
-		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.15),
+		cargoShoot_shooterShoot_to_shooterStop(0.2),
+		hatchPlace_hatchIntakeRelease_to_hatchPanelApparatusExtended(0.05), //was .15 before worlds changed because of velcro removal
 		hatchPlace_hatchPanelApparatusExtended_to_hatchPanelApparatusCollapsed(0.25),
 		hatchPlace_hatchPanelApparatusCollapsed_to_hatchPlaceCompleted(3.0),
 		xButtonReset_armLiftMid_to_armExtendCollapsed(1.0);

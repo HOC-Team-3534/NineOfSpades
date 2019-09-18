@@ -36,7 +36,7 @@ public class Drive extends SystemBase implements SystemInterface {
 	private double KdDistance = .08;
 	private double kpSkew = 0.003; //.004 changed after kettering while testing at kettering
 	private double min_aim_command = 0.005;
-	private double max_distance_command = 0.6; //was .7 before kettering //was .6 after kettering
+	private double max_distance_command = 0.55; //was .7 before kettering //was .6 after kettering
 	private double max_side_to_side_correction = 0.2;
 
 	public Drive() {
@@ -111,11 +111,11 @@ public class Drive extends SystemBase implements SystemInterface {
 
 				}
 
-				if(Math.abs(sideToSideCorrection) < 5){
+				if(Math.abs(sideToSideCorrection) < 2){
 
 					RobotMap.blinkin.set(0.77); //green
 
-				}else if(sideToSideCorrection >= 5){
+				}else if(sideToSideCorrection >= 2){
 
 					RobotMap.blinkin.set(0.61); //red
 
@@ -189,7 +189,7 @@ public class Drive extends SystemBase implements SystemInterface {
 
 			}else{
 
-				RobotMap.blinkin.set(0.53); //color waves of team colors
+				RobotMap.blinkin.set(0.55); //color waves of team colors
 
 				negative = false;
 				yInput = Axes.Drive_ForwardBackward.getAxis();
